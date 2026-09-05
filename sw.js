@@ -4,9 +4,9 @@
    and a fresh copy is fetched in the background whenever there IS
    internet, so students get your updates on their next open.
    Change CACHE (for example to v2.5) whenever you upload a new version. */
-var CACHE = 'sentence-builder-v2.4';
+var CACHE = 'sentence-builder-v2.5';
 var PAGE = './index.html';
-var ASSETS = [PAGE, './manifest.webmanifest', './icon-180.png', './icon-192.png', './icon-512.png'];
+var ASSETS = [PAGE, './comparative-essay.html', './sandwich-essay.html', './manifest.webmanifest', './icon-180.png', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(ASSETS); }).then(function () { return self.skipWaiting(); }));

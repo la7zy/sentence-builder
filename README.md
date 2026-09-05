@@ -4,6 +4,10 @@ English sentence-skills lessons (ATTP). 7 units, 37 lessons, final test and cert
 
 Live: https://la7zy.github.io/sentence-builder/
 
+Also hosted here:
+- Comparative Essay Guide: https://la7zy.github.io/sentence-builder/comparative-essay.html
+- Sandwich Essay Guide: https://la7zy.github.io/sentence-builder/sandwich-essay.html
+
 Students open the link once with internet, then add it to the home screen
 (Share > Add to Home Screen on iPhone, menu > Add to Home screen on Android).
 After that it works with no internet and keeps their progress on the phone.

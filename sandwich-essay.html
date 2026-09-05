@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Sandwich Essay — step by step</title>
+<style>:root{--bg:#f4f2ee; --brand:#a2652a; --tint:#f8f0e5; --deep:#7d4a17; --figw:300px;}
+
+:root{
+  --ink:#16203a; --soft:#4b5670; --mut:#5f6a7d; --line:#e3e7f0; --card:#ffffff;
+  --ok:#177140; --no:#b53225; --okw:#e9f7ee; --now:#fdeceb;
+  --A:#2a6f9e; --B:#c2701f;
+  --muted:#5f6a7d; --wash:#f4f5f8; --ink-soft:#4b5670;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; background:var(--bg); color:var(--ink); font-size:17.5px; line-height:1.62;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;}
+.wrap{max-width:800px; margin:0 auto; padding:0 20px 150px}
+
+/* ---------- top bar ---------- */
+.top{position:sticky; top:0; z-index:30; background:rgba(255,255,255,.93); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line); margin-bottom:26px}
+.topin{max-width:800px; margin:0 auto; padding:9px 20px; display:flex; align-items:center; gap:12px}
+.chip{font-size:.7rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; padding:5px 11px;
+  border-radius:99px; background:var(--tint); color:var(--deep,var(--brand)); white-space:nowrap;
+  overflow:hidden; text-overflow:ellipsis; max-width:42%}
+.figmini{flex:0 0 auto; display:flex; align-items:center}
+.figmini svg{display:block}
+.tprog{flex:1; height:8px; background:#e6e9f1; border-radius:99px; overflow:hidden; min-width:40px}
+.tprog i{display:block; height:100%; width:0; border-radius:99px; background:var(--brand); transition:width .4s cubic-bezier(.2,.8,.2,1)}
+.tnum{font-size:.78rem; font-weight:800; color:var(--soft); white-space:nowrap; flex:0 0 auto}
+
+/* ---------- cards ---------- */
+.step{display:none}
+.step.on{display:block; animation:in .25s ease}
+@keyframes in{from{opacity:0; transform:translateY(8px)}to{opacity:1;transform:none}}
+.scard{background:var(--card); border-radius:22px; padding:30px 34px; margin-bottom:16px;
+  box-shadow:0 1px 2px rgba(22,32,58,.05), 0 16px 34px -26px rgba(22,32,58,.5)}
+.kick{font-size:.7rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--deep,var(--brand)); margin-bottom:6px}
+h1.t{font-size:1.62rem; line-height:1.2; font-weight:800; letter-spacing:-.02em; margin:0 0 14px}
+.lead{font-size:1.09rem; margin:0 0 4px}
+.scard p{margin:.7em 0}
+.scard p:last-child{margin-bottom:0}
+b,strong{font-weight:700}
+.small{font-size:.88rem; color:var(--soft)}
+
+/* the build-up figure */
+.figbox{display:block; text-align:center; margin:4px 0 18px}
+.fighost svg{width:var(--figw,300px); max-width:100%; height:auto; display:block; margin:0 auto}
+.fel{transition:opacity .5s cubic-bezier(.2,.8,.2,1), transform .55s cubic-bezier(.2,.8,.2,1)}
+.cp .fighost svg{max-width:230px}
+@media (prefers-reduced-motion: reduce){ .fel{transition:opacity .18s linear !important; transform:none !important} }
+
+/* examples */
+.eg{border-radius:14px; padding:13px 16px 13px 44px; position:relative; margin:12px 0; font-size:1.03rem}
+.eg:before{position:absolute; left:15px; top:11px; font-weight:800; font-size:1.05rem}
+.eg.bad{background:var(--now)} .eg.bad:before{content:"\2717"; color:var(--no)}
+.eg.good{background:var(--okw)} .eg.good:before{content:"\2713"; color:var(--ok)}
+.eg .n{display:block; font-size:.86rem; color:var(--soft); margin-top:5px}
+.eg em{font-style:italic}
+
+ul.plain{list-style:none; padding:0; margin:12px 0}
+ul.plain li{padding:9px 0 9px 30px; position:relative; border-bottom:1px solid #f0f2f7}
+ul.plain li:last-child{border-bottom:0}
+ul.plain li:before{content:"\2192"; position:absolute; left:4px; color:var(--brand); font-weight:800}
+ul.num{counter-reset:n; list-style:none; padding:0; margin:12px 0}
+ul.num li{counter-increment:n; padding:9px 0 9px 38px; position:relative}
+ul.num li:before{content:counter(n); position:absolute; left:0; top:8px; width:24px; height:24px; border-radius:50%;
+  background:var(--brand); color:#fff; text-align:center; line-height:24px; font-size:.8rem; font-weight:800}
+
+.tipbox{background:var(--tint); border-radius:14px; padding:14px 18px; margin:14px 0; font-size:1rem}
+.tipbox .l{font-size:.68rem; font-weight:800; letter-spacing:.13em; text-transform:uppercase; color:var(--deep,var(--brand)); display:block; margin-bottom:4px}
+.warnb{background:#fdf1ef; border-radius:14px; padding:14px 18px; margin:14px 0; font-size:1rem}
+.warnb .l{font-size:.68rem; font-weight:800; letter-spacing:.13em; text-transform:uppercase; color:var(--no); display:block; margin-bottom:4px}
+
+table{border-collapse:collapse; width:100%; margin:14px 0; font-size:.95rem}
+th,td{padding:9px 11px; text-align:left; vertical-align:top; border-bottom:1px solid #eef0f5}
+th{font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); font-weight:800}
+tr:last-child td{border-bottom:0}
+td.c,th.c{text-align:center}
+
+.fig{margin:16px 0; text-align:center}
+.fig svg{max-width:100%; height:auto}
+.figc{font-size:.86rem; color:var(--soft); margin-top:8px; text-align:left}
+
+.r1{background:#fdeecd; box-shadow:inset 0 -2px 0 #e0a63f}
+.r2{background:#e4f4e5; box-shadow:inset 0 -2px 0 #4f8a4a}
+.r3{background:#f7e6df; box-shadow:inset 0 -2px 0 #8c4a32}
+.r4{background:#e9e9ee; box-shadow:inset 0 -2px 0 #8a8a95}
+.rh{background:#efe7fa; box-shadow:inset 0 -2px 0 #6b4a9b}
+.rb{background:#e6effa; box-shadow:inset 0 -2px 0 #3d6ea8}
+.rt{background:#fbe4e2; box-shadow:inset 0 -2px 0 #c0483f}
+.rA{background:#dceefa; box-shadow:inset 0 -2px 0 var(--A)}
+.rB{background:#fbe8cf; box-shadow:inset 0 -2px 0 var(--B)}
+.rJ{background:#fbe0dc; box-shadow:inset 0 -2px 0 #b3392f}
+.rG{background:#e6efdc; box-shadow:inset 0 -2px 0 #5b7d3f}
+.lab{display:inline-block; font-size:.64rem; font-weight:800; letter-spacing:.09em; text-transform:uppercase;
+  padding:3px 9px; border-radius:99px; background:var(--tint); color:var(--deep,var(--brand)); margin-right:6px}
+
+/* quick check on a teaching screen */
+.qk{margin-top:20px; border-top:2px dashed var(--line); padding-top:16px}
+.qk-l{font-size:.7rem; font-weight:800; letter-spacing:.13em; text-transform:uppercase; color:var(--deep,var(--brand)); margin-bottom:6px}
+.qk-q{margin:0 0 10px; font-weight:600; font-size:1.02rem}
+.qk-os{display:flex; flex-direction:column; gap:7px}
+.qk-o{font:inherit; font-size:.97rem; text-align:left; padding:12px 14px; border:1px solid #d3d3d8;
+  border-radius:11px; background:#fff; cursor:pointer; line-height:1.4}
+.qk-o:hover:not(:disabled){background:#f4f8fb; border-color:#8fb3d0}
+.qk-o.good{background:#eef8f1; border-color:#4d9468; font-weight:600}
+.qk-o.good::after{content:" \2713"; font-weight:800; color:#1f5c37}
+.qk-o.bad{background:#fdefee; border-color:#d4796f}
+.qk-o.bad::after{content:" \2717"; font-weight:800; color:#8e2f28}
+.qk-o:disabled{cursor:default}
+.qk-fb{margin-top:10px; font-size:.93rem; padding:10px 13px; border-radius:9px; display:none}
+.qk-fb.on{display:block}
+.qk-fb.y{background:#eef8f1; color:#1f5c37; border:1px solid #8ec49f}
+.qk-fb.n{background:#fdf6e6; color:#7a5510; border:1px solid #e0c483}
+.qk-fb b{display:block; margin-bottom:.15em}
+
+.cp .qk{border-top-color:rgba(255,255,255,.4); text-align:left}
+.cp .qk-l{color:#fff}
+.cp .qk-q{color:#fff; max-width:none; margin:0 0 10px; text-align:left}
+.cp .qk-o{background:#fff; color:var(--ink); border-color:rgba(255,255,255,.5)}
+.cp .qk-fb,.cp .qk-fb.y,.cp .qk-fb.n{background:rgba(255,255,255,.18); color:#fff; border:1px solid rgba(255,255,255,.45)}
+
+/* checkpoint */
+.cp{background:linear-gradient(135deg,#177140,#0f5a30); color:#fff; border-radius:22px; padding:30px 34px; text-align:center}
+.cp .big{font-size:2.4rem; line-height:1}
+.cp h1{color:#fff; font-size:1.5rem; margin:10px 0 8px; font-weight:800}
+.cp p{margin:0 auto; max-width:44ch}
+.cp .you{background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.3); border-radius:14px;
+  padding:12px 16px; margin-top:16px; font-size:1.02rem}
+
+/* bottom nav */
+.nav{position:fixed; left:0; right:0; bottom:0; z-index:40; background:rgba(255,255,255,.95);
+  backdrop-filter:blur(10px); border-top:1px solid var(--line)}
+.navin{max-width:800px; margin:0 auto; padding:13px 20px; display:flex; align-items:center; gap:12px}
+.nbtn{font:inherit; font-weight:800; font-size:.95rem; padding:13px 30px; border-radius:99px; cursor:pointer; border:1px solid transparent}
+.nbtn.back{background:#fff; color:var(--soft); border-color:var(--line)}
+.nbtn.next{background:var(--brand); color:#fff; box-shadow:0 3px 0 rgba(22,32,58,.18); flex:0 0 auto}
+.nbtn.next.go{background:var(--ok); box-shadow:0 3px 0 rgba(20,90,50,.28)}
+.nbtn:disabled{opacity:.4; cursor:not-allowed; box-shadow:none}
+.nbtn:not(:disabled):hover{transform:translateY(-1px)}
+.nbtn:not(:disabled):active{transform:translateY(1px); box-shadow:none}
+.navmsg{flex:1; font-size:.86rem; color:var(--soft); text-align:right}
+.navmsg b{color:var(--ink)}
+.skip{font:inherit; font-size:.82rem; background:none; border:0; color:var(--soft); text-decoration:underline; cursor:pointer; padding:8px 4px}
+.nbtn:focus-visible,.skip:focus-visible,.qk-o:focus-visible{outline:3px solid #1b5fa8; outline-offset:2px}
+
+.step .drill{border:0; box-shadow:none; margin:0; border-radius:0}
+.step .drill-top{background:transparent; border-bottom:1px solid #eef0f5; padding:0 0 12px}
+.step .drill-body{padding:16px 0 0}
+.step .drill-name{font-size:1.3rem; font-weight:800; letter-spacing:-.02em}
+.step .drill-n{display:none}
+
+@media (max-width:640px){
+  body{font-size:16.5px}
+  .scard{padding:22px 20px; border-radius:18px}
+  h1.t{font-size:1.4rem}
+  .navin{padding:11px 14px; gap:8px}
+  .nbtn{padding:12px 20px; font-size:.9rem}
+  .nbtn.back{padding:12px 14px}
+  .navmsg{font-size:.76rem; text-align:right}
+  .wrap{padding:0 14px 130px}
+  .topin{padding:9px 12px; gap:9px}
+  .chip{font-size:.62rem; padding:4px 8px; letter-spacing:.04em}
+  .tnum{font-size:.72rem}
+  .qk-o{padding:13px 14px}
+  .fig{overflow-x:auto; margin-left:-20px; margin-right:-20px; padding:0 20px}
+  .fig svg{min-width:430px}
+}
+@media print{
+  body{background:#fff; font-size:10.4pt; line-height:1.45}
+  .top,.nav{display:none !important}
+  .step{display:block !important; page-break-inside:avoid; break-inside:avoid}
+  .scard{box-shadow:none; border:1px solid #d8dce6; border-radius:12px; padding:14px 16px; margin-bottom:10px}
+  .cp{background:#fff !important; color:#000 !important; border:2px solid #177140}
+  .cp h1,.cp .qk-q,.cp .qk-l{color:#000 !important}
+  .btns,.fb{display:none !important}
+  .qk-fb{display:none !important}
+  .qk-o{border:1px solid #b9bcc6 !important; background:#fff !important; padding:7px 10px}
+  .qk-o::before{content:"\25a1  "; color:#666}
+  .qk-l::after{content:"\00a0\2014\00a0circle one"; font-weight:600}
+  .figbox{display:none}
+  .wrap{padding:0}
+  @page{size:letter; margin:14mm}
+}
+
+
+</style></head>
+<body>
+<div class="top"><div class="topin">
+  <span class="chip"></span><span class="figmini"></span><span class="tprog"><i></i></span><span class="tnum"></span>
+</div></div>
+<div class="wrap">
+<section class="step" data-req="m1" data-stage="Start" data-type="teach">
+<div class="scard"><div class="figbox"></div><div class="kick">Welcome</div><h1 class="t">You are going to build an essay</h1>
+<p class="lead">Not all at once — <b>piece by piece</b>. You start with one sentence. Every screen adds one small thing to what you already have.</p><p>By the last screen you will have written a whole essay, and every part of it will be something you already practiced on its own.</p><div class="tipbox"><span class="l">How to use this</span>Read a screen, press <b>Got it</b>. On practice screens, answer first — the button turns green when you can move on. Nothing is saved, so you can start over any time.</div>
+<div class="qk" data-qk="m1" data-a="1" data-why="Five: an introduction, three body paragraphs, and a conclusion."><div class="qk-l">Your turn</div><p class="qk-q">How many paragraphs will the essay you build have?</p><div class="qk-os"><button class="qk-o" type="button">Three</button><button class="qk-o" type="button">Five</button><button class="qk-o" type="button">Ten</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m2" data-stage="Stage 1 · The point" data-type="teach">
+<div class="scard"><div class="figbox"></div><h1 class="t">A paragraph proves one thing</h1>
+<p class="lead">Sentence 1 says what that one thing is.</p><p>Different books call it the <i>topic sentence</i>. We will call it <b>the point</b>. Everything else in the paragraph exists to hold it up.</p>
+<div class="qk" data-qk="m2" data-a="0" data-why="One paragraph proves one thing; a new benefit needs a new paragraph."><div class="qk-l">Your turn</div><p class="qk-q">Sentence 1 of a paragraph says: <em>A part-time job teaches money skills.</em> Which sentence belongs in the same paragraph?</p><div class="qk-os"><button class="qk-o" type="button">A working student learns what a phone costs in hours.</button><button class="qk-o" type="button">Jobs also help students make new friends at work.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m3" data-stage="Stage 1 · The point" data-type="teach">
+<div class="scard"><h1 class="t">The test: can someone disagree?</h1>
+<p class="lead">That is the whole of Stage 1. If nobody can disagree, it is a fact — and a fact gives your paragraph nothing to do.</p><div class="eg bad">Many high school students have part-time jobs.<span class="n">Everybody agrees. Where does the paragraph go now? Nowhere.</span></div><div class="eg good">A part-time job teaches students to manage money better than any class can.<span class="n">Someone could say “no it doesn’t.” Now you have something to prove.</span></div>
+<div class="qk" data-qk="m3" data-a="2" data-why="A point must be a claim someone can argue against; a fact only describes."><div class="qk-l">Your turn</div><p class="qk-q">Which of these could someone disagree with?</p><div class="qk-os"><button class="qk-o" type="button">Many local shops hire students on Saturdays.</button><button class="qk-o" type="button">Most teenagers who work do so in stores.</button><button class="qk-o" type="button">A Saturday job is worth more than extra sleep.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 1 · The point" data-type="drill" data-req="s1">
+<div class="scard"><div data-ex="s1"></div></div>
+</section>
+<section class="step" data-req="m5" data-stage="Stage 1 · The point" data-type="teach">
+<div class="scard"><h1 class="t">Kill the empty words</h1>
+<p class="lead"><i>Good, useful, important, interesting</i> — these say nothing. Name the real quality instead.</p><div class="eg bad">Jobs are good for students.<span class="n">“Good” how? The paragraph could go in ten directions.</span></div><div class="eg good">A part-time job teaches students to manage money better than any class can.<span class="n">Now the reader can guess the whole paragraph.</span></div><div class="tipbox"><span class="l">Words that do the work</span>cheaper · faster · safer · harder to fake · more honest · easier to remember</div>
+<div class="qk" data-qk="m5" data-a="1" data-why="Good, useful, important, and interesting say nothing; name the real quality instead."><div class="qk-l">Your turn</div><p class="qk-q">Which point names a real quality instead of an empty word?</p><div class="qk-os"><button class="qk-o" type="button">Working teaches students something really important.</button><button class="qk-o" type="button">Working teaches students to show up on time.</button><button class="qk-o" type="button">Working teaches students a lot of useful things.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 1 · The point" data-type="drill" data-req="s2">
+<div class="scard"><div data-ex="s2"></div></div>
+</section>
+<section class="step" data-req="m7" data-stage="Stage 1 · The point" data-type="teach">
+<div class="scard"><h1 class="t">Add a comparison</h1>
+<p class="lead">A comparison forces you to take a side. Three ways to do it:</p><ul class="plain"><li><b>…better than</b> a class can.</li><li><b>…more than</b> any other subject.</li><li><b>…in a way that</b> homework cannot.</li></ul><p class="small">This is the fastest way to turn a flat sentence into an arguable one.</p>
+<div class="qk" data-qk="m7" data-a="0" data-why="A comparison — better than, more than — makes the point sharper and easier to argue."><div class="qk-l">Your turn</div><p class="qk-q">Finish the point with a comparison: <em>A part-time job teaches patience</em> ___</p><div class="qk-os"><button class="qk-o" type="button">…more than any homework can.</button><button class="qk-o" type="button">…and it is also very interesting.</button><button class="qk-o" type="button">…because customers can be rude.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 1 · The point" data-type="drill" data-req="s3">
+<div class="scard"><div data-ex="s3"></div></div>
+</section>
+<section class="step" data-req="m9" data-stage="Stage 1 · The point" data-type="teach">
+<div class="scard"><h1 class="t">Three things that are not points</h1>
+<div class="eg bad">In this paragraph I will talk about money.<span class="n">An announcement. It describes the paragraph instead of starting it.</span></div><div class="eg bad">According to the dictionary, a job is paid work.<span class="n">A definition. Your reader knows what a job is.</span></div><div class="eg bad">Do part-time jobs help students?<span class="n">A question. A paragraph opens with an <b>answer</b>.</span></div>
+<div class="qk" data-qk="m9" data-a="1" data-why="Announcements, definitions, and questions describe or ask; a point claims something."><div class="qk-l">Your turn</div><p class="qk-q"><em>A part-time job is work that takes fewer than twenty hours a week.</em> Why is this not a point?</p><div class="qk-os"><button class="qk-o" type="button">It is an announcement</button><button class="qk-o" type="button">It is a definition</button><button class="qk-o" type="button">It is a question</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 1 · The point" data-type="drill" data-req="s4">
+<div class="scard"><div data-ex="s4"></div></div>
+</section>
+<section class="step" data-req="m11" data-stage="Stage 1 · The point" data-type="check">
+<div class="cp"><div class="figbox"></div><div class="big">✓</div><h1>Stage 1 done</h1><p>You can now write the first sentence of any paragraph.</p><div class="you"><b>You can write:</b> one sentence, one idea, that somebody could argue with.</div><div class="qk" data-qk="m11" data-a="2" data-why="A point is a claim someone could argue against, not a fact, definition, or question."><div class="qk-l">Your turn</div><p class="qk-q">Finish the Stage 1 rule: a point is a sentence that someone can ___.</p><div class="qk-os"><button class="qk-o" type="button">count</button><button class="qk-o" type="button">picture</button><button class="qk-o" type="button">argue with</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m12" data-stage="Stage 2 · Evidence" data-type="teach">
+<div class="scard"><div class="figbox"></div><h1 class="t">Sentence 2 proves it</h1>
+<p class="lead">Your point is a claim. Nobody has to believe it yet. Sentence 2 is where you show something real.</p><p>This is the sentence that stops an essay being a list of opinions.</p>
+<div class="qk" data-qk="m12" data-a="0" data-why="A point is only a claim; sentence 2 gives the reader a reason to believe it."><div class="qk-l">Your turn</div><p class="qk-q">You wrote: <em>A part-time job teaches patience.</em> What must sentence 2 do?</p><div class="qk-os"><button class="qk-o" type="button">Give something that proves the point.</button><button class="qk-o" type="button">Say the point again in stronger words.</button><button class="qk-o" type="button">Ask the reader whether they agree.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m13" data-stage="Stage 2 · Evidence" data-type="teach">
+<div class="scard"><h1 class="t">Evidence is something you can count or picture</h1>
+<ul class="plain"><li><b>A number.</b> six hours a week · forty minutes · two shifts</li><li><b>A person in a situation.</b> a student who works Saturdays at a coffee shop</li><li><b>A cost or a trade-off.</b> what a phone costs in hours instead of dollars</li><li><b>A comparison with the alternative.</b> something a class on budgeting never makes real</li></ul>
+<div class="qk" data-qk="m13" data-a="1" data-why="Evidence is a number, a person in a situation, a cost, or a comparison."><div class="qk-l">Your turn</div><p class="qk-q">Which sentence is evidence you can count or picture?</p><div class="qk-os"><button class="qk-o" type="button">Students certainly learn a great deal from working every week.</button><button class="qk-o" type="button">A student who closes a café at 10 p.m. still has homework waiting.</button><button class="qk-o" type="button">Everyone agrees that a job is a very good teacher for teenagers.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m14" data-stage="Stage 2 · Evidence" data-type="teach">
+<div class="scard"><h1 class="t">Vague vs. specific</h1>
+<p class="small" style="margin-top:0"><span class="lab">Point</span><span class="r1">A part-time job teaches students to manage money better than any class can.</span></p><div class="eg bad">Students learn a lot about money when they work.<span class="n">This repeats the point in other words. Repeating is not proving.</span></div><div class="eg good">A student who works six hours a week quickly learns what a new phone really costs — not in dollars, but in hours behind a counter.<span class="n"><b>Six hours</b>, <b>a new phone</b>, <b>hours behind a counter</b>. Three concrete words changed everything.</span></div>
+<div class="qk" data-qk="m14" data-a="2" data-why="Specific evidence shows a number, a person, a cost, or a comparison the reader can see."><div class="qk-l">Your turn</div><p class="qk-q">What is wrong with this evidence? <em>Working students understand the value of things much better.</em></p><div class="qk-os"><button class="qk-o" type="button">It is too long for sentence 2.</button><button class="qk-o" type="button">It uses a number you cannot check.</button><button class="qk-o" type="button">It gives nothing to count or picture.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 2 · Evidence" data-type="drill" data-req="s5">
+<div class="scard"><div data-ex="s5"></div></div>
+</section>
+<section class="step" data-stage="Stage 2 · Evidence" data-type="drill" data-req="s6">
+<div class="scard"><div data-ex="s6"></div></div>
+</section>
+<section class="step" data-req="m17" data-stage="Stage 2 · Evidence" data-type="teach">
+<div class="scard"><h1 class="t">Never invent a statistic</h1>
+<div class="eg bad">Studies show that 78% of working teenagers save more money.<span class="n">If you cannot name the study, do not write the number. One invented statistic can sink a whole essay.</span></div><div class="tipbox"><span class="l">Say this instead</span>many employers say… · a growing number of schools… · students often find that…</div>
+<div class="qk" data-qk="m17" data-a="1" data-why="With no source, write 'many teachers say' or 'students often find' — never a made-up number."><div class="qk-l">Your turn</div><p class="qk-q">You have no source. Which version is safe to write?</p><div class="qk-os"><button class="qk-o" type="button">Studies show 64% of working students get better grades.</button><button class="qk-o" type="button">Many teachers say working students often get better grades.</button><button class="qk-o" type="button">Exactly two in three working students get better grades.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 2 · Evidence" data-type="drill" data-req="s7">
+<div class="scard"><div data-ex="s7"></div></div>
+</section>
+<section class="step" data-stage="Stage 2 · Evidence" data-type="drill" data-req="s8">
+<div class="scard"><div data-ex="s8"></div></div>
+</section>
+<section class="step" data-req="m20" data-stage="Stage 2 · Evidence" data-type="check">
+<div class="cp"><div class="figbox"></div><div class="big">✓</div><h1>Stage 2 done</h1><p>You can now write two sentences that belong together.</p><div class="you"><b>You can write:</b> a point, then real proof of it.</div><div class="qk" data-qk="m20" data-a="0" data-why="Evidence is something you can count or picture: a number, a person, a cost, a comparison."><div class="qk-l">Your turn</div><p class="qk-q">From Stage 2: which of these counts as evidence?</p><div class="qk-os"><button class="qk-o" type="button">A cost or trade-off you can picture</button><button class="qk-o" type="button">A strong feeling about the topic</button><button class="qk-o" type="button">A word like 'useful' or 'important'</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m21" data-stage="Stage 3 · Explanation" data-type="teach">
+<div class="scard"><div class="figbox"></div><h1 class="t">Sentence 3 is the one students skip</h1>
+<p class="lead">An example does not argue by itself. Your reader can always look at it and think <i>so what?</i></p><p>Sentence 3 answers one question: <b>why does this example prove my point?</b></p>
+<div class="qk" data-qk="m21" data-a="2" data-why="An example does not argue by itself; sentence 3 answers 'why does this prove my point?'"><div class="qk-l">Your turn</div><p class="qk-q">Point: <em>A job teaches patience.</em> Evidence: <em>A cashier hears the same question fifty times a shift.</em> What should sentence 3 do?</p><div class="qk-os"><button class="qk-o" type="button">Give a second example about cashiers.</button><button class="qk-o" type="button">Repeat the point in different words.</button><button class="qk-o" type="button">Say why fifty questions prove patience.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m22" data-stage="Stage 3 · Explanation" data-type="teach">
+<div class="scard"><h1 class="t">The three sentences so far</h1>
+<p><span class="lab">Point</span><span class="r1">A part-time job teaches students to manage money better than any class can.</span></p><p><span class="lab">Evidence</span><span class="r2">A student who works six hours a week quickly learns what a new phone really costs — not in dollars, but in hours behind a counter.</span></p><p><span class="lab">Explanation</span><span class="r3">This lesson lands harder than any classroom exercise, because the money is real and the decision is the student’s own.</span></p><div class="tipbox"><span class="l">Look at what sentence 3 does</span>It <b>compares</b> the example with the alternative, gives the <b>reason</b> (<i>because…</i>), and names the idea underneath: real consequences teach faster than described ones. That idea — not the phone — is your argument.</div>
+<div class="qk" data-qk="m22" data-a="1" data-why="The explanation is the sentence that says why the evidence proves the point."><div class="qk-l">Your turn</div><p class="qk-q">Which of these three is sentence 3, the explanation?</p><div class="qk-os"><button class="qk-o" type="button">A job makes students better at planning their week.</button><button class="qk-o" type="button">This shows the job, not the teacher, forces the planning.</button><button class="qk-o" type="button">A waiter who works Fridays must do homework on Thursday.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m23" data-stage="Stage 3 · Explanation" data-type="teach">
+<div class="scard"><h1 class="t">Starters that force a real explanation</h1>
+<p class="lead">If you cannot begin with one of these, you have not explained anything yet.</p><table><tr><td><b>This matters because…</b></td><td class="small">give the consequence</td></tr><tr><td><b>What this shows is…</b></td><td class="small">name the idea behind the example</td></tr><tr><td><b>The reason is that…</b></td><td class="small">give the cause</td></tr><tr><td><b>In other words,…</b></td><td class="small">say it at a bigger level</td></tr><tr><td><b>Compared with…</b></td><td class="small">measure it against the alternative</td></tr></table>
+<div class="qk" data-qk="m23" data-a="2" data-why="'This matters because', 'What this shows is', 'The reason is that' all force you to explain."><div class="qk-l">Your turn</div><p class="qk-q">Which starter should you NOT use to begin sentence 3?</p><div class="qk-os"><button class="qk-o" type="button">The reason is that…</button><button class="qk-o" type="button">In other words,…</button><button class="qk-o" type="button">Another example is…</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 3 · Explanation" data-type="drill" data-req="s9">
+<div class="scard"><div data-ex="s9"></div></div>
+</section>
+<section class="step" data-req="m25" data-stage="Stage 3 · Explanation" data-type="teach">
+<div class="scard"><h1 class="t">The three fake explanations</h1>
+<div class="eg bad">This shows that a student who works six hours a week learns about money.<span class="n"><b>The repeat.</b> It says the evidence again in weaker words.</span></div><div class="eg bad">For example, my cousin also worked in a restaurant.<span class="n"><b>The extra example.</b> A second example does not explain the first. This is the most common way a paragraph goes thin.</span></div><div class="eg bad">So we can see that this is very important.<span class="n"><b>The empty one.</b> Zero content. Delete it and start again with <i>This matters because…</i></span></div>
+<div class="qk" data-qk="m25" data-a="1" data-why="A second example is still evidence; it does not say why the first one proves the point."><div class="qk-l">Your turn</div><p class="qk-q">Point: <em>A job teaches patience.</em> Evidence: <em>A cashier hears the same question fifty times a shift.</em> Sentence 3: <em>A waiter also hears the same order all evening.</em> Which fake is this?</p><div class="qk-os"><button class="qk-o" type="button">The repeat</button><button class="qk-o" type="button">The extra example</button><button class="qk-o" type="button">The empty one</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 3 · Explanation" data-type="drill" data-req="s10">
+<div class="scard"><div data-ex="s10"></div></div>
+</section>
+<section class="step" data-stage="Stage 3 · Explanation" data-type="drill" data-req="s11">
+<div class="scard"><div data-ex="s11"></div></div>
+</section>
+<section class="step" data-stage="Stage 3 · Explanation" data-type="drill" data-req="s12">
+<div class="scard"><div data-ex="s12"></div></div>
+</section>
+<section class="step" data-req="m29" data-stage="Stage 3 · Explanation" data-type="check">
+<div class="cp"><div class="figbox"></div><div class="big">✓</div><h1>Stage 3 done</h1><p>Three sentences — and it is already an argument, not a report.</p><div class="you"><b>You can write:</b> point → evidence → explanation.</div><div class="qk" data-qk="m29" data-a="0" data-why="Sentence 3 explains; an example does not argue by itself."><div class="qk-l">Your turn</div><p class="qk-q">What question must sentence 3 answer?</p><div class="qk-os"><button class="qk-o" type="button">Why does this prove my point?</button><button class="qk-o" type="button">What is another example of this?</button><button class="qk-o" type="button">What will the next paragraph say?</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m30" data-stage="Stage 4 · The link" data-type="teach">
+<div class="scard"><div class="figbox"></div><h1 class="t">Sentence 4 points outward</h1>
+<p class="lead">The last sentence does not repeat the first. It connects this paragraph to something bigger.</p><ul class="plain"><li><b>Back to your essay’s main claim:</b> …which is why a job belongs in a student’s education.</li><li><b>Forward to the next paragraph:</b> Money is only the first thing a job teaches.</li></ul>
+<div class="qk" data-qk="m30" data-a="1" data-why="Sentence 4 looks outward: back to the main claim or forward to the next paragraph."><div class="qk-l">Your turn</div><p class="qk-q">Which sentence 4 does its job?</p><div class="qk-os"><button class="qk-o" type="button">The same cashier hears the same joke fifty times too.</button><button class="qk-o" type="button">Such patience is one more skill that school cannot give.</button><button class="qk-o" type="button">Some cashiers work eight hours every Saturday.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m31" data-stage="Stage 4 · The link" data-type="teach">
+<div class="scard"><h1 class="t">Weak link vs. strong link</h1>
+<div class="eg bad">So, as we can see, jobs teach students about money.<span class="n">A repeat in weaker words. It costs you a sentence and adds nothing.</span></div><div class="eg good">In other words, a part-time job turns an abstract idea into a daily habit.<span class="n">It ends on the <b>idea</b>, not the phone — one step up toward the essay’s argument.</span></div>
+<div class="qk" data-qk="m31" data-a="2" data-why="A strong link says something new about the point; 'as we can see' just repeats it."><div class="qk-l">Your turn</div><p class="qk-q">What is wrong with this link? <em>So, in conclusion, we can see that a job teaches patience.</em></p><div class="qk-os"><button class="qk-o" type="button">It adds a new example instead of a link.</button><button class="qk-o" type="button">It is too specific for sentence 4.</button><button class="qk-o" type="button">It only repeats the point with filler words.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m32" data-stage="Stage 4 · The link" data-type="teach">
+<div class="scard"><h1 class="t">This is the sandwich</h1>
+<p class="lead">Four sentences. Bread, filling, filling, bread.</p><table><tr><td><b>1 · Point</b></td><td>your claim</td></tr><tr><td><b>2 · Evidence</b></td><td>something real, from the world</td></tr><tr><td><b>3 · Explanation</b></td><td>why it proves the point — the thickest layer</td></tr><tr><td><b>4 · Link</b></td><td>your claim again, pointing outward</td></tr></table><p class="small">You will write this same shape three times in every essay you produce. Nothing after this stage changes it.</p>
+<div class="qk" data-qk="m32" data-a="1" data-why="Point and link are the bread; evidence and explanation are the filling between them."><div class="qk-l">Your turn</div><p class="qk-q">Which two sentences are the bread of the sandwich?</p><div class="qk-os"><button class="qk-o" type="button">Sentences 1 and 2</button><button class="qk-o" type="button">Sentences 1 and 4</button><button class="qk-o" type="button">Sentences 2 and 3</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 4 · The link" data-type="drill" data-req="s13">
+<div class="scard"><div data-ex="s13"></div></div>
+</section>
+<section class="step" data-stage="Stage 4 · The link" data-type="drill" data-req="s14">
+<div class="scard"><div data-ex="s14"></div></div>
+</section>
+<section class="step" data-stage="Stage 4 · The link" data-type="drill" data-req="s15">
+<div class="scard"><div data-ex="s15"></div></div>
+</section>
+<section class="step" data-req="m36" data-stage="Stage 4 · The link" data-type="teach">
+<div class="scard"><h1 class="t">Now you write one</h1>
+<p class="lead">Four boxes, four sentences. The page checks the structure for you and tells you what is missing.</p><div class="tipbox"><span class="l">Before you start</span>Pick a task you actually have an opinion about. One specific number or situation in box 2 does most of the work.</div>
+<div class="qk" data-qk="m36" data-a="0" data-why="A number you can count is evidence; it goes in box 2, right after the point."><div class="qk-l">Your turn</div><p class="qk-q">You wrote: <em>A student earning $12 an hour works five hours for one $60 game.</em> Which box does it go in?</p><div class="qk-os"><button class="qk-o" type="button">Box 2 — the evidence</button><button class="qk-o" type="button">Box 1 — the point</button><button class="qk-o" type="button">Box 4 — the link</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 4 · The link" data-type="write" data-req="s16">
+<div class="scard"><div data-ex="s16"></div></div>
+</section>
+<section class="step" data-req="m38" data-stage="Stage 4 · The link" data-type="check">
+<div class="cp"><div class="figbox"></div><div class="big">✓</div><h1>Stage 4 done</h1><p>You can write a complete body paragraph on any topic.</p><div class="you"><b>You can write:</b> 4 sentences · 55–80 words · one idea, proved.<br><span class='small' style='opacity:.9'>Two-thirds of an essay is exactly this, repeated three times.</span></div><div class="qk" data-qk="m38" data-a="1" data-why="Point, evidence, explanation, link: bread, filling, filling, bread."><div class="qk-l">Your turn</div><p class="qk-q">From memory: what are the four sentences of a body paragraph, in order?</p><div class="qk-os"><button class="qk-o" type="button">Point, explanation, evidence, link</button><button class="qk-o" type="button">Point, evidence, explanation, link</button><button class="qk-o" type="button">Evidence, point, explanation, link</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m39" data-stage="Stage 5 · The bread" data-type="teach">
+<div class="scard"><div class="figbox"></div><h1 class="t">An essay is three of those paragraphs</h1>
+<p class="lead">Plus one paragraph before them and one after. That is the whole shape.</p><table><tr><td><b>¶1 Introduction</b></td><td>hook · background · thesis</td></tr><tr><td><b>¶2 Body 1</b></td><td>reason 1 (weakest) — the four moves</td></tr><tr><td><b>¶3 Body 2</b></td><td>reason 2 — same four moves, new idea</td></tr><tr><td><b>¶4 Body 3</b></td><td>strongest reason, and the concession</td></tr><tr><td><b>¶5 Conclusion</b></td><td>restate · so what · nothing new</td></tr></table>
+<div class="qk" data-qk="m39" data-a="0" data-why="Every body paragraph is the same sandwich; only the paragraphs before and after are different."><div class="qk-l">Your turn</div><p class="qk-q">True or false: All three body paragraphs use the same four-sentence sandwich.</p><div class="qk-os"><button class="qk-o" type="button">True</button><button class="qk-o" type="button">False</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m40" data-stage="Stage 5 · The bread" data-type="teach">
+<div class="scard"><h1 class="t">The introduction has three moves</h1>
+<p class="lead">Start wide, finish narrow. Three or four sentences, about 50 words.</p><div class="fig"><svg viewBox="0 0 380 190" width="380" role="img" aria-label="Funnel: hook, background, thesis">
+ <path d="M20,14 h340 l-92,150 h-156 z" fill="#faf6ee" stroke="#d8cdb8" stroke-width="2"/>
+ <rect x="34" y="26" width="312" height="34" rx="8" fill="#efe7fa" stroke="#6b4a9b" stroke-width="1.6"/>
+ <text x="190" y="48" text-anchor="middle" font-family="Helvetica" font-size="13" font-weight="700" fill="#4a3070">1 · hook — one sentence, wide</text>
+ <rect x="58" y="70" width="264" height="34" rx="8" fill="#e6effa" stroke="#3d6ea8" stroke-width="1.6"/>
+ <text x="190" y="92" text-anchor="middle" font-family="Helvetica" font-size="13" font-weight="700" fill="#26456b">2 · background — the disagreement</text>
+ <rect x="88" y="114" width="204" height="38" rx="8" fill="#fbe4e2" stroke="#c0483f" stroke-width="2"/>
+ <text x="190" y="138" text-anchor="middle" font-family="Helvetica" font-size="13" font-weight="700" fill="#8e2b23">3 · thesis — narrowest</text>
+ <text x="190" y="180" text-anchor="middle" font-family="Helvetica" font-size="11.5" fill="#7d7160">start wide · finish narrow · about 50 words</text>
+</svg></div>
+<div class="qk" data-qk="m40" data-a="2" data-why="Introductions go wide to narrow: hook, then background, then your main claim last."><div class="qk-l">Your turn</div><p class="qk-q">Which sentence belongs LAST in an introduction?</p><div class="qk-os"><button class="qk-o" type="button">At 6 a.m. on a Saturday, a sixteen-year-old is already opening the bakery.</button><button class="qk-o" type="button">Parents and teachers disagree about whether teenagers should work.</button><button class="qk-o" type="button">Students should work part-time because it teaches money, time, and patience.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m41" data-stage="Stage 5 · The bread" data-type="teach">
+<div class="scard"><h1 class="t">Move 1 — the hook</h1>
+<p class="lead">One sentence that makes the reader want the next one. Five kinds work:</p><table><tr><td><b>Scene</b></td><td>Every Saturday morning, thousands of teenagers put on a uniform and go to work at a coffee shop or a store.</td></tr><tr><td><b>Question</b></td><td>How old should someone be before they earn their first paycheck?</td></tr><tr><td><b>Number</b></td><td>By eleven in the morning, a student who skipped breakfast has already been awake for five hours.</td></tr><tr><td><b>Short story</b></td><td>My cousin bought her first laptop with money she earned washing dishes.</td></tr><tr><td><b>Quotation</b></td><td>As an old teaching proverb puts it, “involve me and I learn.”</td></tr></table><div class="warnb"><span class="l">Two of these have a condition</span>A <b>number</b> and a <b>quotation</b> are only allowed if you can say where they came from. If you cannot, choose one of the other three.</div><p class="small">The <b>scene</b> is the safest choice: it needs no research and no clever phrasing.</p>
+<div class="qk" data-qk="m41" data-a="0" data-why="A number or quotation needs a source you can name; a scene is always safe."><div class="qk-l">Your turn</div><p class="qk-q">You cannot name a source. Which hook is safest?</p><div class="qk-os"><button class="qk-o" type="button">At 6 a.m. a sixteen-year-old is opening the bakery.</button><button class="qk-o" type="button">'Work is love made visible,' said one writer.</button><button class="qk-o" type="button">One in three teenagers now has a job.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 5 · The bread" data-type="drill" data-req="s17">
+<div class="scard"><div data-ex="s17"></div></div>
+</section>
+<section class="step" data-req="m43" data-stage="Stage 5 · The bread" data-type="teach">
+<div class="scard"><h1 class="t">Openings to delete on sight</h1>
+<div class="eg bad">Since the beginning of time, people have always worked.<span class="n"><b>The cliché.</b> It fills a line and says nothing — and it is not even true.</span></div><div class="eg bad">According to the dictionary, a job is “a paid position of employment.”<span class="n"><b>The dictionary.</b> You are explaining a word your reader already knows.</span></div><div class="eg bad">In this essay I am going to answer the question of whether teenagers should work.<span class="n"><b>The announcement.</b> Describing your essay is not starting it — the same mistake you met in Stage 1.</span></div>
+<div class="qk" data-qk="m43" data-a="1" data-why="Dictionary openings, clichés like 'since the beginning of time', and announcements get deleted."><div class="qk-l">Your turn</div><p class="qk-q">Is this opening OK — yes or no? <em>The dictionary defines 'work' as activity done to earn money.</em></p><div class="qk-os"><button class="qk-o" type="button">Yes</button><button class="qk-o" type="button">No</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m44" data-stage="Stage 5 · The bread" data-type="teach">
+<div class="scard"><h1 class="t">Move 2 — the background</h1>
+<p class="lead">One or two sentences that give the reader the <b>disagreement</b>. This is what makes an essay a discussion instead of a speech.</p><p><span class="rb">Some parents worry that a job takes time away from schoolwork. A part-time job, however, teaches things a classroom cannot.</span></p><p class="small">Sentence 1 gives the other side. Sentence 2 turns toward yours.</p>
+<div class="qk" data-qk="m44" data-a="1" data-why="The background gives the disagreement — what the two sides say — in one or two sentences."><div class="qk-l">Your turn</div><p class="qk-q">Which sentence is the background move?</p><div class="qk-os"><button class="qk-o" type="button">Every morning, thousands of teenagers put on a work uniform.</button><button class="qk-o" type="button">Some parents want teenagers to work; others say it hurts grades.</button><button class="qk-o" type="button">Teenagers should work because it teaches responsibility.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m45" data-stage="Stage 5 · The bread" data-type="teach">
+<div class="scard"><h1 class="t">Move 3 — the thesis</h1>
+<p class="lead">The most important sentence in the essay. One formula covers it:</p><div class="tipbox"><span class="l">The formula</span><b>[your position]</b> + <i>because</i> + <b>[reason 1]</b>, <b>[reason 2]</b>, and <b>[reason 3]</b>.</div><p><span class="rt">High school students should be encouraged to work a few hours a week, because a job builds financial awareness, develops responsibility, and improves their chances of getting hired later.</span></p><p class="small">Two things to copy: the three reasons are in <b>the order your paragraphs will use them</b>, and they have the <b>same grammar</b> — <i>builds… develops… improves…</i></p>
+<div class="qk" data-qk="m45" data-a="0" data-why="A thesis is position + because + three reasons in the same grammar, in paragraph order."><div class="qk-l">Your turn</div><p class="qk-q">What is wrong with this thesis? <em>Students should work part-time because it teaches money skills, and there is time management, and being patient.</em></p><div class="qk-os"><button class="qk-o" type="button">The three reasons use different grammar.</button><button class="qk-o" type="button">It has too many reasons for one essay.</button><button class="qk-o" type="button">It does not say the writer's position.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 5 · The bread" data-type="drill" data-req="s18">
+<div class="scard"><div data-ex="s18"></div></div>
+</section>
+<section class="step" data-stage="Stage 5 · The bread" data-type="drill" data-req="s19">
+<div class="scard"><div data-ex="s19"></div></div>
+</section>
+<section class="step" data-stage="Stage 5 · The bread" data-type="drill" data-req="s20">
+<div class="scard"><div data-ex="s20"></div></div>
+</section>
+<section class="step" data-req="m49" data-stage="Stage 5 · The bread" data-type="teach">
+<div class="scard"><h1 class="t">The conclusion has three moves too</h1>
+<ul class="num"><li><b>Say your thesis again — in new words.</b> Not one phrase copied.</li><li><b>Answer “so what?”</b> Who should do what now?</li><li><b>Add nothing new.</b> No new argument, no new example, no new number.</li></ul><p><span class="rt">In short, a few working hours each week give students practical skill with money, a stronger sense of responsibility, and a real advantage when they look for their first full-time job.</span> <span class="r4">Schools and parents should treat a part-time job not as a distraction from education but as a part of it.</span></p>
+<div class="qk" data-qk="m49" data-a="2" data-why="A conclusion restates, answers 'so what', and adds nothing new."><div class="qk-l">Your turn</div><p class="qk-q">Which sentence should NOT be in a conclusion?</p><div class="qk-os"><button class="qk-o" type="button">In short, work teaches lessons no classroom can.</button><button class="qk-o" type="button">These lessons matter because adult life begins soon.</button><button class="qk-o" type="button">A job also helps students make friends outside school.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m50" data-stage="Stage 5 · The bread" data-type="teach">
+<div class="scard"><h1 class="t">Say it again in new words</h1>
+<p class="lead">Move 1 of the conclusion is the hardest sentence in the essay: the same idea, none of the same phrases. Three ways to do it.</p><table><tr><td><b>Swap the words</b></td><td>builds financial awareness → <i>gives students practical skill with money</i></td></tr><tr><td><b>Turn the verb into a noun</b></td><td>students learn responsibility → <i>a stronger sense of responsibility</i></td></tr><tr><td><b>Flip it around</b></td><td>a job improves their chances of being hired → <i>employers notice a student who has worked</i></td></tr></table><div class="eg bad">In conclusion, students should be encouraged to work a few hours a week because it builds financial awareness.<span class="n">Copied. Four phrases straight from the thesis.</span></div><div class="eg good">In short, a few working hours each week give students practical skill with money.<span class="n">Same claim, new words. Nothing is copied.</span></div>
+<div class="qk" data-qk="m50" data-a="1" data-why="Restate by swapping words, turning the verb into a noun, or flipping the sentence around."><div class="qk-l">Your turn</div><p class="qk-q">Thesis: <em>A part-time job teaches teenagers responsibility.</em> Which one says it again in new words?</p><div class="qk-os"><button class="qk-o" type="button">A part-time job really teaches teenagers responsibility.</button><button class="qk-o" type="button">Responsibility is the lesson a first job gives.</button><button class="qk-o" type="button">A part-time job teaches teenagers responsibility.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 5 · The bread" data-type="drill" data-req="s21">
+<div class="scard"><div data-ex="s21"></div></div>
+</section>
+<section class="step" data-req="m52" data-stage="Stage 5 · The bread" data-type="check">
+<div class="cp"><div class="figbox"></div><div class="big">✓</div><h1>Stage 5 done</h1><p>You can now write a three-paragraph essay: introduction, one body paragraph, conclusion.</p><div class="you"><b>You can write:</b> a complete, arguable piece of writing. Stage 6 only multiplies the middle.</div><div class="qk" data-qk="m52" data-a="2" data-why="Wide to narrow: hook, then background, then the thesis last."><div class="qk-l">Your turn</div><p class="qk-q">From memory: the three moves of the introduction, in order?</p><div class="qk-os"><button class="qk-o" type="button">Hook, thesis, background</button><button class="qk-o" type="button">Background, hook, thesis</button><button class="qk-o" type="button">Hook, background, thesis</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m53" data-stage="Stage 6 · The whole essay" data-type="teach">
+<div class="scard"><div class="figbox"></div><h1 class="t">Put your strongest reason last</h1>
+<p class="lead">Your three body paragraphs are the three reasons in your thesis, in the same order. Weakest first, strongest last.</p><div class="tipbox"><span class="l">Why</span>The last argument your reader meets is the one they carry into your conclusion.</div>
+<div class="qk" data-qk="m53" data-a="0" data-why="Weakest first, strongest last: the reader remembers the final paragraph best."><div class="qk-l">Your turn</div><p class="qk-q">You think money skills is your strongest reason. Which paragraph does it go in?</p><div class="qk-os"><button class="qk-o" type="button">Body 3</button><button class="qk-o" type="button">Body 1</button><button class="qk-o" type="button">Body 2</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m54" data-stage="Stage 6 · The whole essay" data-type="teach">
+<div class="scard"><h1 class="t">Give the other side one paragraph of respect</h1>
+<p class="lead">Somewhere in body 3, admit what the other side gets right — then answer it.</p><div class="eg good">Admittedly, some students work too many hours and their grades suffer. The sensible answer, however, is a limit, not a ban.</div><p class="small">Conceding a point makes an argument <b>stronger</b>. It shows you thought about the alternative instead of ignoring it.</p>
+<div class="qk" data-qk="m54" data-a="1" data-why="A concession admits the other side has a point — then you answer it."><div class="qk-l">Your turn</div><p class="qk-q">Which sentence is a concession?</p><div class="qk-os"><button class="qk-o" type="button">Working students always get better grades than others.</button><button class="qk-o" type="button">It is true that some working students get lower grades.</button><button class="qk-o" type="button">Most working students still finish their homework on time.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m55" data-stage="Stage 6 · The whole essay" data-type="teach">
+<div class="scard"><h1 class="t">Joining two sentences</h1>
+<p class="lead">Signposts like <i>however</i> and <i>as a result</i> are not glue. A comma on its own cannot hold two sentences together. That mistake is called a <b>comma splice</b>, and it is the one teachers see most.</p><div class="eg bad">A job takes time, however it teaches things school cannot.<span class="n">Two complete sentences joined by a comma. The comma is not strong enough.</span></div><div class="eg good">A job takes time. However, it teaches things school cannot.<span class="n">Period, then the signpost, then a comma after it.</span></div><div class="eg good">A job takes time, but it teaches things school cannot.<span class="n"><i>But, and, so</i> are the only joining words a comma can work with.</span></div><div class="tipbox"><span class="l">The quick test</span>Cover the comma. Is each half a complete sentence on its own? Then you need a period, a semicolon, or <i>but / and / so</i>.</div>
+<div class="qk" data-qk="m55" data-a="2" data-why="'However' needs a period or semicolon before it; but, and, and so work with a comma."><div class="qk-l">Your turn</div><p class="qk-q">Which sentence is joined correctly?</p><div class="qk-os"><button class="qk-o" type="button">Jobs take time, however they teach patience.</button><button class="qk-o" type="button">Jobs take time, they teach patience.</button><button class="qk-o" type="button">Jobs take time, but they teach patience.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m56" data-stage="Stage 6 · The whole essay" data-type="teach">
+<div class="scard"><h1 class="t">Signposts</h1>
+<table><tr><td><b>Body 1</b></td><td>First of all, · First, · The first reason is…</td></tr><tr><td><b>Body 2</b></td><td>Second, · In addition, · A second reason is…</td></tr><tr><td><b>Body 3</b></td><td>Most importantly, · Above all,</td></tr><tr><td><b>Inside a paragraph</b></td><td>For example, · This matters because… · As a result,</td></tr><tr><td><b>Conclusion</b></td><td>In short, · Overall, · On balance,</td></tr></table><div class="warnb"><span class="l">Do not overdo it</span>One signpost per transition. A signpost on every sentence sounds like a machine, not a writer.</div>
+<div class="qk" data-qk="m56" data-a="0" data-why="Signposts show the reader where they are; 'Most importantly' marks the final, strongest reason."><div class="qk-l">Your turn</div><p class="qk-q">Which signpost opens body paragraph 3, your strongest reason?</p><div class="qk-os"><button class="qk-o" type="button">Most importantly,</button><button class="qk-o" type="button">In addition,</button><button class="qk-o" type="button">First of all,</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 6 · The whole essay" data-type="drill" data-req="s22">
+<div class="scard"><div data-ex="s22"></div></div>
+</section>
+<section class="step" data-stage="Stage 6 · The whole essay" data-type="drill" data-req="s23">
+<div class="scard"><div data-ex="s23"></div></div>
+</section>
+<section class="step" data-stage="Stage 6 · The whole essay" data-type="drill" data-req="s24">
+<div class="scard"><div data-ex="s24"></div></div>
+</section>
+<section class="step" data-req="m60" data-stage="Stage 6 · The whole essay" data-type="teach">
+<div class="scard"><h1 class="t">How the words divide</h1>
+<table><tr><th>Paragraph</th><th class="c">Words</th><th class="c">Sentences</th></tr><tr><td>Introduction</td><td class="c">50–75</td><td class="c">3–4</td></tr><tr><td>Body 1</td><td class="c">55–85</td><td class="c">4–5</td></tr><tr><td>Body 2</td><td class="c">55–85</td><td class="c">4–5</td></tr><tr><td>Body 3</td><td class="c">55–85</td><td class="c">4–5</td></tr><tr><td>Conclusion</td><td class="c">40–60</td><td class="c">2–3</td></tr></table><p class="small">Aim for <b>250–350 words in total</b>. These are ranges, not targets — you will not hit every maximum.</p><div class="tipbox"><span class="l">Forty minutes?</span>5 to plan · 28 to write · 7 to check. Never start writing until the thesis and the three point sentences exist on your plan.</div>
+<div class="qk" data-qk="m60" data-a="1" data-why="Conclusions are 40–60 words; the whole essay is 250–350."><div class="qk-l">Your turn</div><p class="qk-q">Your conclusion is 110 words. Is that the right length?</p><div class="qk-os"><button class="qk-o" type="button">Yes, longer is always better</button><button class="qk-o" type="button">No, aim for 40 to 60 words</button><button class="qk-o" type="button">No, aim for 90 to 120 words</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m61" data-stage="Stage 6 · The whole essay" data-type="teach">
+<div class="scard"><h1 class="t">Read one finished essay</h1>
+<p class="lead">Everything you have practiced, in 346 words. The colors are the sentence jobs you already know.</p><p class="small"><span class="lab">Hook</span><span class="lab">Background</span><span class="lab">Thesis</span><span class="lab">Point</span><span class="lab">Evidence</span><span class="lab">Explanation</span><span class="lab">Link</span></p><div style="font-size:1.02rem"><p style="margin-top:0"><span class="rh">Every Saturday morning, thousands of teenagers put on a uniform and go to work at a coffee shop or a store.</span> <span class="rb">Some parents worry that this takes time away from schoolwork. A part-time job, however, teaches lessons that a classroom cannot.</span> <span class="rt">High school students should be encouraged to work a few hours a week, because a job builds financial awareness, develops responsibility, and improves their chances of getting hired later.</span></p><p><span class="r1">First of all, a part-time job teaches students to manage money better than any class can.</span> <span class="r2">A student who works six hours a week quickly learns what a new phone really costs — not in dollars, but in hours behind a counter.</span> <span class="r3">This lesson lands harder than any classroom exercise, because the money is real and the decision is the student’s own.</span> <span class="r4">In other words, a part-time job turns an abstract idea into a daily habit.</span></p><p><span class="r1">Second, a job builds a sense of responsibility that school finds hard to teach.</span> <span class="r2">At work, a teenager has to show up on time, take instructions from an adult who is not a parent or a teacher, and stay polite with rude customers.</span> <span class="r3">As a result, they learn that their actions have real consequences for other people.</span> <span class="r4">That new maturity often shows up in their behavior at school as well.</span></p><p><span class="r1">Most importantly, a first job improves a student’s chances of being hired later.</span> <span class="r2">Employers repeatedly say they value applicants who can prove they have worked on a team, and a first job is that proof.</span> <span class="r3">A student who has spent a year behind a counter starts ahead of a classmate whose résumé is still empty. Admittedly, some students work too many hours, but the answer to that is a limit, not a ban.</span> <span class="r4">Used sensibly, those few hours pay a student back for years.</span></p><p><span class="rt">In short, a few working hours each week give students practical skill with money, a stronger sense of responsibility, and a real advantage when they look for their first full-time job.</span> <span class="r4">Schools and parents should treat a part-time job not as a distraction from education but as a part of it.</span></p></div>
+<div class="qk" data-qk="m61" data-a="2" data-why="250–350 words total: about 50–75 intro, 55–85 per body, 40–60 conclusion."><div class="qk-l">Your turn</div><p class="qk-q">The model essay is 346 words. Where does that fall?</p><div class="qk-os"><button class="qk-o" type="button">Too long — over 350</button><button class="qk-o" type="button">Too short — under 250</button><button class="qk-o" type="button">Inside the 250–350 target</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m62" data-stage="Final test" data-type="teach">
+<div class="scard"><div class="figbox"></div><div class="kick">Final test</div><h1 class="t">Now write your own</h1>
+<p class="lead">One prompt, five boxes, 250–350 words. When you press <b>Check my writing</b>, the page tests the structure of what you wrote — length, position, evidence, explanation, concession, and whether your conclusion repeats or restates.</p><div class="tipbox"><span class="l">Remember</span>Plan first: your thesis and three point sentences. Everything else grows out of those four sentences.</div><p class="small">It cannot judge your ideas. Only you and your teacher can do that.</p>
+<div class="qk" data-qk="m62" data-a="1" data-why="5 minutes to plan, 28 to write, 7 to check: the plan comes first."><div class="qk-l">Your turn</div><p class="qk-q">The clock starts. What are the first five minutes for?</p><div class="qk-os"><button class="qk-o" type="button">Writing the hook sentence</button><button class="qk-o" type="button">Planning your three reasons</button><button class="qk-o" type="button">Checking your spelling</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Final test" data-type="write" data-req="s25">
+<div class="scard"><div data-ex="s25"></div></div>
+</section>
+<section class="step" data-req="m64" data-stage="Finished" data-type="check">
+<div class="cp"><div class="figbox"></div><div class="big">🎉</div><h1>You wrote an essay</h1><p>You started with one sentence. Every part of what you just produced is something you practiced on its own first.</p><div class="you"><b>Do it again with a different prompt.</b> The shape is now yours — the only thing that changes is what you have to say.</div><div class="qk" data-qk="m64" data-a="0" data-why="The explanation is the one students skip; an example never argues by itself."><div class="qk-l">Your turn</div><p class="qk-q">Last check: which sentence do students most often skip in a body paragraph?</p><div class="qk-os"><button class="qk-o" type="button">Sentence 3, the explanation</button><button class="qk-o" type="button">Sentence 2, the evidence</button><button class="qk-o" type="button">Sentence 4, the link</button></div><div class="qk-fb"></div></div></div>
+</section>
+
+</div>
+<div class="nav"><div class="navin">
+  <button class="nbtn back" type="button">&#8592; Back</button>
+  <span class="navmsg"></span>
+  <button class="skip" type="button">Skip this one</button>
+  <button class="nbtn next" type="button">Next &#8594;</button>
+</div></div>
+<script>
+var DRILLS = {
+
+/* ================= STAGE 1 ================= */
+"s1":{type:"sort",level:1,title:"Claim or fact?",
+ inst:"Only a claim can open a paragraph. A fact leaves the paragraph nothing to prove.",
+ cols:["A CLAIM — someone could disagree","A FACT — nobody can argue with it"],
+ items:[{t:"Schools should start later so that students can sleep more.",col:0},
+        {t:"Many students take a bus to school.",col:1},
+        {t:"Cooking is the most useful skill a school can teach.",col:0},
+        {t:"Many teenagers own a phone.",col:1},
+        {t:"Free bus travel would help students more than free lunches would.",col:0},
+        {t:"Some schools have a cooking room.",col:1},
+        {t:"Phones in class hurt learning more than they help it.",col:0},
+        {t:"Volunteers do not get paid.",col:1}],
+ tip:"Ask of each sentence: could a reasonable person disagree? If nobody could, it is a fact.",
+ why:"A claim needs proving, so the paragraph has a job to do. A fact is already settled, so the paragraph has nothing to do."},
+
+"s2":{type:"mcq",level:1,title:"Which point is not empty?",
+ qs:[{q:"<strong>Topic:</strong> a later school start time.<br>Which point names a real quality instead of an empty word?",
+      opts:[{t:"A later start time is a good idea for high schools."},
+            {t:"A later start time would be very useful for students."},
+            {t:"A later start time would make morning lessons calmer and more focused than they are now."},
+            {t:"Starting school later is an important topic today."}],a:2,
+      why:"Only option 3 names the real quality — calmer, more focused. Good, useful, and important could describe almost anything, so they say nothing."},
+     {q:"<strong>Topic:</strong> cooking lessons in school.<br>Which point could a reader actually test?",
+      opts:[{t:"Cooking lessons are interesting for most students."},
+            {t:"Cooking lessons are cheaper to run than most people think."},
+            {t:"Cooking lessons are a useful part of school life."},
+            {t:"Cooking lessons are very important for young people."}],a:1,
+      why:"Cheaper is a quality you can check. Interesting, useful, and important cannot be checked — they only sound positive."},
+     {q:"<strong>Topic:</strong> phones in class.<br>Which point says something a reader could argue with?",
+      opts:[{t:"Phones in class are a bad idea."},
+            {t:"Phones in class are an interesting problem for teachers."},
+            {t:"Phones in class are not very useful."},
+            {t:"Phones in class are harder to control than any other distraction."}],a:3,
+      why:"Harder to control is a real quality with a comparison built in. Bad, interesting, and not useful are empty words that give the reader nothing to test."}]},
+
+"s3":{type:"order-words",level:1,title:"Build an arguable point",topic:"Cooking in schools",
+ tokens:["Learning","to","cook","teaches","teenagers","more about","healthy food","than","any","cafeteria poster","can","."],
+ alts:[["Learning","to","cook","teaches","teenagers","more about","healthy food","than","can","any","cafeteria poster","."]],
+ why:"The comparison — more about healthy food than any cafeteria poster can — is what turns a nice idea into a point someone could argue with.",
+ tip:"Start with the subject (Learning to cook), then the verb (teaches), then who. Put the comparison — than any … can — at the end."},
+
+"s4":{type:"label",level:1,title:"Point, or not a point?",
+ inst:"Three things look like points but are not: an announcement, a definition, and a question.",
+ roles:["Point","Announcement","Definition","Question"],
+ items:[{t:"In this paragraph I will explain why homework is a problem.",role:"Announcement",why:"it tells the reader what is coming instead of saying it."},
+        {t:"Two hours of homework a night takes more sleep than it adds learning.",role:"Point",why:"it is one claim, with a comparison, that a reader could argue against."},
+        {t:"Homework is work that a teacher gives students to do at home.",role:"Definition",why:"it explains a word, and nobody can disagree with it."},
+        {t:"Why do schools give so much homework?",role:"Question",why:"a question asks; a point answers."},
+        {t:"Volunteering builds confidence faster than any class can.",role:"Point",why:"it names a real quality — faster — and someone could disagree."},
+        {t:"This essay will look at both sides of the volunteering debate.",role:"Announcement",why:"“this essay will look at” describes the essay instead of making a claim."}]},
+
+/* ================= STAGE 2 ================= */
+"s5":{type:"sort",level:2,title:"Vague or specific?",
+ inst:"Evidence is something you can count or picture.",
+ cols:["VAGUE — nothing to count or picture","SPECIFIC — you can count it or picture it"],
+ items:[{t:"Students learn a lot when they volunteer.",col:0},
+        {t:"A student who serves soup at a shelter every Saturday learns to greet strangers without looking at the floor.",col:1},
+        {t:"Eating breakfast helps you in many ways.",col:0},
+        {t:"A bowl of oatmeal takes five minutes to make and costs less than a bus ticket.",col:1},
+        {t:"Phones cause all kinds of problems in class.",col:0},
+        {t:"One phone buzzing during a test pulls thirty heads toward one desk.",col:1},
+        {t:"Later start times make a big difference.",col:0},
+        {t:"A school that starts at 9 a.m. instead of 7:30 gives students ninety extra minutes in bed.",col:1}],
+ tip:"Look for a number, a person in a situation, a cost, or a comparison. If you find none of them, it is vague.",
+ why:"Specific evidence gives the reader something to count or picture. “A lot,” “many ways,” and “a big difference” give nothing to check."},
+
+"s6":{type:"mcq",level:2,title:"Choose the evidence",
+ qs:[{q:"<strong>Point:</strong> Free bus travel would help students who live far from school.<br>Which sentence is real evidence?",
+      opts:[{t:"Free travel is a great help to many students in many ways."},
+            {t:"A student who takes two buses each way pays for twenty rides a week before the first lesson starts."},
+            {t:"Everybody knows that travel is expensive for students."},
+            {t:"Free bus travel would also be good for the environment."}],a:1,
+      why:"Option 2 is something you can count: two buses, each way, five days. Option 1 is vague, option 3 is an opinion, and option 4 is a new claim, not proof of this one."},
+     {q:"<strong>Point:</strong> Eating breakfast makes the first lesson of the day easier.<br>Which sentence is real evidence?",
+      opts:[{t:"Breakfast is the most important meal of the day."},
+            {t:"Students who eat breakfast do better."},
+            {t:"A student who skips breakfast has eaten nothing for fourteen hours by the time the 9 a.m. math lesson begins."},
+            {t:"Lunch at our school starts at 12:30."}],a:2,
+      why:"Option 3 puts a person in a situation and gives a number you can check yourself. Option 4 is specific, but it proves nothing about breakfast."},
+     {q:"<strong>Point:</strong> A phone in class breaks a student’s attention more than a noisy classmate does.<br>Which sentence is real evidence?",
+      opts:[{t:"Phones are a big distraction."},
+            {t:"Teachers hate phones in class."},
+            {t:"A classmate who talks can be asked to stop; a phone in a pocket buzzes again every few minutes, and nobody can ask it to stop."},
+            {t:"Phones are useful for looking up words in class."}],a:2,
+      why:"Option 3 compares the phone with the alternative — the noisy classmate — so the reader can picture the difference. The others repeat the point, give an opinion, or argue the other side."}]},
+
+"s7":{type:"order-words",level:2,title:"Build an evidence sentence",topic:"Breakfast before school",
+ tokens:["A","student","who","skips breakfast","walks into","the first lesson","having","eaten","nothing","for","fourteen","hours","."],
+ alts:[["A","student","who","skips breakfast","having","eaten","nothing","for","fourteen","hours","walks into","the first lesson","."]],
+ why:"This is evidence the reader can check in their own head: dinner at seven, no breakfast, first lesson at nine — fourteen hours with nothing.",
+ tip:"Start with the person — A student who … — then what the student does, then the number that shows the cost."},
+
+"s8":{type:"label",level:2,title:"Point, evidence, or neither?",
+ inst:"Some sentences look useful but only repeat what has already been said.",
+ roles:["Point","Evidence","Neither — it just repeats"],
+ items:[{t:"Homework takes more from a teenager’s evening than it gives back.",role:"Point",why:"it is one arguable claim about homework, with nothing yet to prove it."},
+        {t:"A student who gets home at four and starts two hours of homework at seven is still working when the younger children in the house go to bed.",role:"Evidence",why:"it puts a person in a situation, with times you can check."},
+        {t:"Homework is really a problem for teenagers in the evening.",role:"Neither — it just repeats",why:"it says the point again in slightly different words."},
+        {t:"Volunteering teaches responsibility faster than any lesson can.",role:"Point",why:"it is a claim with a comparison — a reader could disagree."},
+        {t:"A volunteer who forgets one Saturday shift leaves twenty dogs without their morning walk.",role:"Evidence",why:"you can picture the dogs and count the cost of one missed shift."},
+        {t:"So volunteering really does teach responsibility quickly.",role:"Neither — it just repeats",why:"it says the point again with “so” and “really” in front of it — no new proof, no new claim."}]},
+
+/* ================= STAGE 3 ================= */
+"s9":{type:"mcq",level:2,title:"Which explanation actually explains?",
+ qs:[{q:"<strong>Point:</strong> A later start time would make the first lesson more useful.<br><strong>Evidence:</strong> A student who gets up at six for a 7:30 start has often slept less than seven hours.<br>Which sentence says <em>why</em> the evidence proves the point?",
+      opts:[{t:"This shows that the first lesson is more useful with a later start."},
+            {t:"This matters because a brain that has not slept enough cannot hold new information, so the first lesson is taught to a room that will forget it."},
+            {t:"Another student might get up at 6:30 and take the bus."},
+            {t:"This is a very important point that everyone should think about."}],a:1,
+      why:"Option 2 answers the question why: tired brains do not keep new information. Option 1 repeats the point, option 3 adds another example, and option 4 says nothing."},
+     {q:"<strong>Point:</strong> Cooking lessons teach students about money in a way that math class cannot.<br><strong>Evidence:</strong> A student who cooks a pot of soup for four people, then compares it with four bought lunches, sees the difference in one afternoon.<br>Which sentence says <em>why</em> the evidence proves the point?",
+      opts:[{t:"What this shows is that the saving is not a number on a page but a meal the student made and ate, so the lesson sticks."},
+            {t:"In other words, cooking teaches students about money better than math class does."},
+            {t:"For example, a student could also learn to bake bread instead of buying it."},
+            {t:"Cooking is clearly good for students in many ways."}],a:0,
+      why:"Option 1 says why the evidence proves the point: the saving is real, so it is remembered. Option 2 starts like an explanation but only repeats the point — a starter alone is not an explanation."},
+     {q:"<strong>Point:</strong> Phones in class are harder to control than any other distraction.<br><strong>Evidence:</strong> A teacher who takes one phone at 9 a.m. is still collecting phones at 2 p.m.<br>Which sentence says <em>why</em> the evidence proves the point?",
+      opts:[{t:"So phones are the hardest distraction to control."},
+            {t:"Some students also use tablets and smart watches in class."},
+            {t:"The reason is that a phone is small, silent, and always in a pocket, so the teacher can never see it being used."},
+            {t:"This shows how serious the problem really is."}],a:2,
+      why:"Option 3 gives the reason the phones keep coming: they are small, silent, and hidden. Option 1 repeats, option 2 adds a new example, and option 4 is empty."}]},
+
+"s10":{type:"gap",level:2,title:"Insert the explaining starter",topic:"Volunteering",
+ inst:"Two starters in the bank belong nowhere. Look at what comes right after each gap.",
+ text:"Volunteering teaches teenagers to be reliable faster than school does. A volunteer who forgets one Saturday shift leaves twenty dogs without their morning walk. {0} a forgotten assignment, which hurts only the student, a forgotten shift hurts someone who cannot complain. {1} that the volunteer feels the cost of a mistake at once. {2}, the shelter makes responsibility real in a way a classroom cannot.",
+ bank:["Compared with","What this shows is","In other words","This matters because","The reason is that"],
+ answers:[["Compared with"],["What this shows is"],["In other words"]],
+ why:"Each starter fits one grammar: Compared with takes a noun, What this shows is takes that, and In other words takes a comma and then a new sentence.",
+ tip:"Read what follows the gap: a noun (a forgotten assignment), the word that, or a comma. Only one starter fits each."},
+
+"s11":{type:"sort",level:2,title:"Explains or does not explain?",
+ inst:"<b>Point:</b> Learning to cook saves a family more money than any budgeting app can. <b>Evidence:</b> A pot of soup for four costs about the same as one bought lunch.",
+ cols:["EXPLAINS — says why the evidence proves the point","DOES NOT EXPLAIN — repeats, adds an example, or says nothing"],
+ items:[{t:"This matters because the saving happens every day, not once, so it adds up faster than any app can show.",col:0},
+        {t:"So cooking saves families a lot of money.",col:1},
+        {t:"The reason is that an app only counts money after it is spent, while cooking stops the money leaving in the first place.",col:0},
+        {t:"A family could also bake its own bread instead of buying it.",col:1},
+        {t:"In other words, the kitchen does the saving; the app only reports it.",col:0},
+        {t:"This is a very important point for every family.",col:1},
+        {t:"What this shows is that one cooked meal replaces four bought ones, and that is where the money stays at home.",col:0},
+        {t:"Compared with an app, cooking is clearly better.",col:1}],
+ tip:"An explanation answers one question: why does this evidence prove the point? A starter such as “Compared with” does not count if nothing follows it.",
+ why:"Repeating the point, adding a second example, or saying “this is important” all leave the why unanswered."},
+
+"s12":{type:"order-sentences",level:3,title:"Point, evidence, explanation",topic:"School start times",
+ items:[{t:"Moving the first bell from 7:30 to 8:30 would make the first lesson of the day worth teaching.",tag:"Point"},
+        {t:"Under the current bell, a student who gets up at six has often slept less than seven hours.",tag:"Evidence"},
+        {t:"That missing sleep matters because a tired brain lets new information slide straight through, so the lesson is taught to a room that will not remember it.",tag:"Explanation"}],
+ why:"The point makes the claim, the evidence gives a case you can check, and the explanation — That missing sleep matters because… — says why the case proves the claim.",
+ tip:"Find the sentence that could stand alone as a claim; it goes first. “That missing sleep” can only follow the sentence that mentions sleep."},
+
+/* ================= STAGE 4 ================= */
+"s13":{type:"label",level:3,title:"Which of the four moves is it?",
+ inst:"Sentences from two paragraphs are mixed together. Name the move each one makes.",
+ roles:["Point","Evidence","Explanation","Link"],
+ items:[{t:"This matters because a family that cannot find that money keeps the student at home, and no policy can punish a student into affording the fare.",role:"Explanation",why:"“This matters because” answers why the fare keeps students at home."},
+        {t:"Free bus travel would do more for attendance than any new attendance policy.",role:"Point",why:"it makes one claim that the rest of the paragraph has to prove."},
+        {t:"In short, a limit gives back the time; the harder question is what students would do with it.",role:"Link",why:"it sums up the paragraph and points forward to the next one."},
+        {t:"A student who lives five miles from school pays for ten bus rides a week before she has opened a single book.",role:"Evidence",why:"a person, a distance, and a number of rides you can check."},
+        {t:"A limit on homework would give students back the evenings that school currently takes.",role:"Point",why:"it is a claim about homework, not proof — a reader could argue with it."},
+        {t:"In other words, free travel removes the reason for missing school instead of punishing it.",role:"Link",why:"“In other words” steps back from the case and points at the essay’s bigger idea."}]},
+
+"s14":{type:"order-sentences",level:3,title:"Rebuild the paragraph",topic:"Cooking in schools",
+ items:[{t:"A weekly cooking class teaches teenagers more about healthy food than any poster in the cafeteria can.",tag:"Point"},
+        {t:"A student who has chopped, boiled, and tasted a bowl of vegetable soup knows exactly what went into it; a student who has read a poster knows only that vegetables are good.",tag:"Evidence"},
+        {t:"That difference matters because knowledge you have handled with your own hands stays, while knowledge you have only read slides away by the next lesson.",tag:"Explanation"},
+        {t:"In other words, the kitchen does what the cafeteria wall cannot: it makes healthy food a habit instead of a slogan.",tag:"Link"}],
+ why:"Bread, filling, filling, bread: the claim, the case, why the case proves the claim, and a last sentence that points back at the bigger idea.",
+ tip:"The claim goes first. “That difference” must follow the sentence that shows a difference. “In other words” closes."},
+
+"s15":{type:"mcq",level:3,title:"Link or new argument?",
+ qs:[{q:"<strong>Point:</strong> Volunteering teaches responsibility faster than any class can.<br><strong>Evidence:</strong> A volunteer who forgets one Saturday shift leaves twenty dogs without their morning walk.<br><strong>Explanation:</strong> This matters because a missed assignment hurts only the student, while a missed shift hurts someone who cannot complain.<br>Which sentence is a link, not a new argument?",
+      opts:[{t:"Volunteering also looks good on a college application."},
+            {t:"In other words, the shelter teaches in one morning what a lecture on responsibility cannot teach in a year."},
+            {t:"Many volunteers also learn to work with people they would never otherwise meet."},
+            {t:"A volunteer at a hospital learns even more, because the patients can complain."}],a:1,
+      why:"Option 2 points back at the claim in new words. The other three each open a new argument that would need its own paragraph."},
+     {q:"<strong>Point:</strong> Phones in class are harder to control than any other distraction.<br><strong>Evidence:</strong> A teacher who takes one phone at 9 a.m. is still collecting phones at 2 p.m.<br><strong>Explanation:</strong> The reason is that a phone is small, silent, and always in a pocket, so the teacher can never see it being used.<br>Which sentence is a link, not a new argument?",
+      opts:[{t:"Phones also cost families a lot of money every year."},
+            {t:"Students who use phones at night also sleep less."},
+            {t:"That is why a rule that depends on catching students will always lose to the pocket."},
+            {t:"Tablets, on the other hand, are easy to see and easy to close."}],a:2,
+      why:"Option 3 closes the case and points back at the claim: the rule cannot win. The others each start a new argument."},
+     {q:"<strong>Point:</strong> A school breakfast club would help students more than an extra lesson would.<br><strong>Evidence:</strong> A student who skips breakfast walks into the first lesson having eaten nothing for fourteen hours.<br><strong>Explanation:</strong> What this shows is that the problem in the first lesson is often hunger, not the teaching, so more teaching cannot fix it.<br>Which sentence is a link, not a new argument?",
+      opts:[{t:"In short, the cheapest way to improve the first lesson is a bowl of oatmeal, not another hour of math."},
+            {t:"Breakfast clubs also give parents an extra half hour in the morning."},
+            {t:"Fruit, however, is healthier than cereal."},
+            {t:"Some students also skip lunch to save money."}],a:0,
+      why:"Option 1 restates the claim — breakfast beats an extra lesson — in new words. Parents, fruit, and lunch are three new arguments."}]},
+
+"s16":{type:"writer",level:3,title:"Write your own body paragraph",
+ inst:"Pick a topic, take one side, and write the four sentences of one body paragraph: point, evidence, explanation, link.",
+ topics:["Should every student learn a musical instrument?",
+         "Should schools require uniforms?",
+         "Should students be allowed to grade their teachers?",
+         "Should schools ban sugary drinks?",
+         "Should school start later in the morning?",
+         "Should cooking be a required subject?",
+         "Should students get free bus travel?",
+         "Should phones be banned in class?"],
+ total:"55–80",
+ boxes:[{label:"1 · Point",min:8,max:25,rows:2,hint:"One claim a reader could disagree with. Name the real quality — cheaper, safer, faster — and add a comparison if you can.",ph:"… teaches students … better than … can."},
+        {label:"2 · Evidence",min:12,max:35,rows:3,hint:"Something the reader can count or picture: a person in a situation, a number, a cost, a comparison. No invented statistics.",ph:"A student who …"},
+        {label:"3 · Explanation",min:12,max:35,rows:3,hint:"Why does the evidence prove the point? Start with This matters because…, What this shows is…, The reason is that…, or In other words,…",ph:"This matters because …"},
+        {label:"4 · Link",min:8,max:25,rows:2,hint:"Point outward: back to the main claim in new words, or forward to the next idea. Do not copy the point.",ph:"In other words, …"}],
+ checks:function(t,n){
+   var r=[];
+   function wc(s){s=(s||"").trim();return s?s.split(/\s+/).length:0;}
+   function words(s){return (s||"").toLowerCase().replace(/[^a-z0-9'\s]/g," ").split(/\s+/).filter(function(w){return w;});}
+   var filled=t.every(function(s){return (s||"").trim().length>0;});
+   r.push(filled?["p","All four sentences are written."]:["f","One of the four boxes is empty — a body paragraph needs all four moves."]);
+   r.push((n>=55&&n<=80)?["p","Length: "+n+" words, inside 55–80."]:["w","Length: "+n+" words. Aim for 55–80 — long enough to prove something, short enough to stay one paragraph."]);
+   var ann=/\b(in this paragraph|this paragraph|i will|i am going to|i'm going to|i would like to|let me)\b/i;
+   r.push(ann.test(t[0])?["f","The point announces (“in this paragraph I will…”). Say the claim itself instead."]:["p","The point makes a claim instead of announcing one."]);
+   r.push(wc(t[0])<=25?["p","The point is one sentence long."]:["w","The point is over 25 words. One claim, one sentence."]);
+   var num=/(\d|\b(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|half|twice|double|dozen|once|every|each|per|hours?|minutes?|days?|weeks?|months?|years?|daily|weekly|dollars?|cents?|euros?|pounds?|miles?|kilometers?|a\.m\.|p\.m\.|o'clock|morning|night|evening)\b)/i;
+   r.push(num.test(t[1])?["p","The evidence contains something the reader can count — a number, a time, or an amount."]:["w","The evidence has no number, time, or amount. Give the reader something to count or picture."]);
+   var sig=/\b(because|since|so|this matters|what this shows|the reason|in other words|as a result|which means|which is why|therefore|this is why|that is why|proves?|compared with)\b/i;
+   r.push(sig.test(t[2])?["p","The explanation uses an explaining signal, so it is answering why."]:["w","No explaining signal found. Try This matters because…, The reason is that…, or In other words,… and answer why the evidence proves the point."]);
+   var we=wc(t[1]),wx=wc(t[2]);
+   r.push((wx>=we*0.6||wx>=20)?["p","The explanation is as full as the evidence — the why gets real space."]:["w","The explanation is much shorter than the evidence. Sentence 3 is the one students skip; give it as much room as the example."]);
+   var pw=words(t[0]),lw=words(t[3]),copied=false;
+   if(pw.length>=6&&lw.length>=6){var pj=" "+pw.join(" ")+" ";for(var i=0;i+6<=lw.length;i++){if(pj.indexOf(" "+lw.slice(i,i+6).join(" ")+" ")>=0){copied=true;break;}}}
+   r.push(copied?["w","The link copies six words in a row from the point. Say the idea again in new words — swap the words or flip the sentence around."]:["p","The link restates the idea in new words instead of copying the point."]);
+   return r;
+ }},
+
+/* ================= STAGE 5 ================= */
+"s17":{type:"label",level:3,title:"Which kind of hook is it?",
+ inst:"Five opening sentences, five kinds of hook.",
+ roles:["Scene","Question","Number","Short story","Quotation"],
+ items:[{t:"It is 7:20 a.m., the bus is full, and half the passengers are asleep against the windows with their bags on their laps.",role:"Scene",why:"it freezes one moment — a time, a place, sleeping passengers — so the reader can see it."},
+        {t:"What would you do with an extra hour of sleep every morning?",role:"Question",why:"it asks the reader something directly and makes the essay the answer."},
+        {t:"There are 168 hours in a week, and a student with two hours of homework on each of five school nights gives ten of them to school after school has ended.",role:"Number",why:"it opens with figures the reader can check — 168 is seven times twenty-four."},
+        {t:"Last spring my cousin Dana took a job at a bakery, and by June she had stopped asking her parents for money.",role:"Short story",why:"it follows one named person through events that happened over time."},
+        {t:"“Tell me and I forget, teach me and I remember, involve me and I learn,” goes a saying often credited to Benjamin Franklin.",role:"Quotation",why:"it opens with someone else’s words and says where they are said to come from."}]},
+
+"s18":{type:"mcq",level:3,title:"Which thesis is strongest?",
+ qs:[{q:"<strong>Topic:</strong> a later school start time.<br>Which thesis takes a position and gives reasons in the same grammar?",
+      opts:[{t:"In this essay I will discuss whether schools should start later."},
+            {t:"There are many arguments for and against a later start time."},
+            {t:"Schools should start an hour later because students would sleep more, first lessons would be calmer, and fewer students would arrive late."},
+            {t:"Schools should start later, and it would be good for students in many ways."}],a:2,
+      why:"Option 3 takes a position and gives three reasons in the same grammar — the reader can already see the three paragraphs. The others announce, sit on the fence, or give no reasons."},
+     {q:"<strong>Topic:</strong> phones in class.<br>Which thesis is strongest?",
+      opts:[{t:"Phones should be banned in class because they are bad."},
+            {t:"Phones should be banned in class because they break attention, they make cheating easy, and they are harder to police than any other distraction."},
+            {t:"Phones in class are an interesting and important problem."},
+            {t:"Should phones be banned in class? This essay looks at both sides."}],a:1,
+      why:"Option 2 has a position, because, and three parallel reasons. Option 1 has one empty reason, option 3 has no position, and option 4 asks a question and then announces."},
+     {q:"<strong>Topic:</strong> cooking as a required subject.<br>Which thesis is strongest?",
+      opts:[{t:"Cooking should be a required subject because of healthy eating, it saves money, and being fun."},
+            {t:"Cooking is a subject that many schools offer and many students take."},
+            {t:"I think cooking is important, so this essay will explain why."},
+            {t:"Every school should require cooking because it teaches students to eat well, to spend less, and to feed other people."}],a:3,
+      why:"Option 4 gives three reasons in the same grammar: to eat well, to spend less, to feed other people. Option 1 mixes three grammars, option 2 is a fact, and option 3 announces."}]},
+
+"s19":{type:"order-words",level:3,title:"Build the thesis",topic:"School start times",
+ tokens:["Schools","should","start","an hour later","because","students would sleep more",",","lessons would be calmer",",","and","fewer students would arrive late","."],
+ alts:[["Schools","should","start","an hour later","because","students would sleep more",",","fewer students would arrive late",",","and","lessons would be calmer","."],
+       ["Schools","should","start","an hour later","because","lessons would be calmer",",","students would sleep more",",","and","fewer students would arrive late","."],
+       ["Schools","should","start","an hour later","because","lessons would be calmer",",","fewer students would arrive late",",","and","students would sleep more","."],
+       ["Schools","should","start","an hour later","because","fewer students would arrive late",",","students would sleep more",",","and","lessons would be calmer","."],
+       ["Schools","should","start","an hour later","because","fewer students would arrive late",",","lessons would be calmer",",","and","students would sleep more","."]],
+ why:"A thesis is position + because + three reasons in the same grammar. Any order of the three reasons works here; in the essay, the order must match the order of the paragraphs.",
+ tip:"Position first: Schools should start an hour later. Then because, then the three reasons, with and before the last one."},
+
+"s20":{type:"order-sentences",level:3,title:"Rebuild the introduction",topic:"Free transport for students",
+ items:[{t:"At 7:15 every morning, a line of students stands at the bus stop counting coins.",tag:"Hook"},
+        {t:"Those coins are the subject of a growing argument: some cities already let students ride for free, while others say the money is better spent inside the school.",tag:"Background"},
+        {t:"Both sides agree that the fare is small; they disagree about who it keeps at home.",tag:"Background"},
+        {t:"Cities should make bus travel free for students because it would raise attendance, ease family budgets, and clear the cars that crowd the school gate.",tag:"Thesis"}],
+ why:"Start wide, finish narrow: a scene, then the disagreement (“those coins”), then what both sides agree on, then one sentence that takes a position and names three reasons.",
+ tip:"The scene comes first. “Those coins” needs the coins before it; “both sides” needs the two sides before it. The thesis is always last."},
+
+"s21":{type:"sort",level:3,title:"What belongs in a conclusion?",
+ inst:"<b>The essay’s thesis:</b> Phones should be banned in class because they break attention, they make cheating easy, and they are harder to police than any other distraction.",
+ cols:["BELONGS — restates in new words or answers “so what?”","DOES NOT BELONG — new example, new argument, or announcement"],
+ items:[{t:"A classroom without phones is not a classroom without technology; it is a classroom where attention belongs to the lesson.",col:0},
+        {t:"For example, one student at my school checked her phone twelve times in a single lesson.",col:1},
+        {t:"The three problems — lost attention, easy cheating, and rules nobody can enforce — all disappear when the phone stays in the locker.",col:0},
+        {t:"Phones also cost families a lot of money every year.",col:1},
+        {t:"If schools want the next generation to concentrate, the first step costs nothing but a locker key.",col:0},
+        {t:"In this essay I have discussed the problem of phones in class.",col:1},
+        {t:"The choice, in the end, is between a lesson that is heard and one that is only attended.",col:0},
+        {t:"Another point is that phones can be used to bully other students.",col:1}],
+ tip:"A conclusion says the thesis again in new words and answers “so what?” Anything that starts “for example,” “another point,” or “in this essay” is doing a different job.",
+ why:"The reader has already seen the evidence. A conclusion restates, answers “so what?”, and adds nothing new — no new example, no new argument, no announcement."},
+
+/* ================= STAGE 6 ================= */
+"s22":{type:"order-sentences",level:4,title:"Rebuild the whole essay",topic:"Volunteering",
+ items:[{t:"Every Saturday at nine, a group of teenagers opens the doors of the town’s animal shelter before the paid staff arrive. Parents often ask whether such unpaid work is worth the time, and some schools now ask the same question. Schools should require every student to volunteer for one hour a week because volunteering teaches responsibility, builds confidence, and connects students with people they would never otherwise meet.",tag:"Introduction"},
+        {t:"First of all, volunteering teaches responsibility faster than any lesson can. A volunteer who forgets one Saturday shift leaves twenty dogs without their morning walk. This matters because a missed assignment hurts only the student, while a missed shift hurts someone who cannot complain. In other words, the shelter makes responsibility real.",tag:"Body 1"},
+        {t:"Second, volunteering builds confidence. A shy student who has to greet forty strangers at a food bank on her first morning learns, by the second morning, to look them in the eye. The reason is that confidence grows from doing, not from being told, and a weekly shift gives a student something to do. That habit follows her back into the classroom.",tag:"Body 2"},
+        {t:"Most importantly, volunteering connects students with people they would never otherwise meet. Some people say that one hour a week is too little to make a real connection. However, a student who serves the same elderly man his lunch every Tuesday learns his name, his stories, and his worries within a month. Compared with a year of lessons about community, one such friendship teaches more about what a community is.",tag:"Body 3"},
+        {t:"In short, a weekly hour of volunteering is not time taken from school but school taken into the world. The responsibility, the confidence, and the friendships all begin with one small shift. If schools want students who can be relied on, the first step is to give them someone who relies on them.",tag:"Conclusion"}],
+ why:"The thesis names three reasons in order; First of all, Second, and Most importantly follow that order, the concession sits in the third body, and In short can only close.",
+ tip:"Find the paragraph with the thesis — it goes first. Then follow the signposts: First of all, Second, Most importantly, In short."},
+
+"s23":{type:"gap",level:4,title:"Put the signposts in",topic:"Homework",
+ inst:"Two signposts in the bank belong nowhere. The thesis tells you which reason is the strongest.",
+ text:"<b>Introduction:</b> … Schools should limit homework to one hour a night because students would sleep more, family evenings would return, and, most of all, the homework that remained would be better.<br><br><b>Body 1:</b> {0}, a limit would give students back their sleep. A student who starts two hours of homework at eight is still working at ten. {1} a brain that goes to bed late learns less the next morning, so the extra hour of work undoes itself.<br><br><b>Body 2:</b> {2}, a limit would give families their evenings back. A parent who gets home at six and a student who works until ten share a house but not an evening.<br><br><b>Body 3:</b> {3}, a limit would improve the homework that is left, because a teacher who can set only one hour chooses the task that matters.<br><br><b>Conclusion:</b> {4}, less homework would mean more learning, not less.",
+ bank:["First of all","Second","Most importantly","This matters because","In short","For example","Compared with"],
+ answers:[["First of all"],["This matters because"],["Second"],["Most importantly"],["In short"]],
+ why:"First of all, Second, and Most importantly follow the order of the thesis, and most of all marks the third reason as the strongest. This matters because opens an explanation; In short opens the conclusion.",
+ tip:"Match each signpost to its job: order (First of all, Second, Most importantly), explanation (This matters because), ending (In short). Compared with needs a noun after it; For example needs an example after it."},
+
+"s24":{type:"sort",level:4,title:"Everyday or academic?",
+ inst:"Both columns are correct English. Only one column belongs in an essay.",
+ cols:["EVERYDAY — fine in speech, not in an essay","ACADEMIC — fine in an essay"],
+ items:[{t:"Kids don’t get enough sleep.",col:0},
+        {t:"Children do not get enough sleep.",col:1},
+        {t:"Homework is kind of a waste of time.",col:0},
+        {t:"Homework is often a poor use of time.",col:1},
+        {t:"Phones are gonna be a problem anyway.",col:0},
+        {t:"Phones will remain a problem in any case.",col:1},
+        {t:"There’s a lot of stuff to learn in cooking class.",col:0},
+        {t:"A cooking class covers a wide range of skills.",col:1}],
+ tip:"Look for contractions (don’t, there’s), gonna, kids, stuff, kind of. Those belong in speech.",
+ why:"Essays use full forms (do not), neutral nouns (children, students), and exact words instead of stuff, kind of, and gonna."},
+
+"s25":{type:"writer",level:4,title:"Write the whole essay",
+ inst:"Choose a topic you have not written about before. Plan for five minutes, write for about thirty, then read the checks and fix what they find.",
+ topics:["Should schools ban plastic bottles?",
+         "Should students choose what is taught?",
+         "Should every child learn to swim at school?",
+         "Should the school library stay open in the evening?",
+         "Should high school students have a part-time job?",
+         "Should every student be required to volunteer?",
+         "Should homework be limited to one hour a night?",
+         "Should every school run a breakfast club?"],
+ total:"250–350",
+ boxes:[{label:"1 · Introduction",min:50,max:75,rows:4,hint:"Hook → background → thesis. Finish with a position and three reasons in the same grammar, in the order of your paragraphs.",ph:"It is 7:20 a.m., and …"},
+        {label:"2 · Body 1",min:55,max:85,rows:5,hint:"Weakest reason first. Point, evidence, explanation, link.",ph:"First of all, …"},
+        {label:"3 · Body 2",min:55,max:85,rows:5,hint:"Second reason. Point, evidence, explanation, link.",ph:"Second, …"},
+        {label:"4 · Body 3",min:55,max:85,rows:5,hint:"Strongest reason last. Give the other side one sentence (Some people say…), then answer it (However, …).",ph:"Most importantly, …"},
+        {label:"5 · Conclusion",min:40,max:60,rows:3,hint:"Say the thesis again in new words, answer “so what?”, and add nothing new — no new examples, no numbers.",ph:"In short, …"}],
+ checks:function(t,n){
+   var r=[];
+   function wc(s){s=(s||"").trim();return s?s.split(/\s+/).length:0;}
+   function words(s){return (s||"").toLowerCase().replace(/[^a-z0-9'\s]/g," ").split(/\s+/).filter(function(w){return w;});}
+   var all=t.join("\n");
+   var filled=t.every(function(s){return (s||"").trim().length>0;});
+   r.push(filled?["p","All five paragraphs are written."]:["f","One of the five boxes is empty. An essay needs an introduction, three bodies, and a conclusion."]);
+   r.push((n>=250&&n<=350)?["p","Length: "+n+" words, inside 250–350."]:["w","Length: "+n+" words. Aim for 250–350: roughly 60 for the introduction, 70 for each body, 50 for the conclusion."]);
+   var pos=/\b(should|must|ought to|needs? to|would|is better|the better|the right)\b/i;
+   r.push(pos.test(t[0])?["p","The introduction takes a position."]:["w","No position found in the introduction. The thesis should say what should happen: “Schools should…”, “Students need to…”."]);
+   var reasons=/\b(because|since)\b|:/i;
+   r.push(reasons.test(t[0])?["p","The thesis gives reasons (because / since)."]:["w","The thesis gives no reasons. Add because and the three reasons your paragraphs will prove, in the same grammar."]);
+   var ann=/\b(in this essay|this essay will|this essay (looks|discusses|explains|argues)|i will (discuss|explain|talk|write|argue|show|look)|i am going to|i'm going to|in this paragraph|this paragraph)\b/i;
+   r.push(ann.test(all)?["f","Announcement found (“in this essay I will…”). Delete it and say the claim itself."]:["p","No announcements — the essay says things instead of promising to say them."]);
+   var sig=/\b(because|since|so|this matters|what this shows|the reason|in other words|as a result|which means|which is why|therefore|this is why|that is why|proves?|compared with)\b/i;
+   var noSig=[];for(var i=1;i<=3;i++){if(!sig.test(t[i]))noSig.push(i);}
+   r.push(noSig.length===0?["p","Every body paragraph has an explaining signal — sentence 3 is doing its job."]:["w","Body "+noSig.join(", ")+": no explaining signal found. Add This matters because…, The reason is that…, or In other words,… and say why the evidence proves the point."]);
+   var conc=/(\d|\b(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|half|twice|double|dozen|once|every|each|per|hours?|minutes?|days?|weeks?|months?|years?|daily|weekly|dollars?|cents?|euros?|pounds?|miles?|kilometers?|a\.m\.|p\.m\.|o'clock|morning|night|evening|for example|for instance|such as|a student who|a teacher who|a parent who|a family that)\b)/i;
+   var noConc=[];for(var j=1;j<=3;j++){if(!conc.test(t[j]))noConc.push(j);}
+   r.push(noConc.length===0?["p","Every body paragraph has something concrete the reader can count or picture."]:["w","Body "+noConc.join(", ")+": nothing concrete found. Give a person in a situation, a number, a time, or a cost."]);
+   function sc(s){var m=(s||"").match(/[.!?]+(?=\s|$)/g);return m?m.length:0;}
+   var shortB=[];for(var k=1;k<=3;k++){if(sc(t[k])<3)shortB.push(k);}
+   r.push(shortB.length===0?["p","Each body has at least three sentences."]:["w","Body "+shortB.join(", ")+" has fewer than three sentences. A body needs point, evidence, explanation, and link."]);
+   var cess=/\b(some people (say|think|argue|believe|claim|feel|worry)|some (would|might|may|will) (say|argue|object)|it is true that|it could be argued|admittedly|of course|critics|opponents|although|even though|even if|while it is true|while some|however|on the other hand|granted|not everyone|one objection|might argue|may argue|would argue|the other side)\b/i;
+   r.push(cess.test(t[3])?["p","Body 3 gives the other side a sentence before answering it."]:["w","Body 3 has no concession. Give the other side one sentence (“Some people say…”), then answer it (“However, …”)."]);
+   var newEx=/\b(for example|for instance|such as|according to)\b/i;
+   r.push(newEx.test(t[4])?["f","The conclusion introduces a new example (“for example,” “such as,” “according to”). The conclusion adds nothing new — move it to a body paragraph or delete it."]:["p","The conclusion adds no new example."]);
+   var cd=(t[4]||"").replace(/\b(21st|20th|19th)\b/g,"");
+   r.push(/\d/.test(cd)?["w","There is a number in the conclusion. Numbers are evidence, and evidence belongs in the bodies — say the idea in words instead."]:["p","No numbers in the conclusion."]);
+   var iw=words(t[0]),cw=words(t[4]),copied=false;
+   if(iw.length>=5&&cw.length>=5){var ij=" "+iw.join(" ")+" ";for(var q=0;q+5<=cw.length;q++){if(ij.indexOf(" "+cw.slice(q,q+5).join(" ")+" ")>=0){copied=true;break;}}}
+   r.push(copied?["w","The conclusion copies five words in a row from the introduction. Say it again in new words: swap the words, turn the verb into a noun, or flip it around."]:["p","The conclusion restates the thesis in new words."]);
+   var posts=["first of all","firstly","first,","second","secondly","third","thirdly","in addition","moreover","furthermore","most importantly","above all","finally","for example","for instance","this matters because","what this shows is","the reason is","in other words","in short","overall","in conclusion","to sum up","however","on the other hand","as a result","therefore","compared with","that is why","this is why"];
+   var low=all.toLowerCase(),found=0;
+   for(var p=0;p<posts.length;p++){if(low.indexOf(posts[p])>=0)found++;}
+   r.push(found>=4?["p","Signposts: "+found+" different ones found. The reader always knows where they are."]:["w","Only "+found+" signpost expression"+(found===1?"":"s")+" found. Use at least four: First of all, Second, Most importantly, This matters because, In short…"]);
+   var splice=/,\s*(however|therefore|moreover|furthermore|nevertheless|consequently|thus|hence|otherwise|meanwhile)\s+(?!(,|much\b|hard\b|long\b|many\b|often\b|little\b|well\b|far\b|late\b|early\b|small\b|big\b|good\b|bad\b))/i;
+   r.push(splice.test(all)?["w","Possible comma splice: “…, however …” joins two sentences with only a comma. However needs a period or a semicolon before it (…. However, …). But, and, and so work with a comma."]:["p","No comma splices with however / therefore found."]);
+   return r;
+ }}
+
+};
+</script>
+
+<style>
+/* ============ PRACTICE ENGINE ============ */
+.drill{border:1px solid var(--line); border-radius:10px; margin:1.1em 0; overflow:hidden; background:#fff}
+.drill-top{display:flex; align-items:center; gap:9px; padding:9px 14px; background:var(--wash,#f4f5f8); border-bottom:1px solid var(--line); flex-wrap:wrap}
+.drill-n{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.72rem; font-weight:700; letter-spacing:.1em; color:var(--muted,#5f6a7d)}
+.drill-name{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.92rem; font-weight:700; flex:1 1 220px; margin:0}
+.lvl{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.63rem; font-weight:700; letter-spacing:.08em;
+  text-transform:uppercase; padding:3px 8px; border-radius:99px; white-space:nowrap}
+.lvl1{background:#e8f4ea; color:#2f6b3d; border:1px solid #bcdcc3}
+.lvl2{background:#e7f0fa; color:#2b5180; border:1px solid #b8cee6}
+.lvl3{background:#f6ecdc; color:#8a5a15; border:1px solid #e3caa0}
+.lvl4{background:#f2e9f8; color:#5b3a86; border:1px solid #d3c0e6}
+.drill-body{padding:13px 15px}
+.drill-inst{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.86rem; color:var(--ink-soft,#4b5670); margin:0 0 .8em}
+.drill-topic{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.74rem; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--muted,#5f6a7d); margin:0 0 .7em}
+.drill-topic b{color:var(--ink-soft,#4b5670)}
+
+.bank,.line{display:flex; flex-wrap:wrap; gap:6px; min-height:44px; padding:8px; border-radius:8px}
+.bank{background:#f4f4f2; border:1px dashed #cfcfc9}
+.line{background:#fff; border:2px solid var(--line); margin-top:9px}
+.line.empty::before,.bank.empty::before{content:attr(data-ph); font-family:"Helvetica Neue",Arial,sans-serif;
+  font-size:.8rem; color:#6b7280; align-self:center; padding-left:4px}
+.tile{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.9rem; padding:10px 12px; border-radius:6px;
+  border:1px solid #c8c8cd; background:#fff; cursor:pointer; user-select:none; line-height:1.25;
+  overflow-wrap:anywhere; transition:transform .08s, background .12s}
+.tile:hover{background:#eef3f8; border-color:#8fb3d0}
+.col:focus-visible,.card:focus-visible,.gap:focus-visible,.tile:focus-visible,.opt:focus-visible,
+.role:focus-visible,.btn:focus-visible,.arrow:focus-visible{outline:3px solid #1b5fa8; outline-offset:2px}
+.tile:active{transform:translateY(1px)}
+.tile.punc{padding:10px 8px; background:#f0efe9; font-weight:700}
+.tile.good{background:#e6f4ea; border-color:#5aa06f; color:#22603a}
+.tile.good::after{content:" \2713"; font-weight:700}
+.tile.bad{background:#fbe9e7; border-color:#d4796f; color:#8e2f28; text-decoration:line-through}
+.tile.bad::after{content:" \2717"; font-weight:700; text-decoration:none; display:inline-block}
+
+.cards{display:flex; flex-direction:column; gap:7px}
+.card{display:flex; gap:9px; align-items:flex-start; border:1px solid #d3d3d8; border-radius:8px;
+  padding:8px 10px; background:#fff; cursor:pointer; font-size:.93rem}
+.card:hover{background:#f4f8fb; border-color:#8fb3d0}
+.card .cn{font-family:"Helvetica Neue",Arial,sans-serif; font-weight:700; font-size:.78rem; color:#fff;
+  background:var(--muted,#5f6a7d); border-radius:50%; min-width:21px; height:21px; line-height:21px; text-align:center; flex:0 0 auto}
+.card.placed .cn{background:var(--brand)}
+.card.good{background:#eef8f1; border-color:#5aa06f}
+.card.good .cn::after{content:"\2713"}
+.card.bad{background:#fdefee; border-color:#d4796f}
+.card.bad .cn::after{content:"\2717"}
+.card .arrows{margin-left:auto; display:flex; gap:3px; flex:0 0 auto}
+.arrow{border:1px solid #b6b6bd; background:#fff; border-radius:5px; width:34px; height:34px; cursor:pointer;
+  font-size:.8rem; line-height:1; color:#41485c}
+.arrow:hover{background:#eee}
+
+.roles{display:flex; flex-wrap:wrap; gap:5px; margin-top:6px}
+.role{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.75rem; padding:9px 12px; border-radius:5px;
+  border:1px solid #c8c8cd; background:#fff; cursor:pointer}
+.role:hover{background:#eef3f8}
+.role.sel{background:var(--ink); color:#fff; border-color:var(--ink)}
+.item{border:1px solid #e0e0e4; border-radius:8px; padding:9px 11px; margin-bottom:8px; background:#fff}
+.item.good{background:#f2faf4; border-color:#8ec49f}
+.item.bad{background:#fdf2f1; border-color:#e0a49d}
+.item.good>.txt::before{content:"\2713 "; color:#2f7d4f; font-weight:800}
+.item.bad>.txt::before{content:"\2717 "; color:#b3392f; font-weight:800}
+.item .txt{font-size:.94rem}
+
+.cols{display:grid; gap:10px; margin-top:10px}
+.col{border:2px dashed #cfcfd4; border-radius:9px; padding:8px; min-height:76px}
+.col h5{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.76rem; letter-spacing:.06em; text-transform:uppercase;
+  margin:0 0 7px; color:var(--ink-soft,#4b5670); text-align:center}
+.col.act{border-color:var(--brand); background:#f7fafd}
+.col .tile{display:block; width:100%; text-align:left; margin-bottom:5px}
+
+.qa{margin-bottom:14px}
+.qa .qtext{font-size:.96rem; margin:0 0 .5em; font-weight:600}
+.opt{display:block; width:100%; text-align:left; font-family:inherit; font-size:.93rem; padding:11px 13px;
+  border:1px solid #d3d3d8; border-radius:7px; background:#fff; cursor:pointer; margin-bottom:6px; line-height:1.4}
+.opt:hover{background:#f4f8fb; border-color:#8fb3d0}
+.opt.sel{border-color:var(--ink); box-shadow:inset 0 0 0 1px var(--ink)}
+.opt.good{background:#eef8f1; border-color:#5aa06f}
+.opt.good::after{content:" \2713"; font-weight:800; color:#1f5c37}
+.opt.bad{background:#fdefee; border-color:#d4796f}
+.opt.bad::after{content:" \2717"; font-weight:800; color:#8e2f28}
+.why{font-size:.83rem; color:var(--ink-soft,#4b5670); margin:.35em 0 0 4px; padding-left:10px; border-left:2px solid var(--line)}
+
+.gaptext{font-size:1rem; line-height:2.2}
+.gap{display:inline-block; min-width:92px; border-bottom:2px solid var(--brand); text-align:center;
+  cursor:pointer; padding:7px 9px; font-family:"Helvetica Neue",Arial,sans-serif; font-size:.88rem; color:var(--brand)}
+.gap.act{background:#fff6dd; border-bottom-color:#c08b1f}
+.gap.good{background:#e6f4ea; border-bottom-color:#2f7d4f; color:#22603a}
+.gap.good::after{content:"\2713"; font-size:.8em; margin-left:3px}
+.gap.bad{background:#fbe9e7; border-bottom-color:#b3392f; color:#8e2f28}
+.gap.bad::after{content:"\2717"; font-size:.8em; margin-left:3px}
+.gap.empty::before{content:"______"; color:#8a8a93}
+
+.btns{display:flex; flex-wrap:wrap; gap:7px; margin-top:12px}
+.btn{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.86rem; font-weight:600; padding:11px 18px;
+  border-radius:7px; border:1px solid var(--ink); background:var(--ink); color:#fff; cursor:pointer}
+.btn:hover{opacity:.87}
+.btn.sec{background:#fff; color:var(--ink-soft,#4b5670); border-color:#c8c8cd}
+.btn.sec:hover{background:#f2f2f0}
+.fb{margin-top:11px; padding:10px 13px; border-radius:8px; font-size:.9rem; display:none}
+.fb.on{display:block}
+.fb.win{background:#eef8f1; border:1px solid #8ec49f; color:#1f5c37}
+.fb.part{background:#fdf6e6; border:1px solid #e0c483; color:#7a5510}
+.fb.lose{background:#fdefee; border:1px solid #e0a49d; color:#8e2f28}
+.fb b{display:block; margin-bottom:.2em}
+
+/* writer */
+.writer label{display:block; font-family:"Helvetica Neue",Arial,sans-serif; font-size:.8rem; font-weight:700;
+  margin:12px 0 3px; color:var(--ink-soft,#4b5670)}
+.writer .hint{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.78rem; color:var(--muted,#5f6a7d); margin:0 0 5px}
+.writer textarea{width:100%; border:1px solid #cfcfd4; border-radius:8px; padding:9px 11px; font-family:inherit;
+  font-size:.95rem; line-height:1.55; resize:vertical; background:#fffdf8}
+.writer textarea:focus{outline:2px solid #b9cfe4; border-color:#8fb3d0}
+.wc{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.75rem; color:var(--muted,#5f6a7d); text-align:right; margin-top:2px}
+.wc.ok{color:#2f7d4f; font-weight:700}
+.wc.over{color:#b3392f; font-weight:700}
+.picker{display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 4px}
+.chk{list-style:none; padding:0; margin:.6em 0 0}
+.chk li{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.86rem; padding:5px 0 5px 26px; position:relative; border-bottom:1px dotted var(--line)}
+.chk li::before{position:absolute; left:2px; font-weight:700}
+.chk li.p::before{content:"\2713"; color:#2f7d4f}
+.chk li.w::before{content:"!"; color:#c08b1f}
+.chk li.f::before{content:"\2717"; color:#b3392f}
+.out{white-space:pre-wrap; background:#fbfaf6; border:1px solid var(--line); border-radius:8px; padding:14px 16px;
+  margin-top:11px; font-size:.97rem; line-height:1.6; display:none}
+.out.on{display:block}
+.printonly{display:none}
+
+@media (max-width:760px){ .cols{grid-template-columns:1fr !important} }
+@media print{
+  .btns,.fb,.arrows{display:none !important}
+  .drill{page-break-inside:avoid; break-inside:avoid}
+  .line{min-height:58px}
+  .col{min-height:58px}
+  .cards:empty{min-height:64px; border:1px dashed #b9bcc6; border-radius:8px}
+  .card .cn{background:#fff !important; color:#000 !important; border:1px solid #888}
+  .tile{background:#fff !important}
+  .out{display:none !important}
+  .writer textarea{min-height:70px; background:#fff}
+  .roles .role{border-style:solid}
+  .noprint{display:none !important}
+  .printonly{display:block !important}
+}
+</style>
+
+<script>
+(function(){
+"use strict";
+var DONE={}, TOTAL=0;
+var WINS=["<b>Correct.</b>","<b>Yes — that is it.</b>","<b>Right.</b>","<b>Nice one.</b>",
+          "<b>Correct — well spotted.</b>","<b>That is the one.</b>"];
+var WI=0;
+function winTag(){ var t=WINS[WI%WINS.length]; WI++; return t; }
+
+function el(t,c,x){var e=document.createElement(t); if(c)e.className=c; if(x!=null)e.textContent=x; return e;}
+function shuffle(a){a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t;} return a;}
+function reshuffle(a){ if(a.length<2) return a.slice();
+  var s=shuffle(a),n=0; while(n<12 && s.join("|")===a.join("|")){s=shuffle(a);n++;} return s; }
+function joinTok(t){ var s="";
+  for(var i=0;i<t.length;i++){ var w=t[i];
+    if(i>0 && !/^[.,;:!?’”)]/.test(w) && !/[“(‘]$/.test(t[i-1])) s+=" ";
+    s+=w; }
+  return s; }
+function mark(d,st,html){
+  var f=d.querySelector(".fb");
+  f.className="fb on "+st; f.innerHTML=html;
+  if(st==="lose"){ d._tries=(d._tries||0)+1;
+    try{document.dispatchEvent(new CustomEvent("drill:miss",{detail:{}}));}catch(err){} }
+}
+function tries(d){ return d._tries||0; }
+function keyable(n,fn){ n.tabIndex=0; n.setAttribute("role","button");
+  n.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" "||e.key==="Spacebar"){e.preventDefault(); fn(e);} }); }
+function scoreIt(id,ok){ if(ok && !DONE[id]){DONE[id]=1; upd();} }
+function upd(){ try{document.dispatchEvent(new CustomEvent("drill:update",{detail:{map:DONE,total:TOTAL}}));}catch(err){} }
+function btnRow(d,defs){
+  var b=el("div","btns");
+  defs.forEach(function(x){ var k=el("button","btn"+(x.s?" sec":""),x.t); k.type="button"; k.onclick=x.f; b.appendChild(k); });
+  d.appendChild(b);
+  var f=el("div","fb"); f.setAttribute("role","status"); f.setAttribute("aria-live","polite"); d.appendChild(f);
+}
+
+/* ---------- order-words ---------- */
+function tOrderWords(d,ex){
+  var toks = ex.tokens || ex.answer.split(/\s+/);
+  d.appendChild(el("p","drill-inst noprint","Tap the words in the bank, one by one, to build the sentence. Tap a word you have placed to send it back."));
+  d.appendChild(el("p","drill-inst printonly","Number the words below in the right order, then write the sentence on the line."));
+  var bank=el("div","bank empty"); bank.dataset.ph="word bank";
+  var line=el("div","line empty"); line.dataset.ph="your sentence appears here";
+  function sync(){bank.classList.toggle("empty",!bank.children.length); line.classList.toggle("empty",!line.children.length);}
+  function mk(w,inBank){
+    var t=el("button","tile"+(/^[.,;:!?“”’]+$/.test(w)?" punc":""),w); t.type="button";
+    t.onclick=function(){ (inBank? line:bank).appendChild(t); inBank=!inBank;
+      t.className="tile"+(/^[.,;:!?“”’]+$/.test(w)?" punc":""); sync(); };
+    return t;
+  }
+  reshuffle(toks).forEach(function(w){bank.appendChild(mk(w,true));});
+  d.appendChild(bank); d.appendChild(line); sync();
+  btnRow(d,[
+    {t:"Check",f:function(){
+      var got=[].map.call(line.children,function(c){return c.textContent;});
+      var want=toks, ok = joinTok(got)===joinTok(want);
+      if(!ok && ex.alts){ for(var ai=0;ai<ex.alts.length;ai++){ if(joinTok(got)===joinTok(ex.alts[ai])){ok=true; want=ex.alts[ai]; break;} } }
+      [].forEach.call(line.children,function(c,i){c.className="tile"+(/^[.,;:!?“”’]+$/.test(c.textContent)?" punc":"")+(got[i]===want[i]?" good":" bad");});
+      if(ok){scoreIt(ex.id,true); mark(d,"win",winTag()+(ex.why?" "+ex.why:""));}
+      else mark(d,"lose","<b>Not yet.</b> Words marked ✓ are in the right place. "+(ex.tip||"Start with who or what the sentence is about.")+(tries(d)>=1&&ex.why?"<br>"+ex.why:""));
+    }},
+    {t:"Show answer",s:1,f:function(){mark(d,"part","<b>Answer:</b> "+joinTok(toks)+(ex.why?"<br>"+ex.why:""));}},
+    {t:"Reset",s:1,f:function(){bank.innerHTML="";line.innerHTML="";reshuffle(toks).forEach(function(w){bank.appendChild(mk(w,true));});sync();d.querySelector(".fb").className="fb";}}
+  ]);
+}
+
+/* ---------- order-sentences ---------- */
+function tOrderSentences(d,ex){
+  var pool=el("div","cards"), ans=el("div","cards"); ans.style.marginTop="10px";
+  d.appendChild(el("p","drill-inst noprint","Tap a sentence to move it into “Your order”. Use ▲ ▼ to change the order. Tap it again to send it back."));
+  d.appendChild(el("p","drill-inst printonly","Write a number (1, 2, 3 …) in front of each sentence to show the right order."));
+  var wrapA=el("div"); wrapA.appendChild(el("div","drill-topic")); wrapA.firstChild.innerHTML="<b>Scrambled</b>";
+  var wrapB=el("div"); wrapB.style.marginTop="10px"; wrapB.appendChild(el("div","drill-topic")); wrapB.firstChild.innerHTML="<b>Your order</b>";
+  wrapA.appendChild(pool); wrapB.appendChild(ans);
+  d.appendChild(wrapA); d.appendChild(wrapB);
+  function renum(){[].forEach.call(ans.children,function(c,i){c.querySelector(".cn").textContent=i+1;});}
+  function mk(it){
+    var c=el("div","card");
+    var n=el("span","cn","•"); c.appendChild(n);
+    c.appendChild(el("span",null,it.t));
+    var ar=el("span","arrows");
+    var up=el("button","arrow","▲"),dn=el("button","arrow","▼");
+    up.type=dn.type="button";
+    up.onclick=function(e){e.stopPropagation(); var p=c.previousElementSibling; if(p&&c.parentNode===ans)ans.insertBefore(c,p); renum();};
+    dn.onclick=function(e){e.stopPropagation(); var s=c.nextElementSibling; if(s&&c.parentNode===ans)ans.insertBefore(s,c); renum();};
+    ar.appendChild(up); ar.appendChild(dn); c.appendChild(ar);
+    c._it=it;
+    keyable(c,function(){c.onclick();});
+    c.onclick=function(){
+      if(c.parentNode===pool){ans.appendChild(c); c.classList.add("placed");}
+      else {pool.appendChild(c); c.classList.remove("placed"); n.textContent="•";}
+      renum();
+    };
+    return c;
+  }
+  function build(){pool.innerHTML="";ans.innerHTML="";reshuffle(ex.items.map(function(x){return x;})).forEach(function(it){pool.appendChild(mk(it));});}
+  build();
+  btnRow(d,[
+    {t:"Check",f:function(){
+      var got=[].map.call(ans.children,function(c){return c._it;});
+      if(got.length!==ex.items.length){mark(d,"part","<b>Not finished.</b> Place all "+ex.items.length+" sentences first.");return;}
+      var ok=true;
+      [].forEach.call(ans.children,function(c,i){
+        var right=got[i]===ex.items[i];
+        c.className="card placed "+(right?"good":"bad"); if(!right)ok=false;
+      });
+      if(ok){scoreIt(ex.id,true);
+        var roles=ex.items.map(function(x,i){return (i+1)+". "+x.tag;}).join(" · ");
+        mark(d,"win",winTag()+" "+roles+(ex.why?"<br>"+ex.why:""));
+      } else mark(d,"lose","<b>Not yet.</b> Sentences marked ✓ are in the right position. "+(ex.tip||"Read them as one paragraph: which one has to come first for the rest to make sense?")+(tries(d)>=1&&ex.why?"<br>"+ex.why:""));
+    }},
+    {t:"Show answer",s:1,f:function(){
+      mark(d,"part","<b>Correct order:</b><br>"+ex.items.map(function(x,i){return (i+1)+". <em>"+x.tag+"</em> — "+x.t;}).join("<br>"));
+    }},
+    {t:"Reset",s:1,f:function(){build();d.querySelector(".fb").className="fb";}}
+  ]);
+}
+
+/* ---------- label ---------- */
+function tLabel(d,ex){
+  var host=el("div"); d.appendChild(host);
+  function build(){
+    host.innerHTML="";
+    ex.items.forEach(function(it){
+      var b=el("div","item");
+      var t=el("div","txt"); t.innerHTML=it.t; b.appendChild(t);
+      var r=el("div","roles");
+      ex.roles.forEach(function(role){
+        var k=el("button","role",role); k.type="button";
+        k.onclick=function(){ [].forEach.call(r.children,function(x){x.classList.remove("sel");});
+          k.classList.add("sel"); b._pick=role; };
+        r.appendChild(k);
+      });
+      b.appendChild(r); b._it=it; host.appendChild(b);
+    });
+  }
+  build();
+  btnRow(d,[
+    {t:"Check",f:function(){
+      var all=true,done=true;
+      [].forEach.call(host.children,function(b){
+        if(!b._pick){done=false;return;}
+        var right=b._pick===b._it.role;
+        b.className="item "+(right?"good":"bad"); if(!right)all=false;
+        var old=b.querySelector(".why"); if(old)old.remove();
+        if(!right||ex.always){var w=el("div","why"); w.innerHTML="<strong>"+b._it.role+"</strong>"+(b._it.why?" — "+b._it.why:""); b.appendChild(w);}
+      });
+      if(!done){mark(d,"part","<b>Not finished.</b> Choose a label for every item.");return;}
+      if(all){scoreIt(ex.id,true); mark(d,"win",winTag()+(ex.why?" "+ex.why:""));}
+      else mark(d,"lose","<b>Some are wrong.</b> Items marked ✗ have the right label written underneath.");
+    }},
+    {t:"Show answers",s:1,f:function(){
+      [].forEach.call(host.children,function(b){
+        var old=b.querySelector(".why"); if(old)old.remove();
+        var w=el("div","why"); w.innerHTML="<strong>"+b._it.role+"</strong>"+(b._it.why?" — "+b._it.why:""); b.appendChild(w);
+      });
+      mark(d,"part","<b>Answers shown below each item.</b>");
+    }},
+    {t:"Reset",s:1,f:function(){build();d.querySelector(".fb").className="fb";}}
+  ]);
+}
+
+/* ---------- sort ---------- */
+function tSort(d,ex){
+  var bank=el("div","bank empty"); bank.dataset.ph="all sorted";
+  var cols=el("div","cols"); cols.style.gridTemplateColumns="repeat("+ex.cols.length+",1fr)";
+  var sel=null, boxes=[];
+  function pick(t){ if(sel)sel.style.outline=""; sel=t;
+    t.style.outline="2px solid "+getComputedStyle(document.documentElement).getPropertyValue("--brand"); }
+  ex.cols.forEach(function(name){
+    var c=el("div","col"); c.appendChild(el("h5",null,name));
+    c.setAttribute("aria-label","Box: "+name);
+    c.onclick=function(){ if(sel){c.appendChild(sel); sel.className="tile"; sel.style.outline=""; sel=null; sync();} };
+    keyable(c,function(){c.onclick();});
+    boxes.push(c); cols.appendChild(c);
+  });
+  function mk(it){
+    var t=el("button","tile",it.t); t.type="button"; t._it=it;
+    t.onclick=function(e){ e.stopPropagation();
+      if(t.parentNode!==bank){bank.appendChild(t); t.className="tile"; t.style.outline=""; if(sel===t)sel=null; sync(); return;}
+      pick(t);
+    };
+    return t;
+  }
+  function sync(){bank.classList.toggle("empty",!bank.children.length);}
+  function build(){bank.innerHTML=""; boxes.forEach(function(c){[].slice.call(c.querySelectorAll(".tile")).forEach(function(x){x.remove();});});
+    reshuffle(ex.items).forEach(function(it){bank.appendChild(mk(it));}); sync(); sel=null;}
+  d.appendChild(el("p","drill-inst noprint","Tap an item, then tap the box it belongs in. Tap a placed item to send it back. The boxes are just below the list."));
+  d.appendChild(el("p","drill-inst printonly","Write each item in the box below where it belongs."));
+  d.appendChild(bank); d.appendChild(cols);
+  build();
+  btnRow(d,[
+    {t:"Check",f:function(){
+      if(bank.children.length){mark(d,"part","<b>Not finished.</b> "+bank.children.length+" item(s) still unsorted.");return;}
+      var all=true;
+      boxes.forEach(function(c,i){
+        [].slice.call(c.querySelectorAll(".tile")).forEach(function(t){
+          var right=t._it.col===i; t.className="tile "+(right?"good":"bad"); if(!right)all=false;
+        });
+      });
+      if(all){scoreIt(ex.id,true); mark(d,"win",winTag()+" All sorted correctly."+(ex.why?" "+ex.why:""));}
+      else mark(d,"lose","<b>Some are in the wrong box.</b> "+(ex.tip||"Tap an item marked ✗ to send it back, then try the other box.")+(tries(d)>=1&&ex.why?"<br>"+ex.why:""));
+    }},
+    {t:"Show answer",s:1,f:function(){
+      mark(d,"part","<b>Answer:</b><br>"+ex.cols.map(function(n,i){
+        return "<strong>"+n+":</strong> "+ex.items.filter(function(x){return x.col===i;}).map(function(x){return x.t;}).join(" · ");
+      }).join("<br>"));
+    }},
+    {t:"Reset",s:1,f:function(){build();d.querySelector(".fb").className="fb";}}
+  ]);
+}
+
+/* ---------- mcq ---------- */
+function tMcq(d,ex){
+  var host=el("div"); d.appendChild(host);
+  function build(){
+    host.innerHTML="";
+    ex.qs.forEach(function(q,qi){
+      var w=el("div","qa");
+      var p=el("p","qtext"); p.innerHTML=(ex.qs.length>1?(qi+1)+". ":"")+q.q; w.appendChild(p);
+      q.opts.forEach(function(o,oi){
+        var b=el("button","opt"); b.type="button"; b.innerHTML=o.t;
+        b.onclick=function(){[].forEach.call(w.querySelectorAll(".opt"),function(x){x.classList.remove("sel");}); b.classList.add("sel"); w._pick=oi;};
+        w.appendChild(b);
+      });
+      w._q=q; host.appendChild(w);
+    });
+  }
+  build();
+  function reveal(force){
+    var all=true,done=true, soft=(!force && tries(d)<1);
+    [].forEach.call(host.children,function(w){ if(w._pick==null && !force){done=false;} });
+    if(!done){mark(d,"part","<b>Not finished.</b> Answer every question first."); return;}
+    [].forEach.call(host.children,function(w){
+      var right = w._pick===w._q.a;
+      if(!right)all=false;
+      [].forEach.call(w.querySelectorAll(".opt"),function(b,i){
+        b.classList.remove("sel","good","bad");
+        if(soft){ if(i===w._pick) b.classList.add(right?"good":"bad"); return; }
+        if(i===w._q.a)b.classList.add("good");
+        else if(i===w._pick)b.classList.add("bad");
+      });
+      var old=w.querySelector(".why"); if(old&&(soft&&!right))old.remove();
+      if(!(soft&&!right) && !w.querySelector(".why")){var y=el("div","why"); y.innerHTML=w._q.why; w.appendChild(y);}
+    });
+    if(force){mark(d,"part","<b>The right answer is now marked ✓.</b>"); return;}
+    if(all){scoreIt(ex.id,true); mark(d,"win",winTag());}
+    else if(soft) mark(d,"lose","<b>Not quite.</b> Your answer is marked ✗. Read the question once more and try a different option — the reason appears after your next try.");
+    else mark(d,"lose","<b>Not all correct.</b> The right answer is marked ✓; the reason is under each question.");
+  }
+  btnRow(d,[{t:"Check",f:function(){reveal(false);}},{t:"Show answers",s:1,f:function(){reveal(true);}},
+    {t:"Reset",s:1,f:function(){build();d.querySelector(".fb").className="fb";}}]);
+}
+
+/* ---------- gap ---------- */
+function tGap(d,ex){
+  var bank=el("div","bank"), body=el("p","gaptext"), gaps=[], active=null;
+  function build(){
+    bank.innerHTML=""; body.innerHTML=""; gaps=[]; active=null;
+    var parts=ex.text.split(/(\{\d+\})/);
+    parts.forEach(function(p){
+      var m=p.match(/^\{(\d+)\}$/);
+      if(m){
+        var g=el("span","gap empty"); g._i=+m[1]; g._v=null;
+        keyable(g,function(){g.onclick();});
+        g.onclick=function(){
+          if(g._v){ var w=g._v; g._v=null; g.textContent=""; g.className="gap empty"; addTile(w); return; }
+          gaps.forEach(function(x){x.classList.remove("act");}); g.classList.add("act"); active=g;
+        };
+        gaps.push(g); body.appendChild(g);
+      } else body.appendChild(document.createTextNode(p));
+    });
+    reshuffle(ex.bank).forEach(addTile);
+  }
+  function addTile(w){
+    var t=el("button","tile",w); t.type="button";
+    t.onclick=function(){
+      var g=active||gaps.filter(function(x){return !x._v;})[0];
+      if(!g)return;
+      g._v=w; g.textContent=w; g.className="gap"; t.remove();
+      gaps.forEach(function(x){x.classList.remove("act");}); active=null;
+    };
+    bank.appendChild(t);
+  }
+  d.appendChild(el("p","drill-inst noprint","Tap a word from the bank, then tap the gap it belongs in — or tap the gap first. Tap a filled gap to empty it."));
+  d.appendChild(el("p","drill-inst printonly","Write one word from the bank in each gap. Two words are not used."));
+  d.appendChild(bank); d.appendChild(body);
+  build();
+  btnRow(d,[
+    {t:"Check",f:function(){
+      var all=true,done=true;
+      gaps.forEach(function(g){
+        if(!g._v){done=false;return;}
+        var ok=ex.answers[g._i].indexOf(g._v)>-1;
+        g.className="gap "+(ok?"good":"bad"); if(!ok)all=false;
+      });
+      if(!done){mark(d,"part","<b>Not finished.</b> Fill every gap.");return;}
+      if(all){scoreIt(ex.id,true); mark(d,"win",winTag()+(ex.why?" "+ex.why:""));}
+      else mark(d,"lose","<b>Some are wrong.</b> "+(ex.tip||"Tap a gap marked ✗ to empty it, then try another word.")+(tries(d)>=1&&ex.why?"<br>"+ex.why:""));
+    }},
+    {t:"Show answer",s:1,f:function(){mark(d,"part","<b>Answer:</b> "+ex.answers.map(function(a,i){return (i+1)+" = "+a[0];}).join(" · ")+(ex.why?"<br>"+ex.why:""));}},
+    {t:"Reset",s:1,f:function(){build();d.querySelector(".fb").className="fb";}}
+  ]);
+}
+
+/* ---------- writer ---------- */
+function tWriter(d,ex){
+  var w=el("div","writer");
+  var chosen=ex.topics[0], tt;
+  var pk=el("div","picker");
+  ex.topics.forEach(function(t){
+    var b=el("button","role",t); b.type="button";
+    if(t===chosen)b.classList.add("sel");
+    b.onclick=function(){[].forEach.call(pk.children,function(x){x.classList.remove("sel");}); b.classList.add("sel"); chosen=t; tt.textContent=t;};
+    pk.appendChild(b);
+  });
+  w.appendChild(el("label",null,"Choose your task")); w.appendChild(pk);
+  var tt2=el("p","drill-topic"); tt2.appendChild(document.createTextNode("Writing about: "));
+  var strong=el("b",null,chosen); tt2.appendChild(strong); w.appendChild(tt2); tt=strong;
+
+  var areas=[];
+  ex.boxes.forEach(function(b){
+    w.appendChild(el("label",null,b.label));
+    if(b.hint)w.appendChild(el("p","hint",b.hint));
+    var ta=el("textarea"); ta.rows=b.rows||3; ta.placeholder=b.ph||"";
+    var c=el("div","wc",b.nocount?"":"0 words · target "+b.min+"–"+b.max);
+    ta.oninput=function(){
+      var n=ta.value.trim()?ta.value.trim().split(/\s+/).length:0;
+      if(!b.nocount){ c.textContent=n+" words · target "+b.min+"–"+b.max;
+        c.className="wc"+(n===0?"":(n>=b.min&&n<=b.max?" ok":" over")); }
+      total();
+    };
+    w.appendChild(ta); w.appendChild(c); areas.push({ta:ta,def:b});
+  });
+  var tot=el("p","drill-topic"); tot.innerHTML="Total: <b>0</b> words (target "+ex.total+")"; w.appendChild(tot);
+  function total(){
+    var n=areas.reduce(function(a,x){return a+(x.def.nocount?0:(x.ta.value.trim()?x.ta.value.trim().split(/\s+/).length:0));},0);
+    tot.innerHTML="Total: <b>"+n+"</b> words (target "+ex.total+")";
+    return n;
+  }
+  var list=el("ul","chk"), out=el("div","out");
+  d.appendChild(w); d.appendChild(list); d.appendChild(out);
+  function run(){
+    var txt=areas.map(function(x){return x.ta.value.trim();});
+    var n=total();
+    var res=ex.checks(txt,n,areas);
+    list.innerHTML="";
+    res.forEach(function(r){list.appendChild(el("li",r[0],r[1]));});
+    // allow HTML in check messages
+    [].forEach.call(list.children,function(li,i){ li.innerHTML=res[i][1]; });
+    var fails=res.filter(function(r){return r[0]==="f";}).length;
+    var warns=res.filter(function(r){return r[0]==="w";}).length;
+    if(!fails&&!warns){scoreIt(ex.id,true); mark(d,"win","<b>The structural checks found nothing to flag.</b> They cannot judge your ideas — read it aloud once, then give it to your teacher.");}
+    else if(!fails){scoreIt(ex.id,true); mark(d,"part","<b>Structure holds. "+warns+" thing(s) worth a second look</b> — you can move on, but read them first.");}
+    else mark(d,"lose","<b>"+fails+" structural check(s) failed.</b> Fix those first — they are the ones a teacher notices immediately.");
+  }
+  btnRow(d,[
+    {t:"Check my writing",f:run},
+    {t:"Put it together",s:1,f:function(){
+      var t=areas.map(function(x){return x.ta.value.trim();}).filter(Boolean).join("\n\n");
+      out.textContent=t||"Nothing written yet."; out.className="out on";
+    }},
+    {t:"Clear",s:1,f:function(){areas.forEach(function(x){x.ta.value="";x.ta.oninput();}); list.innerHTML=""; out.className="out"; d.querySelector(".fb").className="fb";}}
+  ]);
+}
+
+var TYPES={"order-words":tOrderWords,"order-sentences":tOrderSentences,"label":tLabel,
+  "sort":tSort,"mcq":tMcq,"gap":tGap,"writer":tWriter};
+
+function boot(){
+  var all=[].slice.call(document.querySelectorAll("[data-ex]"));
+  all.forEach(function(n){ if(!DRILLS[n.dataset.ex]) n.remove(); });
+  var nodes=all.filter(function(n){return !!DRILLS[n.dataset.ex];});
+  TOTAL=nodes.length;
+  nodes.forEach(function(node,i){
+    var ex=DRILLS[node.dataset.ex];
+    ex.id=node.dataset.ex;
+    node.className="drill";
+    var top=el("div","drill-top");
+    top.appendChild(el("span","drill-n","DRILL "+(i+1)));
+    top.appendChild(el("h2","drill-name",ex.title));
+    top.appendChild(el("span","lvl lvl"+ex.level, ["Starter","Building","Independent","Master"][ex.level-1]));
+    node.appendChild(top);
+    var body=el("div","drill-body");
+    if(ex.topic){var t=el("p","drill-topic"); t.innerHTML="Topic: <b>"+ex.topic+"</b>"; body.appendChild(t);}
+    if(ex.inst)body.appendChild(el("p","drill-inst",ex.inst));
+    node.appendChild(body);
+    TYPES[ex.type](body,ex);
+  });
+  upd();
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot); else boot();
+})();
+</script>
+
+<script>
+function figRnd(seed){ var s=seed; return function(){ s=(s*1103515245+12345)&0x7fffffff; return s/0x7fffffff; }; }
+function figStipple(n,x,y,w,h,fill,op,seed,r0,r1,ry){
+  var R=figRnd(seed), o="";
+  for(var i=0;i<n;i++){ var cx=(x+R()*w).toFixed(1), cy=(y+R()*h).toFixed(1), r=(r0+R()*(r1-r0)).toFixed(2);
+    o+='<ellipse cx="'+cx+'" cy="'+cy+'" rx="'+r+'" ry="'+(r*(ry||1)).toFixed(2)+'" fill="'+fill+'" opacity="'+(op*(.5+R()*.5)).toFixed(2)+'"/>'; }
+  return o;
+}
+function figApply(root,s,instant){
+  if(!root) return;
+  var nodes=root.querySelectorAll(".fel");
+  for(var i=0;i<nodes.length;i++){
+    var e=nodes[i], inAt=+e.getAttribute("data-in")||0, tf="none", k;
+    for(k=6;k>=1;k--){ if(s>=k && e.getAttribute("data-t"+k)){ tf=e.getAttribute("data-t"+k); break; } }
+    for(k=6;k>=1;k--){ if(s<k && e.getAttribute("data-u"+k)){ tf=e.getAttribute("data-u"+k); break; } }
+    var out=e.getAttribute("data-out")?+e.getAttribute("data-out"):99;
+    e.style.transitionDelay = instant?"0ms":((s===inAt?(e.getAttribute("data-d")||0):0)+"ms");
+    if(s>=out){ e.style.opacity=0; e.style.transform=tf; }
+    else if(s>=inAt){ e.style.opacity=e.getAttribute("data-op")||1; e.style.transform=tf; }
+    else { e.style.opacity=0; e.style.transform=e.getAttribute("data-from")||"none"; }
+  }
+}
+
+var REASON=["#b4573a","#4f8a4a","#3d6ea8"];
+function figBeat(stage){
+  if(/^Stage 1/.test(stage)) return 1;
+  if(/^Stage 2/.test(stage)) return 2;
+  if(/^Stage 3/.test(stage)) return 3;
+  if(/^Stage 4/.test(stage)) return 4;
+  if(/^Stage 5/.test(stage)) return 5;
+  if(/^Stage 6/.test(stage)) return 6;
+  if(/^Final/.test(stage))   return 6;
+  if(/^Finished/.test(stage))return 7;
+  return 0;
+}
+function figSeeds(){
+  var S=[[92,44,-14],[124,36,8],[152,40,-6],[72,54,12],[176,50,-18],[110,56,-10],[164,58,14],[138,54,4]], o="";
+  for(var i=0;i<S.length;i++){ var p=S[i];
+    o+='<g transform="translate('+p[0]+','+p[1]+') rotate('+p[2]+')">'+
+       '<ellipse rx="5.6" ry="3.3" fill="#efd5a1" stroke="#b98f52" stroke-width=".9"/>'+
+       '<ellipse rx="5.6" ry="3.3" fill="url(#fgSeed)"/>'+
+       '<ellipse cx="-1.5" cy="-1" rx="2.2" ry="1.1" fill="#fff" opacity=".7"/></g>'; }
+  return o;
+}
+function figFlag(x,y,col,h){
+  return '<g><line x1="'+x+'" y1="'+y+'" x2="'+x+'" y2="'+(y+h)+'" stroke="#6b4718" stroke-width="2.4" stroke-linecap="round"/>'+
+   '<path d="M'+(x+1)+','+(y+1)+' l17,5.5 l-17,6 z" fill="'+col+'"/>'+
+   '<path d="M'+(x+1)+','+(y+1)+' l17,5.5 l-9,3 z" fill="#fff" opacity=".25"/></g>';
+}
+function figFill(y,e,seed){
+  e=e||0;
+  var cheese='<g><path d="M38,'+y+' h164 v7 l-16,7 l-15,-7 l-16,7 l-15,-7 l-16,7 l-15,-7 l-16,7 l-15,-7 l-16,7 l-8,-4 z" fill="#f0b73f"/>'+
+    '<path d="M38,'+y+' h164 v3.5 q-82,4 -164,0 z" fill="#f9d982"/>'+
+    '<path d="M38,'+y+' h164 v7 l-16,7 l-15,-7 l-16,7 l-15,-7 l-16,7 l-15,-7 l-16,7 l-15,-7 l-16,7 l-8,-4 z" fill="none" stroke="#c98d1c" stroke-width="1" opacity=".45"/></g>';
+  var lettuce='<g><path d="M22,'+(y+16)+' q13,-11 26,0 q13,-11 26,0 q13,-11 26,0 q13,-11 26,0 q13,-11 26,0 q13,-11 26,0 q13,-11 26,0 L218,'+(y+18)+' L218,'+(y+27)+' L22,'+(y+27)+' Z" fill="url(#fgLeaf)"/>'+
+    '<path d="M30,'+(y+21)+' q16,6 32,1 q16,6 32,1 q16,6 32,1 q16,6 32,1 q14,3 24,0" fill="none" stroke="#3f7739" stroke-width="1.3" opacity=".55"/>'+
+    '<path d="M26,'+(y+15)+' q13,-8 26,0 q13,-8 26,0 q13,-8 26,0 q13,-8 26,0" fill="none" stroke="#bde0a8" stroke-width="1.7" opacity=".8"/></g>';
+  var patty='<g><path d="M40,'+(y+28)+' C34,'+(y+28)+' 30,'+(y+33)+' 34,'+(y+38)+' C30,'+(y+43)+' 36,'+(y+51+e)+' 44,'+(y+50+e)+
+    ' C60,'+(y+54+e)+' 78,'+(y+51+e)+' 96,'+(y+53+e)+' C118,'+(y+55+e)+' 140,'+(y+51+e)+' 160,'+(y+53+e)+
+    ' C178,'+(y+55+e)+' 196,'+(y+52+e)+' 202,'+(y+48+e)+' C210,'+(y+44+e)+' 210,'+(y+36)+' 204,'+(y+33)+
+    ' C208,'+(y+27)+' 202,'+(y+21)+' 194,'+(y+22)+' C176,'+(y+19)+' 156,'+(y+22)+' 136,'+(y+20.5)+
+    ' C112,'+(y+19)+' 88,'+(y+22)+' 66,'+(y+20.5)+' C54,'+(y+20)+' 44,'+(y+22)+' 40,'+(y+28)+' Z" fill="url(#fgPatty)"/>'+
+    '<path d="M40,'+(y+28)+' C60,'+(y+24)+' 92,'+(y+26)+' 120,'+(y+24.5)+' C150,'+(y+23)+' 182,'+(y+25.5)+' 202,'+(y+29)+'" fill="none" stroke="#96603c" stroke-width="2" opacity=".5" stroke-linecap="round"/>'+
+    figStipple(34,42,y+22,160,30+e,"#2b1509",.45,seed,.8,2.1)+
+    figStipple(14,46,y+25,152,20+e,"#c08b57",.3,seed+7,.6,1.5)+'</g>';
+  var sauce='<g><path d="M42,'+(y+50+e)+' q78,8 156,0 v5 q-78,8 -156,0 z" fill="#e6d5ae"/>'+
+    '<path d="M42,'+(y+50+e)+' q78,8 156,0 v2 q-78,8 -156,0 z" fill="#f7edd6"/></g>';
+  return {cheese:cheese,lettuce:lettuce,patty:patty,sauce:sauce};
+}
+function figBig(){
+  var F1=figFill(78,0,13), F2=figFill(130,0,41), F3=figFill(182,8,67);
+  return '<svg viewBox="0 0 240 300" role="img" aria-label="The essay, drawn as a burger">'+
+  '<defs>'+
+   '<linearGradient id="fgBun" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#f3d9a8"/><stop offset=".55" stop-color="#e8c384"/><stop offset="1" stop-color="#cf9f5c"/></linearGradient>'+
+   '<linearGradient id="fgBunB" x1="0" y1="0" x2=".2" y2="1"><stop offset="0" stop-color="#e6bf80"/><stop offset="1" stop-color="#c9924f"/></linearGradient>'+
+   '<radialGradient id="fgSeed" cx=".35" cy=".3"><stop offset="0" stop-color="#fff8e6"/><stop offset="1" stop-color="#e2c793" stop-opacity="0"/></radialGradient>'+
+   '<linearGradient id="fgPatty" x1="0" y1="0" x2=".2" y2="1"><stop offset="0" stop-color="#7d4a2e"/><stop offset=".5" stop-color="#63371f"/><stop offset="1" stop-color="#452414"/></linearGradient>'+
+   '<linearGradient id="fgLeaf" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#8fc27a"/><stop offset="1" stop-color="#4e8c46"/></linearGradient>'+
+   '<radialGradient id="fgPlate" cx=".4" cy=".3"><stop offset="0" stop-color="#f3efe8"/><stop offset="1" stop-color="#ded8cd"/></radialGradient>'+
+  '</defs>'+
+  '<ellipse class="fel" data-in="0" data-u5="translateY(-152px)" cx="120" cy="285" rx="102" ry="10" fill="#3a3226" opacity=".08"/>'+
+  '<ellipse class="fel" data-in="0" data-u5="translateY(-152px)" cx="120" cy="280" rx="100" ry="9" fill="url(#fgPlate)" stroke="#cbc4b7" stroke-width="1.2"/>'+
+  '<g class="fel" data-in="0" data-op=".2" data-out="1">'+
+   '<path d="M28,72 C28,46 74,34 120,34 C166,34 212,46 212,72 L212,77 L28,77 Z" fill="none" stroke="#a3907a" stroke-width="2" stroke-dasharray="5 4"/>'+
+   '<rect x="33" y="83" width="174" height="152" rx="12" fill="none" stroke="#a3907a" stroke-width="2" stroke-dasharray="5 4"/>'+
+   '<rect x="28" y="241" width="184" height="22" rx="10" fill="none" stroke="#a3907a" stroke-width="2" stroke-dasharray="5 4"/></g>'+
+
+  '<g class="fel" data-in="5" data-from="translateY(-46px)" data-d="520">'+
+   '<path d="M26,78 C26,44 68,28 120,28 C172,28 214,44 214,78 q0,6 -7,6 h-174 q-7,0 -7,-6 z" fill="url(#fgBun)"/>'+
+   '<path d="M40,54 C64,38 176,38 200,54 C176,44 64,44 40,54 Z" fill="#fff" opacity=".3"/>'+
+   '<path d="M26,76 q94,10 188,0 q0,8 -7,8 h-174 q-7,0 -7,-8 z" fill="#000" opacity=".08"/>'+
+   figSeeds()+'<ellipse cx="120" cy="36" rx="46" ry="9" fill="#fff" opacity=".18"/></g>'+
+  '<g class="fel" data-in="5" data-from="translateY(-28px)" data-d="900">'+
+   figFlag(74,24,REASON[0],26)+figFlag(112,18,REASON[1],32)+figFlag(150,24,REASON[2],26)+'</g>'+
+
+  '<g class="fel" data-in="1">'+
+   '<g class="fel" data-in="4" data-from="translateX(-72px)">'+F1.sauce+'</g>'+
+   '<g class="fel" data-in="3" data-from="translateX(72px)">'+F1.patty+'</g>'+
+   '<g class="fel" data-in="2" data-from="translateX(-72px)">'+F1.lettuce+'</g>'+
+   '<g class="fel" data-in="1" data-from="translateY(-52px)">'+F1.cheese+'</g>'+
+   '<rect class="fel" data-in="6" x="219" y="86" width="7" height="38" rx="3.5" fill="'+REASON[0]+'"/></g>'+
+  '<g class="fel" data-in="6" data-from="translateX(-76px)" data-d="240">'+
+   F2.sauce+F2.patty+F2.lettuce+F2.cheese+
+   '<rect x="219" y="138" width="7" height="38" rx="3.5" fill="'+REASON[1]+'"/></g>'+
+  '<g class="fel" data-in="6" data-from="translateX(76px)" data-d="460">'+
+   F3.sauce+F3.patty+F3.lettuce+F3.cheese+
+   '<rect x="219" y="190" width="7" height="46" rx="3.5" fill="'+REASON[2]+'"/></g>'+
+  '<g class="fel" data-in="5" data-from="translateY(32px)" data-d="760" data-t5="translateY(-112px)" data-t6="none">'+
+   '<path d="M28,242 h184 v9 C212,264 176,272 120,272 C64,272 28,264 28,251 z" fill="url(#fgBunB)"/>'+
+   '<path d="M28,242 h184 v3.5 q-92,7 -184,0 z" fill="#fff" opacity=".28"/>'+
+   '<path d="M32,258 C60,268 180,268 208,258 C186,266 54,266 32,258 z" fill="#000" opacity=".1"/></g>'+
+  '<g class="fel" data-in="7" data-from="translateY(-26px)">'+
+   '<line x1="196" y1="8" x2="196" y2="50" stroke="#6b4718" stroke-width="2.6" stroke-linecap="round"/>'+
+   '<path d="M198,9 l20,6 l-20,7 z" fill="#b3392f"/><path d="M198,9 l20,6 l-10,3 z" fill="#fff" opacity=".22"/>'+
+   '<path d="M201.5,14 l2.6,2.6 L210,10.6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>'+
+  '</svg>';
+}
+function figMini(s){
+  if(s===0) return '<svg viewBox="0 0 56 34" width="52" height="32" aria-hidden="true"><line x1="4" y1="30" x2="52" y2="30" stroke="#c7c2b6" stroke-width="2" stroke-dasharray="4 3"/></svg>';
+  var out="";
+  if(s<=4){
+    var L=[["#f0b73f",5],["#5f9a52",5],["#63371f",9],["#e8d9b4",4]], y=31, i;
+    for(i=Math.min(s,4)-1;i>=0;i--){ y-=L[i][1]; out='<rect x="4" y="'+y+'" width="48" height="'+L[i][1]+'" rx="2" fill="'+L[i][0]+'"/>'+out; }
+    return '<svg viewBox="0 0 56 34" width="52" height="32" aria-hidden="true">'+out+'</svg>';
+  }
+  function band(y,h){ return '<rect x="4" y="'+y+'" width="48" height="'+h+'" rx="2" fill="#63371f"/>'+
+    '<rect x="4" y="'+y+'" width="48" height="1.6" fill="#f0b73f"/><rect x="4" y="'+(y+1.6)+'" width="48" height="1.4" fill="#5f9a52"/>'; }
+  out='<path d="M4,26 h48 v3 q-24,6 -48,0 z" fill="#c9924f"/>'+band(19,6.4);
+  var top=18;
+  if(s>=6){ out+=band(12,5.6)+band(5.4,5.6); top=4.6; }
+  out+='<path d="M4,'+top+' C4,'+(top-6)+' 18,'+(top-9)+' 28,'+(top-9)+' C38,'+(top-9)+' 52,'+(top-6)+' 52,'+top+' z" fill="#e8c384"/>'+
+    '<circle cx="20" cy="'+(top-4)+'" r="1.2" fill="#fff8e6"/><circle cx="28" cy="'+(top-6)+'" r="1.2" fill="#fff8e6"/><circle cx="36" cy="'+(top-4)+'" r="1.2" fill="#fff8e6"/>';
+  return '<svg viewBox="0 0 56 34" width="52" height="32" aria-hidden="true">'+out+'</svg>';
+}
+var FIG_ALT=["An empty plate.","One layer: the point.","Two layers: the point and the evidence.",
+"Three layers: the point, the evidence and a thick explanation.","One complete filling: point, evidence, explanation, link — one body paragraph.",
+"The bun closes around one body paragraph: introduction above, conclusion below, three flags in the crown for the three reasons.",
+"The whole essay: introduction, three body paragraphs, conclusion. The third body is the thickest.",
+"The finished essay, pinned with a flag."];
+</script>
+<script>
+(function(){
+"use strict";
+var steps=[].slice.call(document.querySelectorAll(".step"));
+var N=steps.length, cur=0, DONE={}, SKIP={}, QK={}, MISS={}, started=false;
+var bar=document.querySelector(".tprog i"), num=document.querySelector(".tnum"), chip=document.querySelector(".chip");
+var back=document.querySelector(".nbtn.back"), next=document.querySelector(".nbtn.next"),
+    msg=document.querySelector(".navmsg"), skip=document.querySelector(".skip"),
+    miniHost=document.querySelector(".figmini");
+var RM=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* one shared instance of the big figure, moved into whichever step shows it */
+var FIGHOST=document.createElement("div"); FIGHOST.className="fighost";
+FIGHOST.innerHTML=figBig();
+var figPlayed={}, figTimer=null;
+
+function ready(i){
+  var s=steps[i], ex=s.dataset.req;
+  if(!ex) return true;
+  return !!(DONE[ex]||SKIP[ex]||QK[ex]);
+}
+function narrow(){ return window.innerWidth<560; }
+function shortStage(t){
+  var m=/^(Stage\s*\d+)/i.exec(t||""); if(m) return m[1];
+  return (t||"").length>13 ? (t||"").slice(0,12)+"\u2026" : (t||"");
+}
+[].slice.call(document.querySelectorAll(".qk")).forEach(function(q){
+  var id=q.dataset.qk, ans=+q.dataset.a, fb=q.querySelector(".qk-fb"), n=0;
+  var opts=[].slice.call(q.querySelectorAll(".qk-o"));
+  opts.forEach(function(b,i){
+    b.onclick=function(){
+      if(QK[id]) return;
+      if(i===ans){
+        b.classList.add("good"); QK[id]=1;
+        opts.forEach(function(x){x.disabled=true;});
+        fb.className="qk-fb on y";
+        fb.innerHTML="<b>"+["Yes.","Right.","Correct.","That is it.","Exactly."][n%5]+"</b>"+q.dataset.why;
+        paint();
+      } else {
+        n++; b.classList.add("bad"); b.disabled=true;
+        if(n>=2){
+          opts[ans].classList.add("good"); QK[id]=1;
+          opts.forEach(function(x){x.disabled=true;});
+          fb.className="qk-fb on n"; fb.innerHTML="<b>The answer is marked \u2713.</b>"+q.dataset.why;
+          paint();
+        } else { fb.className="qk-fb on n"; fb.innerHTML="<b>Not that one.</b>Read the screen once more, then try the other answer."; }
+      }
+    };
+  });
+});
+function placeFigure(s){
+  var box=s.querySelector(".figbox");
+  if(!box){ if(FIGHOST.parentNode) FIGHOST.parentNode.removeChild(FIGHOST); return; }
+  if(FIGHOST.parentNode!==box) box.appendChild(FIGHOST);
+  var beat=figBeat(s.dataset.stage||"");
+  var svg=FIGHOST.querySelector("svg");
+  if(svg && typeof FIG_ALT!=="undefined" && FIG_ALT[beat]) svg.setAttribute("aria-label",FIG_ALT[beat]);
+  if(figTimer){clearTimeout(figTimer); figTimer=null;}
+  if(RM || figPlayed[beat]){ figApply(FIGHOST,beat,true); figPlayed[beat]=1; return; }
+  figApply(FIGHOST,Math.max(0,beat-1),true);
+  figTimer=setTimeout(function(){ figApply(FIGHOST,beat,false); figPlayed[beat]=1; },260);
+}
+function paint(){
+  var s=steps[cur], nw=narrow();
+  chip.textContent = nw? shortStage(s.dataset.stage) : (s.dataset.stage||"");
+  num.textContent = nw? (cur+1)+"/"+N : "Step "+(cur+1)+" of "+N;
+  num.setAttribute("aria-label","Step "+(cur+1)+" of "+N);
+  bar.style.width=((cur)/(N-1)*100)+"%";
+  if(miniHost) miniHost.innerHTML=figMini(figBeat(s.dataset.stage||""));
+  back.disabled = cur===0;
+  var ok=ready(cur), last=cur===N-1, req=s.dataset.req;
+  next.disabled = !ok && !last;
+  next.classList.toggle("go", ok);
+  next.textContent = last? "Start again \u21ba" : (s.dataset.type==="teach"? "Got it \u2192" : "Next \u2192");
+  if(skip){
+    var showSkip = req && !DONE[req] && !SKIP[req] && !QK[req] && MISS[req];
+    skip.style.display = showSkip? "" : "none";
+    skip.onclick=function(){ SKIP[req]=1; paint(); };
+  }
+  msg.innerHTML = (!last && req && !ok)? "Answer this to keep going" : "";
+}
+function show(i){
+  cur=Math.max(0,Math.min(N-1,i));
+  steps.forEach(function(s,j){ s.classList.toggle("on", j===cur); });
+  placeFigure(steps[cur]);
+  paint();
+  window.scrollTo({top:0,behavior:"instant" in window?"instant":"auto"});
+}
+document.addEventListener("drill:update",function(e){ DONE=e.detail.map||{}; started=true; paint(); });
+document.addEventListener("drill:miss",function(){ var r=steps[cur].dataset.req; if(r){MISS[r]=1; paint();} });
+back.onclick=function(){ show(cur-1); };
+next.onclick=function(){ if(cur===N-1){ show(0); } else { show(cur+1); } };
+window.addEventListener("resize",function(){ paint(); });
+document.addEventListener("keydown",function(e){
+  var t=e.target;
+  if(t.tagName==="TEXTAREA"||t.tagName==="INPUT") return;
+  if(t.closest&&(t.closest(".drill")||t.closest(".qk"))) return;
+  if(e.key==="ArrowRight"&&!next.disabled) show(cur+1);
+  if(e.key==="ArrowLeft"&&!back.disabled) show(cur-1);
+});
+window.addEventListener("beforeunload",function(e){
+  if(!started && cur<3) return;
+  if(cur>=N-1) return;
+  e.preventDefault(); e.returnValue="";
+});
+show(0);
+})();
+</script>
+</body></html>

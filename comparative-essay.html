@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Comparative Essay — step by step</title>
+<style>:root{--bg:#eef1f6; --brand:#2a5b8f; --tint:#e9f0f8; --deep:#1f4a78; --figw:430px;}
+
+:root{
+  --ink:#16203a; --soft:#4b5670; --mut:#5f6a7d; --line:#e3e7f0; --card:#ffffff;
+  --ok:#177140; --no:#b53225; --okw:#e9f7ee; --now:#fdeceb;
+  --A:#2a6f9e; --B:#c2701f;
+  --muted:#5f6a7d; --wash:#f4f5f8; --ink-soft:#4b5670;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; background:var(--bg); color:var(--ink); font-size:17.5px; line-height:1.62;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;}
+.wrap{max-width:800px; margin:0 auto; padding:0 20px 150px}
+
+/* ---------- top bar ---------- */
+.top{position:sticky; top:0; z-index:30; background:rgba(255,255,255,.93); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line); margin-bottom:26px}
+.topin{max-width:800px; margin:0 auto; padding:9px 20px; display:flex; align-items:center; gap:12px}
+.chip{font-size:.7rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; padding:5px 11px;
+  border-radius:99px; background:var(--tint); color:var(--deep,var(--brand)); white-space:nowrap;
+  overflow:hidden; text-overflow:ellipsis; max-width:42%}
+.figmini{flex:0 0 auto; display:flex; align-items:center}
+.figmini svg{display:block}
+.tprog{flex:1; height:8px; background:#e6e9f1; border-radius:99px; overflow:hidden; min-width:40px}
+.tprog i{display:block; height:100%; width:0; border-radius:99px; background:var(--brand); transition:width .4s cubic-bezier(.2,.8,.2,1)}
+.tnum{font-size:.78rem; font-weight:800; color:var(--soft); white-space:nowrap; flex:0 0 auto}
+
+/* ---------- cards ---------- */
+.step{display:none}
+.step.on{display:block; animation:in .25s ease}
+@keyframes in{from{opacity:0; transform:translateY(8px)}to{opacity:1;transform:none}}
+.scard{background:var(--card); border-radius:22px; padding:30px 34px; margin-bottom:16px;
+  box-shadow:0 1px 2px rgba(22,32,58,.05), 0 16px 34px -26px rgba(22,32,58,.5)}
+.kick{font-size:.7rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--deep,var(--brand)); margin-bottom:6px}
+h1.t{font-size:1.62rem; line-height:1.2; font-weight:800; letter-spacing:-.02em; margin:0 0 14px}
+.lead{font-size:1.09rem; margin:0 0 4px}
+.scard p{margin:.7em 0}
+.scard p:last-child{margin-bottom:0}
+b,strong{font-weight:700}
+.small{font-size:.88rem; color:var(--soft)}
+
+/* the build-up figure */
+.figbox{display:block; text-align:center; margin:4px 0 18px}
+.fighost svg{width:var(--figw,300px); max-width:100%; height:auto; display:block; margin:0 auto}
+.fel{transition:opacity .5s cubic-bezier(.2,.8,.2,1), transform .55s cubic-bezier(.2,.8,.2,1)}
+.cp .fighost svg{max-width:230px}
+@media (prefers-reduced-motion: reduce){ .fel{transition:opacity .18s linear !important; transform:none !important} }
+
+/* examples */
+.eg{border-radius:14px; padding:13px 16px 13px 44px; position:relative; margin:12px 0; font-size:1.03rem}
+.eg:before{position:absolute; left:15px; top:11px; font-weight:800; font-size:1.05rem}
+.eg.bad{background:var(--now)} .eg.bad:before{content:"\2717"; color:var(--no)}
+.eg.good{background:var(--okw)} .eg.good:before{content:"\2713"; color:var(--ok)}
+.eg .n{display:block; font-size:.86rem; color:var(--soft); margin-top:5px}
+.eg em{font-style:italic}
+
+ul.plain{list-style:none; padding:0; margin:12px 0}
+ul.plain li{padding:9px 0 9px 30px; position:relative; border-bottom:1px solid #f0f2f7}
+ul.plain li:last-child{border-bottom:0}
+ul.plain li:before{content:"\2192"; position:absolute; left:4px; color:var(--brand); font-weight:800}
+ul.num{counter-reset:n; list-style:none; padding:0; margin:12px 0}
+ul.num li{counter-increment:n; padding:9px 0 9px 38px; position:relative}
+ul.num li:before{content:counter(n); position:absolute; left:0; top:8px; width:24px; height:24px; border-radius:50%;
+  background:var(--brand); color:#fff; text-align:center; line-height:24px; font-size:.8rem; font-weight:800}
+
+.tipbox{background:var(--tint); border-radius:14px; padding:14px 18px; margin:14px 0; font-size:1rem}
+.tipbox .l{font-size:.68rem; font-weight:800; letter-spacing:.13em; text-transform:uppercase; color:var(--deep,var(--brand)); display:block; margin-bottom:4px}
+.warnb{background:#fdf1ef; border-radius:14px; padding:14px 18px; margin:14px 0; font-size:1rem}
+.warnb .l{font-size:.68rem; font-weight:800; letter-spacing:.13em; text-transform:uppercase; color:var(--no); display:block; margin-bottom:4px}
+
+table{border-collapse:collapse; width:100%; margin:14px 0; font-size:.95rem}
+th,td{padding:9px 11px; text-align:left; vertical-align:top; border-bottom:1px solid #eef0f5}
+th{font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); font-weight:800}
+tr:last-child td{border-bottom:0}
+td.c,th.c{text-align:center}
+
+.fig{margin:16px 0; text-align:center}
+.fig svg{max-width:100%; height:auto}
+.figc{font-size:.86rem; color:var(--soft); margin-top:8px; text-align:left}
+
+.r1{background:#fdeecd; box-shadow:inset 0 -2px 0 #e0a63f}
+.r2{background:#e4f4e5; box-shadow:inset 0 -2px 0 #4f8a4a}
+.r3{background:#f7e6df; box-shadow:inset 0 -2px 0 #8c4a32}
+.r4{background:#e9e9ee; box-shadow:inset 0 -2px 0 #8a8a95}
+.rh{background:#efe7fa; box-shadow:inset 0 -2px 0 #6b4a9b}
+.rb{background:#e6effa; box-shadow:inset 0 -2px 0 #3d6ea8}
+.rt{background:#fbe4e2; box-shadow:inset 0 -2px 0 #c0483f}
+.rA{background:#dceefa; box-shadow:inset 0 -2px 0 var(--A)}
+.rB{background:#fbe8cf; box-shadow:inset 0 -2px 0 var(--B)}
+.rJ{background:#fbe0dc; box-shadow:inset 0 -2px 0 #b3392f}
+.rG{background:#e6efdc; box-shadow:inset 0 -2px 0 #5b7d3f}
+.lab{display:inline-block; font-size:.64rem; font-weight:800; letter-spacing:.09em; text-transform:uppercase;
+  padding:3px 9px; border-radius:99px; background:var(--tint); color:var(--deep,var(--brand)); margin-right:6px}
+
+/* quick check on a teaching screen */
+.qk{margin-top:20px; border-top:2px dashed var(--line); padding-top:16px}
+.qk-l{font-size:.7rem; font-weight:800; letter-spacing:.13em; text-transform:uppercase; color:var(--deep,var(--brand)); margin-bottom:6px}
+.qk-q{margin:0 0 10px; font-weight:600; font-size:1.02rem}
+.qk-os{display:flex; flex-direction:column; gap:7px}
+.qk-o{font:inherit; font-size:.97rem; text-align:left; padding:12px 14px; border:1px solid #d3d3d8;
+  border-radius:11px; background:#fff; cursor:pointer; line-height:1.4}
+.qk-o:hover:not(:disabled){background:#f4f8fb; border-color:#8fb3d0}
+.qk-o.good{background:#eef8f1; border-color:#4d9468; font-weight:600}
+.qk-o.good::after{content:" \2713"; font-weight:800; color:#1f5c37}
+.qk-o.bad{background:#fdefee; border-color:#d4796f}
+.qk-o.bad::after{content:" \2717"; font-weight:800; color:#8e2f28}
+.qk-o:disabled{cursor:default}
+.qk-fb{margin-top:10px; font-size:.93rem; padding:10px 13px; border-radius:9px; display:none}
+.qk-fb.on{display:block}
+.qk-fb.y{background:#eef8f1; color:#1f5c37; border:1px solid #8ec49f}
+.qk-fb.n{background:#fdf6e6; color:#7a5510; border:1px solid #e0c483}
+.qk-fb b{display:block; margin-bottom:.15em}
+
+.cp .qk{border-top-color:rgba(255,255,255,.4); text-align:left}
+.cp .qk-l{color:#fff}
+.cp .qk-q{color:#fff; max-width:none; margin:0 0 10px; text-align:left}
+.cp .qk-o{background:#fff; color:var(--ink); border-color:rgba(255,255,255,.5)}
+.cp .qk-fb,.cp .qk-fb.y,.cp .qk-fb.n{background:rgba(255,255,255,.18); color:#fff; border:1px solid rgba(255,255,255,.45)}
+
+/* checkpoint */
+.cp{background:linear-gradient(135deg,#177140,#0f5a30); color:#fff; border-radius:22px; padding:30px 34px; text-align:center}
+.cp .big{font-size:2.4rem; line-height:1}
+.cp h1{color:#fff; font-size:1.5rem; margin:10px 0 8px; font-weight:800}
+.cp p{margin:0 auto; max-width:44ch}
+.cp .you{background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.3); border-radius:14px;
+  padding:12px 16px; margin-top:16px; font-size:1.02rem}
+
+/* bottom nav */
+.nav{position:fixed; left:0; right:0; bottom:0; z-index:40; background:rgba(255,255,255,.95);
+  backdrop-filter:blur(10px); border-top:1px solid var(--line)}
+.navin{max-width:800px; margin:0 auto; padding:13px 20px; display:flex; align-items:center; gap:12px}
+.nbtn{font:inherit; font-weight:800; font-size:.95rem; padding:13px 30px; border-radius:99px; cursor:pointer; border:1px solid transparent}
+.nbtn.back{background:#fff; color:var(--soft); border-color:var(--line)}
+.nbtn.next{background:var(--brand); color:#fff; box-shadow:0 3px 0 rgba(22,32,58,.18); flex:0 0 auto}
+.nbtn.next.go{background:var(--ok); box-shadow:0 3px 0 rgba(20,90,50,.28)}
+.nbtn:disabled{opacity:.4; cursor:not-allowed; box-shadow:none}
+.nbtn:not(:disabled):hover{transform:translateY(-1px)}
+.nbtn:not(:disabled):active{transform:translateY(1px); box-shadow:none}
+.navmsg{flex:1; font-size:.86rem; color:var(--soft); text-align:right}
+.navmsg b{color:var(--ink)}
+.skip{font:inherit; font-size:.82rem; background:none; border:0; color:var(--soft); text-decoration:underline; cursor:pointer; padding:8px 4px}
+.nbtn:focus-visible,.skip:focus-visible,.qk-o:focus-visible{outline:3px solid #1b5fa8; outline-offset:2px}
+
+.step .drill{border:0; box-shadow:none; margin:0; border-radius:0}
+.step .drill-top{background:transparent; border-bottom:1px solid #eef0f5; padding:0 0 12px}
+.step .drill-body{padding:16px 0 0}
+.step .drill-name{font-size:1.3rem; font-weight:800; letter-spacing:-.02em}
+.step .drill-n{display:none}
+
+@media (max-width:640px){
+  body{font-size:16.5px}
+  .scard{padding:22px 20px; border-radius:18px}
+  h1.t{font-size:1.4rem}
+  .navin{padding:11px 14px; gap:8px}
+  .nbtn{padding:12px 20px; font-size:.9rem}
+  .nbtn.back{padding:12px 14px}
+  .navmsg{font-size:.76rem; text-align:right}
+  .wrap{padding:0 14px 130px}
+  .topin{padding:9px 12px; gap:9px}
+  .chip{font-size:.62rem; padding:4px 8px; letter-spacing:.04em}
+  .tnum{font-size:.72rem}
+  .qk-o{padding:13px 14px}
+  .fig{overflow-x:auto; margin-left:-20px; margin-right:-20px; padding:0 20px}
+  .fig svg{min-width:430px}
+}
+@media print{
+  body{background:#fff; font-size:10.4pt; line-height:1.45}
+  .top,.nav{display:none !important}
+  .step{display:block !important; page-break-inside:avoid; break-inside:avoid}
+  .scard{box-shadow:none; border:1px solid #d8dce6; border-radius:12px; padding:14px 16px; margin-bottom:10px}
+  .cp{background:#fff !important; color:#000 !important; border:2px solid #177140}
+  .cp h1,.cp .qk-q,.cp .qk-l{color:#000 !important}
+  .btns,.fb{display:none !important}
+  .qk-fb{display:none !important}
+  .qk-o{border:1px solid #b9bcc6 !important; background:#fff !important; padding:7px 10px}
+  .qk-o::before{content:"\25a1  "; color:#666}
+  .qk-l::after{content:"\00a0\2014\00a0circle one"; font-weight:600}
+  .figbox{display:none}
+  .wrap{padding:0}
+  @page{size:letter; margin:14mm}
+}
+
+
+</style></head>
+<body>
+<div class="top"><div class="topin">
+  <span class="chip"></span><span class="figmini"></span><span class="tprog"><i></i></span><span class="tnum"></span>
+</div></div>
+<div class="wrap">
+<section class="step" data-req="m1" data-stage="Start" data-type="teach">
+<div class="scard"><div class="figbox"></div><div class="kick">Welcome</div><h1 class="t">You are going to compare two things — and win an argument about them</h1>
+<p class="lead">One small step at a time. You start by deciding whether two things can even be compared, and finish by writing a full essay about them.</p><div class="tipbox"><span class="l">How to use this</span>Read a screen, press <b>Got it</b>. On practice screens, answer first — the button turns green when you can move on. Nothing is saved, so you can start over any time.</div><p class="small">The example that runs through the whole thing: <b>online classes vs. in-person classes</b>.</p>
+<div class="qk" data-qk="m1" data-a="0" data-why="You compare two things in order to win an argument, so the essay must take a side."><div class="qk-l">Your turn</div><p class="qk-q">True or false: a comparative essay should say which of the two things is better.</p><div class="qk-os"><button class="qk-o" type="button">True</button><button class="qk-o" type="button">False</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m2" data-stage="Stage 1 · Two things" data-type="teach">
+<div class="scard"><div class="figbox"></div><h1 class="t">A comparative essay is an argument, not a list</h1>
+<p class="lead">Most students think the job is to list what is the same and what is different. It is not.</p><div class="eg bad">A and B are similar in some ways and different in others.<span class="n">True of any two things in the universe. It proves nothing and decides nothing.</span></div><div class="eg good">Although A is cheaper, B is the better choice for most students, because…<span class="n">The similarities and differences are your <b>evidence</b>. The argument is what you conclude from them.</span></div><div class="tipbox"><span class="l">The question you must answer</span><b>So what?</b> Why should anyone care that these two things are different in this way?</div>
+<div class="qk" data-qk="m2" data-a="2" data-why="Differences are only evidence; an argument answers the question &lt;em&gt;so what?&lt;/em&gt; with a conclusion."><div class="qk-l">Your turn</div><p class="qk-q">Which one is an argument, not a list?</p><div class="qk-os"><button class="qk-o" type="button">Trains and buses differ in speed, price, and comfort.</button><button class="qk-o" type="button">Trains are faster, but buses are much cheaper.</button><button class="qk-o" type="button">Trains are the better choice, because they are faster.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m3" data-stage="Stage 1 · Two things" data-type="teach">
+<div class="scard"><h1 class="t">First: do they belong to the same category?</h1>
+<p class="lead">You can only compare two things that fit in one box.</p><div class="eg good">Online classes and in-person classes<span class="n">Both are <b>ways of taking a course</b>.</span></div><div class="eg good">A book and the movie made from it<span class="n">Both are <b>ways of telling one story</b>.</span></div><div class="eg bad">My phone and my hometown<span class="n">No shared box. Nothing useful can be said.</span></div>
+<div class="qk" data-qk="m3" data-a="2" data-why="Two subjects can be compared only if they fit in one shared box, like two ways of living."><div class="qk-l">Your turn</div><p class="qk-q">Which pair belongs to the same category, so you can compare them?</p><div class="qk-os"><button class="qk-o" type="button">A city bus and a train ticket</button><button class="qk-o" type="button">A bicycle and a rainy day</button><button class="qk-o" type="button">City life and village life</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 1 · Two things" data-type="drill" data-req="c1">
+<div class="scard"><div data-ex="c1"></div></div>
+</section>
+<section class="step" data-req="m5" data-stage="Stage 1 · Two things" data-type="teach">
+<div class="scard"><h1 class="t">Second: choose three criteria</h1>
+<p class="lead">A criterion is a thing you judge <b>both</b> subjects on. Three criteria give you three body paragraphs — that is the whole reason for the number.</p><table><tr><th>Criterion</th><th class="c">Works?</th><th>Why</th></tr><tr><td>Cost</td><td class="c">✓</td><td>Both have a price.</td></tr><tr><td>Flexibility</td><td class="c">✓</td><td>Both happen at some time and place.</td></tr><tr><td>Interaction</td><td class="c">✓</td><td>Both involve — or fail to involve — other people.</td></tr><tr><td><i>How much I like online classes</i></td><td class="c">✗</td><td>Applies to one subject only.</td></tr><tr><td><i>Cost · price · what you pay</i></td><td class="c">✗</td><td>One criterion with three names.</td></tr></table>
+<div class="qk" data-qk="m5" data-a="0" data-why="A criterion is one thing, with one name, that you judge &lt;b&gt;both&lt;/b&gt; subjects on."><div class="qk-l">Your turn</div><p class="qk-q">You are comparing two phones. Which one is a usable criterion?</p><div class="qk-os"><button class="qk-o" type="button">How long the battery lasts</button><button class="qk-o" type="button">Why I love my own phone</button><button class="qk-o" type="button">Price, cost, and what you pay</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 1 · Two things" data-type="drill" data-req="c2">
+<div class="scard"><div data-ex="c2"></div></div>
+</section>
+<section class="step" data-req="m7" data-stage="Stage 1 · Two things" data-type="teach">
+<div class="scard"><h1 class="t">Two ways to lay it out before you write</h1>
+<p class="lead">The planner you pick quietly picks your essay shape — so pick on purpose.</p><table><tr><th></th><th>Two overlapping circles</th><th>A grid</th></tr><tr><td><b>Shows</b></td><td>what they share</td><td>each criterion, judged on both</td></tr><tr><td><b>Rows</b></td><td>none</td><td>every row is already a paragraph</td></tr><tr><td><b>Warns you</b></td><td>no</td><td>an empty box means that criterion has to go</td></tr></table><div class="tipbox"><span class="l">For a five-paragraph essay</span>Use the <b>grid</b>. Three criteria, two columns. Fill it before you write a word — that is what the picture at the top of this screen is.</div>
+<div class="qk" data-qk="m7" data-a="2" data-why="Every row is a paragraph; an empty box means the criterion cannot compare both subjects."><div class="qk-l">Your turn</div><p class="qk-q">In your grid, the row for <em>safety</em> has a full box for A but an empty box for B. What should you do?</p><div class="qk-os"><button class="qk-o" type="button">Write that paragraph about A only</button><button class="qk-o" type="button">Leave the box empty and keep going</button><button class="qk-o" type="button">Drop that criterion from the essay</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 1 · Two things" data-type="drill" data-req="c3">
+<div class="scard"><div data-ex="c3"></div></div>
+</section>
+<section class="step" data-stage="Stage 1 · Two things" data-type="drill" data-req="c4">
+<div class="scard"><div data-ex="c4"></div></div>
+</section>
+<section class="step" data-req="m10" data-stage="Stage 1 · Two things" data-type="check">
+<div class="cp"><div class="figbox"></div><div class="big">✓</div><h1>Stage 1 done</h1><p>You can now set an essay up before writing a single sentence.</p><div class="you"><b>You can say:</b> “I am comparing ___ and ___ on ___, ___, and ___.”</div><div class="qk" data-qk="m10" data-a="1" data-why="Same category, three criteria for both, and &lt;em&gt;so what?&lt;/em&gt; — nothing about your own history."><div class="qk-l">Your turn</div><p class="qk-q">Stage 1 asked three questions about your two subjects. Which is <b>not</b> one of them?</p><div class="qk-os"><button class="qk-o" type="button">Are they in the same category?</button><button class="qk-o" type="button">Which one did you try first?</button><button class="qk-o" type="button">What do you judge both on?</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m11" data-stage="Stage 2 · One sentence" data-type="teach">
+<div class="scard"><div class="figbox"></div><h1 class="t">Now: one sentence that holds both subjects</h1>
+<p class="lead">This is the short stage. It is also where most points are lost.</p><div class="tipbox"><span class="l">Why it matters this much</span>In one study of student compare-and-contrast essays, <b>mechanics and grammar</b> were the two biggest problem areas — ahead of ideas. And contrast words were the hardest category of all: students produced them correctly only <b>18%</b> of the time.</div><p>Take this stage slowly. Everything after it is built from this one sentence.</p>
+<div class="qk" data-qk="m11" data-a="0" data-why="Grammar and mechanics, not ideas, were the biggest problem; contrast words were right only 18% of the time."><div class="qk-l">Your turn</div><p class="qk-q">Where does this guide say most points are lost in a comparative essay?</p><div class="qk-os"><button class="qk-o" type="button">Joining the two subjects</button><button class="qk-o" type="button">Choosing the ideas</button><button class="qk-o" type="button">Writing the conclusion</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m12" data-stage="Stage 2 · One sentence" data-type="teach">
+<div class="scard"><h1 class="t">English gives you three tools — and three punctuation patterns</h1>
+<p class="lead">They mean almost the same thing. They are punctuated <b>completely</b> differently.</p><div class="fig"><svg viewBox="0 0 620 300" width="620" role="img" aria-label="Three classes of contrast connector and how each is punctuated">
+ <rect x="8" y="8" width="604" height="86" rx="10" fill="#eef4fb" stroke="#2a6f9e" stroke-width="1.8"/>
+ <text x="22" y="30" font-family="Helvetica" font-size="12" font-weight="700" fill="#1d4f73" letter-spacing=".06em">CLASS 1 · COORDINATING CONJUNCTIONS</text>
+ <text x="22" y="48" font-family="Georgia,serif" font-size="13" font-style="italic" fill="#3b5b80">but · yet · so</text>
+ <rect x="22" y="56" width="150" height="26" rx="6" fill="#fff" stroke="#9db8d2"/><text x="97" y="73" text-anchor="middle" font-family="Helvetica" font-size="12" fill="#33415c">clause 1</text>
+ <text x="182" y="73" font-family="Helvetica" font-size="16" font-weight="700" fill="#b3392f">,</text>
+ <rect x="196" y="56" width="70" height="26" rx="6" fill="#dceefa" stroke="#2a6f9e"/><text x="231" y="73" text-anchor="middle" font-family="Helvetica" font-size="12" font-weight="700" fill="#1d4f73">but</text>
+ <rect x="276" y="56" width="150" height="26" rx="6" fill="#fff" stroke="#9db8d2"/><text x="351" y="73" text-anchor="middle" font-family="Helvetica" font-size="12" fill="#33415c">clause 2</text>
+ <text x="440" y="73" font-family="Helvetica" font-size="11.5" fill="#5c6b82">ONE sentence · comma BEFORE the word</text>
+
+ <rect x="8" y="104" width="604" height="86" rx="10" fill="#fdf3e6" stroke="#c2701f" stroke-width="1.8"/>
+ <text x="22" y="126" font-family="Helvetica" font-size="12" font-weight="700" fill="#8f5013" letter-spacing=".06em">CLASS 2 · SUBORDINATING CONJUNCTIONS</text>
+ <text x="22" y="144" font-family="Georgia,serif" font-size="13" font-style="italic" fill="#a2652a">whereas · while · although</text>
+ <rect x="22" y="152" width="150" height="26" rx="6" fill="#fff" stroke="#dcae7a"/><text x="97" y="169" text-anchor="middle" font-family="Helvetica" font-size="12" fill="#33415c">main clause</text>
+ <text x="182" y="169" font-family="Helvetica" font-size="16" font-weight="700" fill="#b3392f">,</text>
+ <rect x="196" y="152" width="90" height="26" rx="6" fill="#fbe8cf" stroke="#c2701f"/><text x="241" y="169" text-anchor="middle" font-family="Helvetica" font-size="12" font-weight="700" fill="#8f5013">whereas</text>
+ <rect x="296" y="152" width="130" height="26" rx="6" fill="#fff" stroke="#dcae7a"/><text x="361" y="169" text-anchor="middle" font-family="Helvetica" font-size="12" fill="#33415c">second clause</text>
+ <text x="440" y="169" font-family="Helvetica" font-size="11.5" fill="#5c6b82">ONE sentence · comma at the join</text>
+
+ <rect x="8" y="200" width="604" height="92" rx="10" fill="#f4eefb" stroke="#6b4a9b" stroke-width="1.8"/>
+ <text x="22" y="222" font-family="Helvetica" font-size="12" font-weight="700" fill="#4a3070" letter-spacing=".06em">CLASS 3 · CONJUNCTIVE ADVERBS</text>
+ <text x="22" y="240" font-family="Georgia,serif" font-size="13" font-style="italic" fill="#6b4a9b">however · in contrast · on the other hand · nevertheless</text>
+ <rect x="22" y="248" width="140" height="26" rx="6" fill="#fff" stroke="#b9a3d6"/><text x="92" y="265" text-anchor="middle" font-family="Helvetica" font-size="12" fill="#33415c">sentence 1</text>
+ <text x="170" y="265" font-family="Helvetica" font-size="16" font-weight="700" fill="#b3392f">.</text>
+ <text x="182" y="265" font-family="Helvetica" font-size="12" fill="#5c6b82">or</text>
+ <text x="202" y="265" font-family="Helvetica" font-size="16" font-weight="700" fill="#b3392f">;</text>
+ <rect x="216" y="248" width="86" height="26" rx="6" fill="#efe7fa" stroke="#6b4a9b"/><text x="259" y="265" text-anchor="middle" font-family="Helvetica" font-size="12" font-weight="700" fill="#4a3070">However</text>
+ <text x="306" y="265" font-family="Helvetica" font-size="16" font-weight="700" fill="#b3392f">,</text>
+ <rect x="318" y="248" width="140" height="26" rx="6" fill="#fff" stroke="#b9a3d6"/><text x="388" y="265" text-anchor="middle" font-family="Helvetica" font-size="12" fill="#33415c">sentence 2</text>
+ <text x="22" y="286" font-family="Helvetica" font-size="11.5" font-weight="700" fill="#b3392f">TWO sentences · it can also MOVE: “In-person classes, however, cost more.”</text>
+</svg><p class="figc">Get the class right and the punctuation follows automatically.</p></div>
+<div class="qk" data-qk="m12" data-a="1" data-why="&lt;em&gt;While&lt;/em&gt; is a subordinating conjunction; &lt;em&gt;yet&lt;/em&gt; is coordinating and &lt;em&gt;however&lt;/em&gt; is an adverb."><div class="qk-l">Your turn</div><p class="qk-q">Which word belongs in the same group as <em>whereas</em> and <em>although</em>?</p><div class="qk-os"><button class="qk-o" type="button">yet</button><button class="qk-o" type="button">while</button><button class="qk-o" type="button">however</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m13" data-stage="Stage 2 · One sentence" data-type="teach">
+<div class="scard"><h1 class="t">The one test that decides everything</h1>
+<p class="lead">Can the word move into the middle of the second clause?</p><div class="eg good">In-person classes, <b>however</b>, cost more.<span class="n">It moves → it is an <b>adverb</b> → period or semicolon before it.</span></div><div class="eg bad">In-person classes, <b>whereas</b>, cost more.<span class="n">It cannot move → it is a <b>conjunction</b> → comma only, one sentence.</span></div>
+<div class="qk" data-qk="m13" data-a="1" data-why="A word that can move is an adverb, so the clause before it needs a period or semicolon."><div class="qk-l">Your turn</div><p class="qk-q">The word can move into the middle of its clause: <em>Buses, on the other hand, are cheaper.</em> What does this tell you?</p><div class="qk-os"><button class="qk-o" type="button">It is a conjunction: a comma is enough</button><button class="qk-o" type="button">It is an adverb: period or semicolon</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 2 · One sentence" data-type="drill" data-req="c5">
+<div class="scard"><div data-ex="c5"></div></div>
+</section>
+<section class="step" data-req="m15" data-stage="Stage 2 · One sentence" data-type="teach">
+<div class="scard"><h1 class="t">The four sentences to get right</h1>
+<div class="eg good">Online classes are cheaper<b>,</b> but in-person classes offer more support.</div><div class="eg good">Online classes are cheaper<b>,</b> whereas in-person classes offer more support.</div><div class="eg good">Online classes are cheaper. <b>However,</b> in-person classes offer more support.</div><div class="eg good">In-person classes<b>,</b> however<b>,</b> offer more support.</div>
+<div class="qk" data-qk="m15" data-a="0" data-why="A comma fits &lt;em&gt;but&lt;/em&gt;; &lt;em&gt;however&lt;/em&gt; needs a period before it, and &lt;em&gt;whereas&lt;/em&gt; cannot stand alone after one."><div class="qk-l">Your turn</div><p class="qk-q">Which comes next? <em>Online classes are cheaper ___ in-person classes offer more support.</em></p><div class="qk-os"><button class="qk-o" type="button"><b>, but</b></button><button class="qk-o" type="button"><b>. Whereas</b></button><button class="qk-o" type="button"><b>, however,</b></button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m16" data-stage="Stage 2 · One sentence" data-type="teach">
+<div class="scard"><h1 class="t">The two mistakes almost everyone makes</h1>
+<div class="eg bad">Online classes are cheaper<b>,</b> however<b>,</b> in-person classes offer more support.<span class="n"><b>Comma splice.</b> Two complete sentences joined by a comma. The most common error in this essay type.</span></div><div class="eg bad">Online classes are cheaper. <b>Whereas</b> in-person classes offer more support.<span class="n"><b>Fragment.</b> A <i>whereas</i> clause cannot stand alone. It <b>can</b> open a sentence — but only if the main clause follows: <i>Whereas online classes are cheaper, in-person classes offer more support.</i></span></div>
+<div class="qk" data-qk="m16" data-a="2" data-why="&lt;em&gt;Whereas&lt;/em&gt; can open a sentence only when the main clause follows; alone, it is a fragment."><div class="qk-l">Your turn</div><p class="qk-q">What is wrong with this one? <em>Whereas trains are faster.</em></p><div class="qk-os"><button class="qk-o" type="button">It is a comma splice</button><button class="qk-o" type="button">Nothing — whereas can open a sentence</button><button class="qk-o" type="button">It is a fragment</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 2 · One sentence" data-type="drill" data-req="c6">
+<div class="scard"><div data-ex="c6"></div></div>
+</section>
+<section class="step" data-stage="Stage 2 · One sentence" data-type="drill" data-req="c7">
+<div class="scard"><div data-ex="c7"></div></div>
+</section>
+<section class="step" data-req="m19" data-stage="Stage 2 · One sentence" data-type="teach">
+<div class="scard"><h1 class="t">A fourth tool: prepositions</h1>
+<p class="lead"><i>Despite, in spite of, unlike, in contrast to, compared with</i> take a <b>noun</b> or an <b>-ing</b> form — never a whole clause.</p><div class="eg bad">Despite it was expensive, she chose the in-person class.</div><div class="eg good">Despite <b>the cost</b>, she chose the in-person class.</div><div class="eg good"><b>Although it was expensive</b>, she chose the in-person class.<span class="n">Use <i>although</i> when you need a whole clause.</span></div>
+<div class="qk" data-qk="m19" data-a="1" data-why="&lt;em&gt;Despite&lt;/em&gt; takes a noun or -ing form, never a clause; before a clause, use &lt;em&gt;although&lt;/em&gt;."><div class="qk-l">Your turn</div><p class="qk-q">Is this correct — yes or no? <em>Despite online classes are cheaper, many students prefer the campus.</em></p><div class="qk-os"><button class="qk-o" type="button">Yes</button><button class="qk-o" type="button">No</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m20" data-stage="Stage 2 · One sentence" data-type="teach">
+<div class="scard"><h1 class="t">Two words students mix up</h1>
+<table><tr><th></th><th>on the other hand</th><th>on the contrary</th></tr><tr><td><b>Does</b></td><td>adds a <b>second, different</b> point — both can be true</td><td><b>contradicts</b> — says the last idea was <b>not true</b></td></tr><tr><td><b>Example</b></td><td class="small">The online class is cheaper; on the other hand, it offers no speaking practice.</td><td class="small">She wasn’t bored; on the contrary, she signed up again.</td></tr></table><div class="warnb"><span class="l">In your essay</span>You are weighing two <b>true</b> options, not correcting a false claim. So <b>on the other hand</b> is almost always right, and <b>on the contrary</b> is almost always wrong.</div>
+<div class="qk" data-qk="m20" data-a="1" data-why="A second true point takes &lt;em&gt;on the other hand&lt;/em&gt;; &lt;em&gt;on the contrary&lt;/em&gt; only denies a false claim."><div class="qk-l">Your turn</div><p class="qk-q">Which comes next? <em>Trains are faster. Buses, ___, are much cheaper.</em></p><div class="qk-os"><button class="qk-o" type="button">on the contrary</button><button class="qk-o" type="button">on the other hand</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 2 · One sentence" data-type="drill" data-req="c10">
+<div class="scard"><div data-ex="c10"></div></div>
+</section>
+<section class="step" data-req="m22" data-stage="Stage 2 · One sentence" data-type="teach">
+<div class="scard"><h1 class="t">Comparative forms</h1>
+<table><tr><th>Adjective</th><th>Comparative</th></tr><tr><td>One syllable</td><td>+ <b>-er</b> — cheap<b>er</b>, fast<b>er</b></td></tr><tr><td>Ends in one vowel + one consonant</td><td>double the consonant — bi<b>gg</b>er, ho<b>tt</b>er</td></tr><tr><td>Two syllables ending <i>-y</i></td><td>y → i + -er — eas<b>ier</b></td></tr><tr><td>Three syllables or more</td><td><b>more</b> expensive, <b>less</b> flexible</td></tr><tr><td>Some two-syllable words</td><td>either is correct — <i>simpler</i> or <i>more simple</i></td></tr><tr><td>Irregular</td><td>good → <b>better</b> · bad → <b>worse</b></td></tr></table><div class="eg bad">a more better option · the most biggest difference<span class="n">Never use two comparison markers at once.</span></div>
+<div class="qk" data-qk="m22" data-a="2" data-why="Final &lt;em&gt;y&lt;/em&gt; becomes &lt;em&gt;-ier&lt;/em&gt;, and a word never takes two comparison markers at once."><div class="qk-l">Your turn</div><p class="qk-q">Which one is the correct comparative of <em>busy</em>?</p><div class="qk-os"><button class="qk-o" type="button">more busier</button><button class="qk-o" type="button">busyer</button><button class="qk-o" type="button">busier</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 2 · One sentence" data-type="drill" data-req="c8">
+<div class="scard"><div data-ex="c8"></div></div>
+</section>
+<section class="step" data-req="m24" data-stage="Stage 2 · One sentence" data-type="teach">
+<div class="scard"><h1 class="t">Words for what is the same</h1>
+<p class="lead">A comparison is not only differences. Your introduction has to say what the two subjects <b>share</b>, and you need words for that too.</p><table><tr><th>To say</th><th>Use</th></tr><tr><td>They are equal on this</td><td>An online class is <b>as useful as</b> a classroom one.</td></tr><tr><td>One is less</td><td>An online class is <b>not as expensive as</b> a classroom one.</td></tr><tr><td>Both do it</td><td><b>Both</b> routes lead to the same certificate.</td></tr><tr><td>Add a matching point</td><td><b>Similarly,</b> both require about six hours a week.</td></tr></table><div class="warnb"><span class="l">One word to get right</span>In academic writing it is <b>different from</b>, not <i>different than</i>.<br>✓ Online study is <b>different from</b> classroom study.</div><div class="tipbox"><span class="l">Where you will use this</span>The second sentence of your introduction — the common ground — is built entirely from these.</div>
+<div class="qk" data-qk="m24" data-a="2" data-why="American English says &lt;em&gt;different from&lt;/em&gt;; &lt;em&gt;not as … as&lt;/em&gt; is the pattern for a smaller degree."><div class="qk-l">Your turn</div><p class="qk-q">Which one is correct in American English?</p><div class="qk-os"><button class="qk-o" type="button">Online classes are different than in-person classes.</button><button class="qk-o" type="button">Online classes are not as cheap than in-person classes.</button><button class="qk-o" type="button">Online classes are different from in-person classes.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m25" data-stage="Stage 2 · One sentence" data-type="teach">
+<div class="scard"><h1 class="t">Finish every comparison</h1>
+<p class="lead">One rule covers all four errors: <b>the two sides of <i>than</i> must be the same kind of thing.</b></p><div class="eg bad">Online study is cheaper.<span class="n">Cheaper than <b>what</b>?</span></div><div class="eg bad">The cost of an online class is lower than a language school.<span class="n">A <i>cost</i> compared with a <i>school</i>. Fix: “…than <b>that of</b> a language school.”</span></div><div class="eg bad">Students like online classes more than teachers.<span class="n">More than teachers <b>do</b>? Or more than they like teachers?</span></div><div class="eg bad">This class is better than any class in the school.<span class="n">Better than itself. Fix: “any <b>other</b> class.”</span></div>
+<div class="qk" data-qk="m25" data-a="0" data-why="Both sides of &lt;em&gt;than&lt;/em&gt; must be the same kind of thing: higher than &lt;em&gt;that of&lt;/em&gt; a bus."><div class="qk-l">Your turn</div><p class="qk-q">What is wrong with this one? <em>The price of a train ticket is higher than a bus.</em></p><div class="qk-os"><button class="qk-o" type="button">Price and bus do not match</button><button class="qk-o" type="button">It should say <em>more high</em></button><button class="qk-o" type="button">Nothing — it is finished</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 2 · One sentence" data-type="drill" data-req="c9">
+<div class="scard"><div data-ex="c9"></div></div>
+</section>
+<section class="step" data-req="m27" data-stage="Stage 2 · One sentence" data-type="check">
+<div class="cp"><div class="figbox"></div><div class="big">✓</div><h1>Stage 2 done</h1><p>You can now write one correct sentence that holds both subjects — in three different shapes.</p><div class="you"><b>You can write:</b> the sentence that every paragraph in your essay is built around.</div><div class="qk" data-qk="m27" data-a="0" data-why="A word that can move is an adverb (period or semicolon); one that cannot is a conjunction (comma)."><div class="qk-l">Your turn</div><p class="qk-q">Stage 2 gave you one test for any contrast word. What was it?</p><div class="qk-os"><button class="qk-o" type="button">Can it move into the middle of its clause?</button><button class="qk-o" type="button">Is it longer than three letters?</button><button class="qk-o" type="button">Does it come at the start of the sentence?</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m28" data-stage="Stage 3 · One paragraph" data-type="teach">
+<div class="scard"><div class="figbox"></div><h1 class="t">Grow that sentence into a paragraph</h1>
+<p class="lead">Two sentences around it: one before, one after.</p><p>The sentence you learned in Stage 2 becomes the middle of a four-part paragraph. Nothing about it changes — it just gets a roof and a floor.</p>
+<div class="qk" data-qk="m28" data-a="2" data-why="A comparative paragraph grows from the contrast sentence: one sentence before, one after."><div class="qk-l">Your turn</div><p class="qk-q">Your contrast sentence is ready. What does this screen tell you to add?</p><div class="qk-os"><button class="qk-o" type="button">Three more contrast sentences</button><button class="qk-o" type="button">A new criterion in the same paragraph</button><button class="qk-o" type="button">One sentence before it and one after</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m29" data-stage="Stage 3 · One paragraph" data-type="teach">
+<div class="scard"><h1 class="t">What goes in each box</h1>
+<div class="fig"><svg viewBox="0 0 560 250" width="560" role="img" aria-label="The four boxes of a comparative body paragraph">
+ <rect x="12" y="10" width="536" height="46" rx="9" fill="#f1f3f6" stroke="#8c8f96" stroke-width="2"/>
+ <text x="26" y="32" font-family="Helvetica" font-size="12" font-weight="700" fill="#5c6b82">BOX 1</text>
+ <text x="92" y="32" font-family="Georgia,serif" font-size="14" fill="#2b3446">Name the criterion — not a subject.</text>
+ <text x="92" y="49" font-family="Georgia,serif" font-size="13" font-style="italic" fill="#6b7688">“The first difference is cost.”</text>
+
+ <rect x="12" y="64" width="264" height="60" rx="9" fill="#dceefa" stroke="#2a6f9e" stroke-width="2"/>
+ <text x="26" y="86" font-family="Helvetica" font-size="12" font-weight="700" fill="#1d4f73">BOX 2 · SUBJECT A</text>
+ <text x="26" y="106" font-family="Georgia,serif" font-size="13" fill="#26456b">something concrete about A</text>
+
+ <rect x="284" y="64" width="264" height="60" rx="9" fill="#fbe8cf" stroke="#c2701f" stroke-width="2"/>
+ <text x="298" y="86" font-family="Helvetica" font-size="12" font-weight="700" fill="#8f5013">BOX 3 · SUBJECT B</text>
+ <text x="298" y="106" font-family="Georgia,serif" font-size="13" fill="#7a4a10">the same thing about B</text>
+
+ <text x="280" y="142" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" font-style="italic" fill="#5c6b82">boxes 2 and 3 can be one sentence, joined by “whereas”</text>
+
+ <rect x="12" y="152" width="536" height="62" rx="9" fill="#fbe0dc" stroke="#b3392f" stroke-width="2.4"/>
+ <text x="26" y="174" font-family="Helvetica" font-size="12" font-weight="700" fill="#8e2b23">BOX 4 · SO WHAT?</text>
+ <text x="26" y="194" font-family="Georgia,serif" font-size="13" fill="#7e2620">Who does this difference affect, and why does it matter?</text>
+ <text x="280" y="234" text-anchor="middle" font-family="Helvetica" font-size="12.5" font-weight="700" fill="#b3392f">Box 4 is never optional.</text>
+</svg><p class="figc">Boxes 2 and 3 can sit in one sentence joined by <i>whereas</i>, or in two sentences. Box 4 is never optional.</p></div>
+<div class="qk" data-qk="m29" data-a="1" data-why="Box 4 is never optional; without the &lt;em&gt;so what&lt;/em&gt;, two facts are only a list."><div class="qk-l">Your turn</div><p class="qk-q">True or false: if boxes 2 and 3 are clear, box 4 (<em>so what</em>) can be left out.</p><div class="qk-os"><button class="qk-o" type="button">True</button><button class="qk-o" type="button">False</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m30" data-stage="Stage 3 · One paragraph" data-type="teach">
+<div class="scard"><h1 class="t">Built one box at a time</h1>
+<p><span class="lab">Box 1</span><i>The first difference is cost.</i></p><p class="small" style="margin-top:0">Five words. It names the <b>criterion</b> — not a subject. That is how a reader knows what the paragraph is for.</p><p><span class="lab">Box 2 + 3</span><span class="rA">An online class usually charges a low monthly fee and requires no travel,</span> whereas <span class="rB">an in-person class has to cover a building, an instructor, and printed materials, so the price is normally much higher.</span></p><p class="small" style="margin-top:0">Both subjects in one sentence — Stage 2, used for real.</p><p><span class="lab">Box 4</span><span class="rJ">Online study is therefore the cheaper choice for a student on a tight budget. A low price, however, only matters if the class actually works.</span></p><p class="small" style="margin-top:0">The first sentence says <b>who</b> the difference affects. The second hands the argument forward so your essay does not look like it is losing.</p>
+<div class="qk" data-qk="m30" data-a="0" data-why="Box 3 is subject B on the same criterion; the &lt;em&gt;so what&lt;/em&gt; comes only in box 4."><div class="qk-l">Your turn</div><p class="qk-q">Which comes next? Box 1: <em>Cost is the first difference.</em> Box 2: <em>Online courses are often free or cheap.</em> Box 3: ?</p><div class="qk-os"><button class="qk-o" type="button"><em>In-person classes charge full fees.</em></button><button class="qk-o" type="button"><em>So cost matters to most students.</em></button><button class="qk-o" type="button"><em>Cost is important for parents too.</em></button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m31" data-stage="Stage 3 · One paragraph" data-type="teach">
+<div class="scard"><h1 class="t">The two ways this paragraph fails</h1>
+<div class="eg bad">The paragraph only talks about A.<span class="n">If B never appears, it is a description, not a comparison. <b>Both subjects belong in every body paragraph.</b></span></div><div class="eg bad">Two facts, no interpretation.<span class="n">Facts side by side do not argue. Without box 4, your reader has to do the arguing for you.</span></div>
+<div class="qk" data-qk="m31" data-a="1" data-why="Two facts with no &lt;em&gt;so what&lt;/em&gt; is one failure; describing only A is the other."><div class="qk-l">Your turn</div><p class="qk-q">What is wrong with this paragraph? <em>Online classes cost about $50. In-person classes cost about $500.</em></p><div class="qk-os"><button class="qk-o" type="button">It describes only one subject</button><button class="qk-o" type="button">It gives facts but no interpretation</button><button class="qk-o" type="button">It compares two different criteria</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 3 · One paragraph" data-type="drill" data-req="c11">
+<div class="scard"><div data-ex="c11"></div></div>
+</section>
+<section class="step" data-stage="Stage 3 · One paragraph" data-type="drill" data-req="c12">
+<div class="scard"><div data-ex="c12"></div></div>
+</section>
+<section class="step" data-stage="Stage 3 · One paragraph" data-type="drill" data-req="c13">
+<div class="scard"><div data-ex="c13"></div></div>
+</section>
+<section class="step" data-req="m35" data-stage="Stage 3 · One paragraph" data-type="teach">
+<div class="scard"><h1 class="t">Now you write one</h1>
+<p class="lead">Name your two subjects first. The page then checks that both really appear, that your topic sentence names the criterion instead of a subject, and that your last box interprets rather than reports.</p>
+<div class="qk" data-qk="m35" data-a="2" data-why="One paragraph, one criterion: both subjects, then the &lt;em&gt;so what&lt;/em&gt;."><div class="qk-l">Your turn</div><p class="qk-q">Which of these should <b>not</b> be in the paragraph you are about to write?</p><div class="qk-os"><button class="qk-o" type="button">A sentence about subject A</button><button class="qk-o" type="button">A sentence about subject B</button><button class="qk-o" type="button">A second criterion</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 3 · One paragraph" data-type="write" data-req="c14">
+<div class="scard"><div data-ex="c14"></div></div>
+</section>
+<section class="step" data-req="m37" data-stage="Stage 3 · One paragraph" data-type="check">
+<div class="cp"><div class="figbox"></div><div class="big">✓</div><h1>Stage 3 done</h1><p>You can write one complete comparative paragraph.</p><div class="you"><b>You can write:</b> criterion → A → B → so what.<br><span class='small' style='opacity:.9'>Write it three times and you have the whole middle of an essay.</span></div><div class="qk" data-qk="m37" data-a="0" data-why="Name the criterion, give subject A, give subject B, then say what the difference means."><div class="qk-l">Your turn</div><p class="qk-q">Stage 3: what are the four boxes of a comparative paragraph, in order?</p><div class="qk-os"><button class="qk-o" type="button">criterion · A · B · so what</button><button class="qk-o" type="button">A · B · criterion · so what</button><button class="qk-o" type="button">so what · criterion · A · B</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m38" data-stage="Stage 4 · The thesis" data-type="teach">
+<div class="scard"><div class="figbox"></div><h1 class="t">One sentence decides what the whole essay is for</h1>
+<p class="lead">A comparative thesis has one extra job: <b>it must take a side.</b></p><div class="eg bad">In this essay I will compare online classes and in-person classes.<span class="n">An announcement.</span></div><div class="eg bad">Online classes and in-person classes have many similarities and differences.<span class="n">The sentence every writing center tells you to delete.</span></div><div class="eg bad">Online classes are cheaper and more flexible, but in-person classes have more interaction.<span class="n">Better — all three criteria are here. But it only <b>reports</b>. Which side wins? For whom?</span></div>
+<div class="qk" data-qk="m38" data-a="1" data-why="A thesis is a judgment, not an announcement and not a report that they differ."><div class="qk-l">Your turn</div><p class="qk-q">Which one takes a side?</p><div class="qk-os"><button class="qk-o" type="button">This essay will compare trains and buses.</button><button class="qk-o" type="button">For short trips, buses beat trains.</button><button class="qk-o" type="button">Trains and buses differ in many ways.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m39" data-stage="Stage 4 · The thesis" data-type="teach">
+<div class="scard"><h1 class="t">The one that works</h1>
+<p><span class="rt">Although online classes are cheaper and more flexible than in-person classes,</span> <span class="rJ">in-person classes are more effective for most students, because of the support and interaction they provide.</span></p><p>Four things are happening:</p><ul class="num"><li><b>Concession</b> — you admit the other side wins two criteria.</li><li><b>Judgment</b> — <i>more effective</i>.</li><li><b>Limit</b> — <i>for most students</i>, not all.</li><li><b>Grounds</b> — <i>because…</i></li></ul><div class="tipbox"><span class="l">The formula</span><b>Although</b> [what the other side wins]<b>,</b> [your subject] is <b>more</b> [judgment] for [who]<b>, because</b> [grounds].</div><p class="small">Notice the <i>Although</i> clause uses Stage 2 punctuation: conjunction first, comma at the join.</p>
+<div class="qk" data-qk="m39" data-a="2" data-why="The limit says when or for whom the judgment holds; concession and grounds sit around it."><div class="qk-l">Your turn</div><p class="qk-q"><em>Although buses are cheaper, trains are better for long trips, because they are faster.</em> Which part is the limit?</p><div class="qk-os"><button class="qk-o" type="button"><em>Although buses are cheaper</em></button><button class="qk-o" type="button"><em>because they are faster</em></button><button class="qk-o" type="button"><em>for long trips</em></button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 4 · The thesis" data-type="drill" data-req="c15">
+<div class="scard"><div data-ex="c15"></div></div>
+</section>
+<section class="step" data-stage="Stage 4 · The thesis" data-type="drill" data-req="c16">
+<div class="scard"><div data-ex="c16"></div></div>
+</section>
+<section class="step" data-stage="Stage 4 · The thesis" data-type="drill" data-req="c17">
+<div class="scard"><div data-ex="c17"></div></div>
+</section>
+<section class="step" data-req="m43" data-stage="Stage 4 · The thesis" data-type="check">
+<div class="cp"><div class="figbox"></div><div class="big">✓</div><h1>Stage 4 done</h1><p>You can write a thesis a reader could argue with.</p><div class="you"><b>Test it:</b> if nobody could take the opposite side, you wrote a description, not a thesis.</div><div class="qk" data-qk="m43" data-a="0" data-why="Concession, judgment, limit, grounds: this thesis never admits what buses do well."><div class="qk-l">Your turn</div><p class="qk-q">Stage 4: which of the four parts is missing here? <em>Trains are better than buses for long trips, because they are faster.</em></p><div class="qk-os"><button class="qk-o" type="button">The concession</button><button class="qk-o" type="button">The limit</button><button class="qk-o" type="button">The grounds</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m44" data-stage="Stage 5 · Arranging" data-type="teach">
+<div class="scard"><div class="figbox"></div><h1 class="t">Way 1 — point-by-point</h1>
+<p class="lead">One criterion per paragraph, both subjects inside it. This is your Stage 3 paragraph, written three times.</p><div class="fig"><svg viewBox="0 0 560 210" width="560" role="img" aria-label="Point-by-point structure: one criterion per paragraph, both subjects inside">
+ <text x="12" y="18" font-family="Helvetica" font-size="12" font-weight="700" fill="#5c6b82" letter-spacing=".06em">POINT-BY-POINT</text>
+ <g>
+  <rect x="12" y="28" width="536" height="46" rx="8" fill="#f7f9fc" stroke="#c3ccd9" stroke-width="1.6"/>
+  <text x="26" y="56" font-family="Helvetica" font-size="12.5" font-weight="700" fill="#33415c">¶2 · cost</text>
+  <rect x="150" y="38" width="150" height="26" rx="6" fill="#dceefa" stroke="#2a6f9e"/><text x="225" y="55" text-anchor="middle" font-family="Helvetica" font-size="12" fill="#1d4f73">A</text>
+  <rect x="308" y="38" width="150" height="26" rx="6" fill="#fbe8cf" stroke="#c2701f"/><text x="383" y="55" text-anchor="middle" font-family="Helvetica" font-size="12" fill="#8f5013">B</text>
+  <rect x="466" y="38" width="70" height="26" rx="6" fill="#fbe0dc" stroke="#b3392f"/><text x="501" y="55" text-anchor="middle" font-family="Helvetica" font-size="11" font-weight="700" fill="#8e2b23">so what</text>
+ </g>
+ <g>
+  <rect x="12" y="80" width="536" height="46" rx="8" fill="#f7f9fc" stroke="#c3ccd9" stroke-width="1.6"/>
+  <text x="26" y="108" font-family="Helvetica" font-size="12.5" font-weight="700" fill="#33415c">¶3 · flexibility</text>
+  <rect x="150" y="90" width="150" height="26" rx="6" fill="#dceefa" stroke="#2a6f9e"/><text x="225" y="107" text-anchor="middle" font-family="Helvetica" font-size="12" fill="#1d4f73">A</text>
+  <rect x="308" y="90" width="150" height="26" rx="6" fill="#fbe8cf" stroke="#c2701f"/><text x="383" y="107" text-anchor="middle" font-family="Helvetica" font-size="12" fill="#8f5013">B</text>
+  <rect x="466" y="90" width="70" height="26" rx="6" fill="#fbe0dc" stroke="#b3392f"/><text x="501" y="107" text-anchor="middle" font-family="Helvetica" font-size="11" font-weight="700" fill="#8e2b23">so what</text>
+ </g>
+ <g>
+  <rect x="12" y="132" width="536" height="52" rx="8" fill="#eef4fb" stroke="#2a6f9e" stroke-width="2"/>
+  <text x="26" y="163" font-family="Helvetica" font-size="12.5" font-weight="700" fill="#1d4f73">¶4 · interaction</text>
+  <rect x="150" y="144" width="150" height="28" rx="6" fill="#dceefa" stroke="#2a6f9e"/><text x="225" y="163" text-anchor="middle" font-family="Helvetica" font-size="12" fill="#1d4f73">A</text>
+  <rect x="308" y="144" width="150" height="28" rx="6" fill="#fbe8cf" stroke="#c2701f"/><text x="383" y="163" text-anchor="middle" font-family="Helvetica" font-size="12" fill="#8f5013">B</text>
+  <rect x="466" y="144" width="70" height="28" rx="6" fill="#fbe0dc" stroke="#b3392f"/><text x="501" y="163" text-anchor="middle" font-family="Helvetica" font-size="11" font-weight="700" fill="#8e2b23">so what</text>
+ </g>
+ <text x="280" y="202" text-anchor="middle" font-family="Helvetica" font-size="12" fill="#5c6b82">strongest criterion last · both subjects inside every paragraph</text>
+</svg></div>
+<div class="qk" data-qk="m44" data-a="0" data-why="Point-by-point puts both subjects in each paragraph and saves the strongest criterion for last."><div class="qk-l">Your turn</div><p class="qk-q">Point-by-point, three criteria: cost (weakest), speed, safety (your strongest). Which order?</p><div class="qk-os"><button class="qk-o" type="button">cost, speed, safety</button><button class="qk-o" type="button">safety, speed, cost</button><button class="qk-o" type="button">speed, safety, cost</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m45" data-stage="Stage 5 · Arranging" data-type="teach">
+<div class="scard"><h1 class="t">Way 2 — block</h1>
+<p class="lead">Everything about A, then everything about B. Two subjects give only two blocks, so you need a fourth paragraph that <b>weighs</b> them.</p><div class="fig"><svg viewBox="0 0 560 210" width="560" role="img" aria-label="Block structure with a fourth paragraph that weighs the two subjects">
+ <text x="12" y="18" font-family="Helvetica" font-size="12" font-weight="700" fill="#5c6b82" letter-spacing=".06em">BLOCK</text>
+ <rect x="12" y="28" width="536" height="46" rx="8" fill="#dceefa" stroke="#2a6f9e" stroke-width="2"/>
+ <text x="26" y="48" font-family="Helvetica" font-size="12.5" font-weight="700" fill="#1d4f73">¶2 · everything about A</text>
+ <text x="26" y="66" font-family="Helvetica" font-size="12" fill="#26456b">cost → flexibility → interaction</text>
+ <rect x="12" y="80" width="536" height="46" rx="8" fill="#fbe8cf" stroke="#c2701f" stroke-width="2"/>
+ <text x="26" y="100" font-family="Helvetica" font-size="12.5" font-weight="700" fill="#8f5013">¶3 · everything about B</text>
+ <text x="26" y="118" font-family="Helvetica" font-size="12" fill="#7a4a10">the same three, in the same order</text>
+ <rect x="12" y="132" width="536" height="52" rx="8" fill="#fbe0dc" stroke="#b3392f" stroke-width="2.4"/>
+ <text x="26" y="153" font-family="Helvetica" font-size="12.5" font-weight="700" fill="#8e2b23">¶4 · weigh them</text>
+ <text x="26" y="172" font-family="Helvetica" font-size="12" fill="#7e2620">no new facts — this paragraph is what stops a block essay becoming a list</text>
+ <text x="280" y="202" text-anchor="middle" font-family="Helvetica" font-size="12" fill="#5c6b82">two subjects give only two blocks, so a five-paragraph essay needs the fourth</text>
+</svg></div><div class="tipbox"><span class="l">The bridge sentence</span>Paragraph 3 must point back at paragraph 2.<br>✗ <i>Now I will write about in-person classes.</i><br>✓ <i>In-person classes reverse almost every one of these features.</i></div>
+<div class="qk" data-qk="m45" data-a="1" data-why="A bridge links B to what was just said about A; it never announces the plan."><div class="qk-l">Your turn</div><p class="qk-q">In a block essay, which bridge sentence should open the paragraph about buses (B)?</p><div class="qk-os"><button class="qk-o" type="button"><em>Now I will write about buses.</em></button><button class="qk-o" type="button"><em>Buses reverse almost all of these points.</em></button><button class="qk-o" type="button"><em>Trains, as I said, are fast, safe, and clean.</em></button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m46" data-stage="Stage 5 · Arranging" data-type="teach">
+<div class="scard"><h1 class="t">Which one?</h1>
+<table><tr><th></th><th>Point-by-point</th><th>Block</th></tr><tr><td><b>Easier to</b></td><td>read</td><td>write</td></tr><tr><td><b>Risk</b></td><td>every paragraph sounds the same</td><td>it turns into a list</td></tr><tr><td><b>Fits 5 paragraphs?</b></td><td>yes</td><td>only with the extra weighing paragraph</td></tr></table><div class="tipbox"><span class="l">Default</span>Use <b>point-by-point</b>. Three criteria → three paragraphs, no adaptation needed.</div>
+<div class="qk" data-qk="m46" data-a="0" data-why="Block is easier to write, but point-by-point is easier to read, so it is the default."><div class="qk-l">Your turn</div><p class="qk-q">True or false: point-by-point is the default because it is easier to read.</p><div class="qk-os"><button class="qk-o" type="button">True</button><button class="qk-o" type="button">False</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 5 · Arranging" data-type="drill" data-req="c18">
+<div class="scard"><div data-ex="c18"></div></div>
+</section>
+<section class="step" data-stage="Stage 5 · Arranging" data-type="drill" data-req="c19">
+<div class="scard"><div data-ex="c19"></div></div>
+</section>
+<section class="step" data-stage="Stage 5 · Arranging" data-type="drill" data-req="c20">
+<div class="scard"><div data-ex="c20"></div></div>
+</section>
+<section class="step" data-stage="Stage 5 · Arranging" data-type="drill" data-req="c21">
+<div class="scard"><div data-ex="c21"></div></div>
+</section>
+<section class="step" data-req="m51" data-stage="Stage 5 · Arranging" data-type="check">
+<div class="cp"><div class="figbox"></div><div class="big">✓</div><h1>Stage 5 done</h1><p>You can plan a whole essay on paper before writing it.</p><div class="you"><b>You can plan:</b> a structure chosen on purpose, three criteria in order, strongest last.</div><div class="qk" data-qk="m51" data-a="2" data-why="Block needs a fourth paragraph that weighs the two blocks, or the essay never compares."><div class="qk-l">Your turn</div><p class="qk-q">Stage 5: in a block essay, what does the fourth paragraph do?</p><div class="qk-os"><button class="qk-o" type="button">It adds a third subject</button><button class="qk-o" type="button">It repeats the thesis</button><button class="qk-o" type="button">It weighs A against B</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m52" data-stage="Stage 6 · The whole essay" data-type="teach">
+<div class="scard"><div class="figbox"></div><h1 class="t">The introduction — three moves</h1>
+<ul class="num"><li><b>Context.</b> One sentence that puts both subjects in the same world. A then-and-now contrast works almost every time.</li><li><b>Common ground.</b> One sentence naming what they share — this is what makes the comparison fair.</li><li><b>Thesis.</b> Stage 4, unchanged.</li></ul>
+<div class="qk" data-qk="m52" data-a="0" data-why="Context, common ground, thesis: the thesis is always the last move of the introduction."><div class="qk-l">Your turn</div><p class="qk-q">Which comes next? <em>More students now study online than ever. Both kinds of class teach the same content and lead to the same degree. ___</em></p><div class="qk-os"><button class="qk-o" type="button">The thesis</button><button class="qk-o" type="button">The common ground</button><button class="qk-o" type="button">The first criterion</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m53" data-stage="Stage 6 · The whole essay" data-type="teach">
+<div class="scard"><h1 class="t">The conclusion — three moves</h1>
+<ul class="num"><li><b>Say the judgment again, in new words.</b> Not one phrase copied.</li><li><b>Answer “so what?”</b> Recommend one option <b>for one kind of reader</b>.</li><li><b>Add nothing new.</b> No new example, no new number.</li></ul><div class="tipbox"><span class="l">The most mature move available</span>Refuse the false choice. <i>“For a disciplined, independent learner, online study is a sensible choice; for everyone else, a classroom is worth the extra money.”</i></div>
+<div class="qk" data-qk="m53" data-a="2" data-why="Say the judgment again, answer &lt;em&gt;so what&lt;/em&gt; for one kind of reader, and add nothing new."><div class="qk-l">Your turn</div><p class="qk-q">Which one does <b>not</b> belong in the conclusion?</p><div class="qk-os"><button class="qk-o" type="button">A recommendation for one reader type</button><button class="qk-o" type="button">The judgment said in new words</button><button class="qk-o" type="button">One new piece of evidence</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m54" data-stage="Stage 6 · The whole essay" data-type="teach">
+<div class="scard"><h1 class="t">Say the judgment again, in new words</h1>
+<p class="lead">Move 1 of the conclusion is the hardest sentence in the essay: the same judgment, none of the same phrases. Three ways to do it.</p><table><tr><td><b>Swap the words</b></td><td>more effective for most students → <i>works better for most people</i></td></tr><tr><td><b>Turn the verb into a noun</b></td><td>they support each other → <i>that support</i></td></tr><tr><td><b>Flip it around</b></td><td>in-person classes win on interaction → <i>what a classroom gives you is other people</i></td></tr></table><div class="eg bad">In conclusion, although online classes are cheaper, in-person classes are more effective for most students.<span class="n">Copied. That is the thesis with two words changed.</span></div><div class="eg good">The lower price of online study is real, but for most people the classroom still does the job better.<span class="n">Same judgment, new words.</span></div>
+<div class="qk" data-qk="m54" data-a="2" data-why="Swap the words, turn the verb into a noun, or flip it — same judgment, new words."><div class="qk-l">Your turn</div><p class="qk-q">Thesis: <em>Trains are the better choice for long trips.</em> Which one says it again in new words?</p><div class="qk-os"><button class="qk-o" type="button">Trains are the better choice for long trips.</button><button class="qk-o" type="button">Buses are cheaper than trains.</button><button class="qk-o" type="button">For long journeys, the train wins.</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m55" data-stage="Stage 6 · The whole essay" data-type="teach">
+<div class="scard"><h1 class="t">The balance rule</h1>
+<p class="lead">A comparative task sets <b>two</b> subjects. Treating one of them thinly reads as though you skipped half the task, and a teacher can mark it as an omission.</p><ul class="plain"><li>Same criteria for both.</li><li>Same order, every time.</li><li>Comparable space.</li></ul><div class="tipbox"><span class="l">Quick check</span>Count the words you spent on each subject. Anything outside roughly <b>45 : 55</b> is worth a second look.</div>
+<div class="qk" data-qk="m55" data-a="0" data-why="160:140 is about 53:47; only a split outside roughly 45:55 is worth a second look."><div class="qk-l">Your turn</div><p class="qk-q">Your essay gives online classes 160 words and in-person classes 140 words. Is this balanced — yes or no?</p><div class="qk-os"><button class="qk-o" type="button">Yes</button><button class="qk-o" type="button">No</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Stage 6 · The whole essay" data-type="drill" data-req="c22">
+<div class="scard"><div data-ex="c22"></div></div>
+</section>
+<section class="step" data-stage="Stage 6 · The whole essay" data-type="drill" data-req="c23">
+<div class="scard"><div data-ex="c23"></div></div>
+</section>
+<section class="step" data-req="m58" data-stage="Stage 6 · The whole essay" data-type="teach">
+<div class="scard"><h1 class="t">How the words divide</h1>
+<table><tr><th>Paragraph</th><th class="c">Words</th></tr><tr><td>Paragraph 1 — introduction + thesis</td><td class="c">50–75</td></tr><tr><td>Paragraph 2 — criterion 1</td><td class="c">55–85</td></tr><tr><td>Paragraph 3 — criterion 2</td><td class="c">55–85</td></tr><tr><td>Paragraph 4 — criterion 3, the strongest</td><td class="c">55–85</td></tr><tr><td>Paragraph 5 — conclusion</td><td class="c">40–60</td></tr></table><p class="small">Aim for <b>250–350 words in total</b>. These are ranges, not targets — you will not hit every maximum.</p><div class="tipbox"><span class="l">Forty minutes?</span>5 to plan · 28 to write · 7 to check. Fill the grid from Stage 1 before you write a word.</div>
+<div class="qk" data-qk="m58" data-a="2" data-why="The whole essay is 250–350 words: 50–75 to open, 55–85 per body paragraph, 40–60 to close."><div class="qk-l">Your turn</div><p class="qk-q">Your whole essay is 420 words. What does the guide say?</p><div class="qk-os"><button class="qk-o" type="button">Fine — longer is stronger</button><button class="qk-o" type="button">Too short — add a paragraph</button><button class="qk-o" type="button">Too long — aim for 250–350</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m59" data-stage="Stage 6 · The whole essay" data-type="teach">
+<div class="scard"><h1 class="t">Read one finished essay</h1>
+<p class="lead">Everything you have practiced, in 318 words. Blue is subject A, orange is subject B, red is the judgment.</p><div class="tipbox"><span class="l">One thing to notice</span>Paragraph 4 puts <b>B first</b>. Keeping A→B in every paragraph is the safe default — but a writer may reverse it once, on purpose, to let the winning side speak last.</div><div style="font-size:1.02rem"><p style="margin-top:0"><span class="rb">Ten years ago, taking a language class meant sitting in a classroom; today the same course can be taken on a laptop at the kitchen table.</span> <span class="rG">Both routes lead to the same certificate, but they do not offer the same experience.</span> <span class="rt">Although online classes are cheaper and more flexible than in-person classes, in-person classes are more effective for most students, because of the support and interaction they provide.</span></p><p>The first difference is cost. <span class="rA">An online class usually charges a low monthly fee and requires no travel,</span> whereas <span class="rB">an in-person class has to cover a building, an instructor, and printed materials, so the price is normally much higher.</span> <span class="rJ">Online study is therefore the cheaper choice for a student on a tight budget. A low price, however, only matters if the class actually works.</span></p><p>The second difference is flexibility. <span class="rA">An online class can be watched at midnight or on a bus,</span> while <span class="rB">an in-person class happens once a week at a fixed hour in a fixed room.</span> <span class="rJ">For a student who already works, that difference decides whether the course is possible at all. Flexibility, though, asks something in return: the discipline to use it.</span></p><p>The most important difference is what happens when a student does not understand. <span class="rB">In an in-person class, an instructor sees a confused face and explains the point again in a different way;</span> <span class="rA">online, the same student clicks next and the misunderstanding is never cleared up.</span> <span class="rJ">For most learners this is the difference between finishing a course and abandoning it in week three.</span></p><p><span class="rJ">Cheaper and more convenient are real advantages, and for a disciplined learner online classes are a sensible choice. For everyone else, sitting in a room with a teacher who can see you is still worth the extra money.</span></p></div>
+<div class="qk" data-qk="m59" data-a="0" data-why="Keep A before B as the default; reverse it on purpose when the point reads better that way."><div class="qk-l">Your turn</div><p class="qk-q">In the model essay, paragraph 4 puts in-person classes (B) before online classes (A). Why is this acceptable?</p><div class="qk-os"><button class="qk-o" type="button">A before B is only the default</button><button class="qk-o" type="button">It was a mistake the writer missed</button><button class="qk-o" type="button">Any paragraph may drop one subject</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-req="m60" data-stage="Final test" data-type="teach">
+<div class="scard"><div class="figbox"></div><div class="kick">Final test</div><h1 class="t">Now write your own</h1>
+<p class="lead">Name your two subjects, pick a prompt, fill five boxes. When you press <b>Check my writing</b>, the page tests your structure — the concession, the judgment, whether both subjects appear in every paragraph, the balance between them, comma splices, and whether your conclusion repeats or restates.</p><div class="tipbox"><span class="l">Remember</span>Criterion first in every body paragraph. A before B as your default. Interpretation at the end of each one.</div><p class="small">It cannot judge your ideas. Only you and your teacher can do that.</p>
+<div class="qk" data-qk="m60" data-a="1" data-why="Five minutes of planning first — category, three criteria, thesis — then write, then check."><div class="qk-l">Your turn</div><p class="qk-q">You have 40 minutes for the final test. What do you do first?</p><div class="qk-os"><button class="qk-o" type="button">Start writing the introduction</button><button class="qk-o" type="button">Plan the grid and the thesis</button><button class="qk-o" type="button">Write the strongest paragraph</button></div><div class="qk-fb"></div></div></div>
+</section>
+<section class="step" data-stage="Final test" data-type="write" data-req="c24">
+<div class="scard"><div data-ex="c24"></div></div>
+</section>
+<section class="step" data-req="m62" data-stage="Finished" data-type="check">
+<div class="cp"><div class="figbox"></div><div class="big">🎉</div><h1>You wrote a comparative essay</h1><p>You started by asking whether two things could be compared at all. Every part of what you just wrote is something you practiced on its own first.</p><div class="you"><b>Do it again with a different pair.</b> The shape is yours now — only the subjects change.</div><div class="qk" data-qk="m62" data-a="2" data-why="Similarities and differences are the evidence; the judgment you draw from them is the essay."><div class="qk-l">Your turn</div><p class="qk-q">Which sentence best describes what a comparative essay is?</p><div class="qk-os"><button class="qk-o" type="button">A list of all the similarities and differences</button><button class="qk-o" type="button">A description of the one subject you prefer</button><button class="qk-o" type="button">An argument built on similarities and differences</button></div><div class="qk-fb"></div></div></div>
+</section>
+
+</div>
+<div class="nav"><div class="navin">
+  <button class="nbtn back" type="button">&#8592; Back</button>
+  <span class="navmsg"></span>
+  <button class="skip" type="button">Skip this one</button>
+  <button class="nbtn next" type="button">Next &#8594;</button>
+</div></div>
+<script>
+var DRILLS = {
+
+/* ================= STAGE 1 ================= */
+"c1":{type:"sort",level:1,title:"Can these two be compared?",
+ inst:"Two things can be compared only if they belong to the same category — they are two ways of doing, being, or having the same thing.",
+ cols:["SAME CATEGORY — can be compared","DIFFERENT CATEGORIES — cannot"],
+ items:[{t:"online classes and in-person classes",col:0},
+        {t:"a novel and the film made from it",col:0},
+        {t:"living in a city and living in a small town",col:0},
+        {t:"wind power and solar power",col:0},
+        {t:"my phone and my hometown",col:1},
+        {t:"a bicycle and the color blue",col:1},
+        {t:"a bowl of soup and the month of March",col:1},
+        {t:"the number seven and a rainy afternoon",col:1}],
+ tip:"Try to finish the sentence “Both are ways of …” or “Both are kinds of …”. If you cannot, they do not share a category.",
+ why:"Online and in-person classes are both ways of taking a course; wind and solar are both ways of making electricity. A phone and a hometown share no category, so there is nothing to judge them on."},
+
+"c2":{type:"mcq",level:1,title:"Category, criteria, and “so what?”",
+ qs:[{q:"A student wants to compare working from home with working in an office.<br>Which sentence names the <strong>category</strong> the two subjects share?",
+      opts:[{t:"Working from home is more comfortable."},{t:"Both are ways of doing a job."},{t:"Both are popular with young people."},{t:"Offices have more meetings than homes."}],a:1,
+      why:"A category is the “ways of …” box that both subjects fit inside. Option 1 is a judgment about one subject, option 3 is a fact about popularity, and option 4 is already a comparison — none of them names the shared box."},
+     {q:"A student is comparing wind power and solar power.<br>Which of these is a <strong>criterion</strong> — something you can judge BOTH subjects on?",
+      opts:[{t:"how much I like solar panels"},{t:"why I would never want a turbine near my house"},{t:"reliability in bad weather"},{t:"Solar panels were first sold in the 1950s."}],a:2,
+      why:"Reliability in bad weather can be judged for wind and for solar. Options 1 and 2 are feelings about one subject only, and option 4 is a fact, not a thing to judge."},
+     {q:"Which list contains three <strong>different</strong> criteria?",
+      opts:[{t:"cost · price · what you pay"},{t:"cost · flexibility · interaction"},{t:"cost · expense · how much it costs"},{t:"interaction · contact with the teacher · communication in class"}],a:1,
+      why:"Options 1, 3 and 4 are each one criterion wearing three names. Cost, flexibility and interaction are three separate things to judge, so they give you three separate paragraphs."},
+     {q:"Which sentence answers the question <strong>“so what?”</strong> — an argument, not a list?",
+      opts:[{t:"City life and small-town life are similar in some ways and different in others."},{t:"Cities are bigger than small towns."},{t:"This essay will compare cities and small towns."},{t:"Although a small town is quieter, a city offers far more to a young person starting a career."}],a:3,
+      why:"Only option 4 concludes something from the comparison. Option 1 lists, option 2 states a fact, and option 3 just says what the essay will do."}]},
+
+"c3":{type:"sort",level:1,title:"Fill the grid",
+ inst:"Subject A is cooking at home; subject B is eating out. Put each fact in the column where it belongs.",
+ topic:"Cooking at home (A) vs. eating out (B)",
+ cols:["ONLY cooking at home","BOTH","ONLY eating out"],
+ items:[{t:"You choose exactly how much salt and oil go in.",col:0},
+        {t:"You buy the ingredients yourself.",col:0},
+        {t:"You can share the meal with friends.",col:1},
+        {t:"You can try a dish you have never eaten before.",col:1},
+        {t:"A waiter brings the food to your table.",col:2},
+        {t:"You leave a tip at the end.",col:2}],
+ tip:"Ask of each fact: is it true of A? Is it true of B? Two yeses means the middle column.",
+ why:"The grid shows you where the essay is. The “both” column gives you the common ground for your introduction; the two outside columns give you the differences that each body paragraph will weigh."},
+
+"c4":{type:"label",level:1,title:"Is this a usable criterion?",
+ inst:"A student is comparing taking the bus with driving to work. The first criterion on the list is already <b>cost</b>. Label each new idea.",
+ topic:"Taking the bus vs. driving",
+ roles:["Usable criterion","Fits one subject only","Just “cost” again"],
+ items:[{t:"how long the journey takes",role:"Usable criterion",why:"both the bus and the car can be judged on journey time."},
+        {t:"how much you pay each month",role:"Just “cost” again",why:"paying each month is cost with a new name, so it would give the essay the same paragraph twice."},
+        {t:"how tiring the journey is",role:"Usable criterion",why:"both a bus journey and a drive can be judged on how tired they leave you."},
+        {t:"how hard it is to find a parking space",role:"Fits one subject only",why:"a bus passenger never parks, so the criterion has nothing to say about subject A."},
+        {t:"how much I hate waiting at the bus stop",role:"Fits one subject only",why:"it is a feeling about one subject — there is no bus stop in the driver’s day to judge."},
+        {t:"what it costs you over a year",role:"Just “cost” again",why:"a yearly total is still cost, only measured differently."}]},
+
+/* ================= STAGE 2 ================= */
+"c5":{type:"sort",level:2,title:"Which class is this connector?",
+ inst:"The test: can the word move into the middle of the second clause? If it can, it is an adverb and needs a period or a semicolon before it.",
+ cols:["COORDINATING — comma before it","SUBORDINATING — comma only","ADVERB — period or semicolon"],
+ items:[{t:"but",col:0},
+        {t:"yet",col:0},
+        {t:"whereas",col:1},
+        {t:"although",col:1},
+        {t:"however",col:2},
+        {t:"in contrast",col:2}],
+ tip:"Try it: “In-person classes, however, cost more” works. “In-person classes, whereas, cost more” does not.",
+ why:"But and yet join two full clauses with a comma. Whereas and although make one clause depend on the other, so a comma is enough. However and in contrast are adverbs — they can move, so they cannot hold two clauses together with only a comma."},
+
+"c6":{type:"mcq",level:2,title:"Punctuation — five items",
+ qs:[{q:"Which sentence is punctuated correctly?",
+      opts:[{t:"Driving is faster, but public transport is cheaper."},{t:"Driving is faster, public transport is cheaper."},{t:"Driving is faster, however public transport is cheaper."},{t:"Driving is faster. Whereas public transport is cheaper."}],a:0,
+      why:"But is a coordinating conjunction, so a comma before it is enough. Option 2 has no connector at all (a comma splice), option 3 asks an adverb to do a conjunction’s job (another splice), and option 4 leaves the whereas clause standing alone (a fragment)."},
+     {q:"Which sentence is punctuated correctly?",
+      opts:[{t:"A film tells its story in two hours. Whereas a novel can take a week to read."},{t:"A film tells its story in two hours, whereas a novel can take a week to read."},{t:"A film tells its story in two hours, a novel, whereas, can take a week to read."},{t:"A film tells its story in two hours, a novel can take a week to read."}],a:1,
+      why:"Whereas is a conjunction: one comma, and the clause it introduces must be attached to a main clause. Option 1 is a fragment, option 3 moves whereas into the middle of the clause where only an adverb can go, and option 4 is a comma splice."},
+     {q:"Three of these are correct. Which one is <strong>NOT</strong>?",
+      opts:[{t:"Solar panels produce nothing at night. However, wind turbines can run around the clock."},{t:"Solar panels produce nothing at night; however, wind turbines can run around the clock."},{t:"Solar panels produce nothing at night. Wind turbines, however, can run around the clock."},{t:"Solar panels produce nothing at night, however, wind turbines can run around the clock."}],a:3,
+      why:"An adverb can follow a period, follow a semicolon, or sit in the middle of the second clause — options 1, 2 and 3 are all correct. What it cannot do is hold two full clauses together with commas alone: option 4 is a comma splice."},
+     {q:"Which sentence is punctuated correctly?",
+      opts:[{t:"Shopping in a store lets you touch the product, online shopping however is open all night."},{t:"Shopping in a store lets you touch the product. Online shopping, whereas, is open all night."},{t:"Shopping in a store lets you touch the product. Online shopping, however, is open all night."},{t:"Shopping in a store lets you touch the product. Online shopping, but, is open all night."}],a:2,
+      why:"Only an adverb can move into the middle of its clause, between commas. Whereas and but are conjunctions and have to stand at the join between the clauses, so options 2 and 4 are wrong; option 1 is a comma splice."},
+     {q:"Which sentence is punctuated correctly?",
+      opts:[{t:"Although working from home saves the commute. The office makes teamwork easier."},{t:"Working from home saves the commute, although, the office makes teamwork easier."},{t:"Working from home saves the commute; although the office makes teamwork easier."},{t:"Although working from home saves the commute, the office makes teamwork easier."}],a:3,
+      why:"Although can open the sentence as long as the main clause follows the comma. Option 1 cuts the although clause off with a period (a fragment), option 2 wraps a conjunction in commas as if it were an adverb, and option 3 puts a semicolon in front of a clause that cannot stand alone."}]},
+
+"c7":{type:"order-words",level:2,title:"Build a whereas sentence",topic:"A small town vs. a big city",
+ inst:"Whereas can open the sentence — but only if the main clause follows the comma.",
+ tokens:["Whereas","a","small town","closes its shops at six",",","big cities","keep","their","stores","open","all night","."],
+ alts:[["Whereas","big cities","keep","their","stores","open","all night",",","a","small town","closes its shops at six","."]],
+ why:"The whereas clause and the main clause can come in either order, but the whole sentence needs both of them, joined by one comma.",
+ tip:"Start with Whereas, finish that clause, place the comma, and then build the main clause. Check that big cities goes with keep — a small town would need keeps."},
+
+"c8":{type:"mcq",level:2,title:"Comparative forms — quick-fire",
+ qs:[{q:"A city apartment is usually ____ than a house in a small town.",
+      opts:[{t:"more expensive"},{t:"expensiver"},{t:"more expensiver"},{t:"the most expensive"}],a:0,
+      why:"Expensive has three syllables, so it takes more. Option 4 is a superlative, which cannot be followed by than."},
+     {q:"Chicago is far ____ than my hometown.",
+      opts:[{t:"biger"},{t:"bigger"},{t:"more big"},{t:"more bigger"}],a:1,
+      why:"One syllable ending in a single vowel and a single consonant: double the consonant, then add -er. Never use more and -er together."},
+     {q:"A small town is ____ to walk around than a city.",
+      opts:[{t:"easyer"},{t:"more easier"},{t:"easier"},{t:"easiest"}],a:2,
+      why:"A final -y becomes -ier. Option 2 uses two markers at once, and option 4 is a superlative, which cannot take than."},
+     {q:"The film’s ending is ____ than the book’s.",
+      opts:[{t:"gooder"},{t:"more good"},{t:"more better"},{t:"better"}],a:3,
+      why:"Good is irregular: good → better, just as bad → worse. Better already contains the comparison, so more better doubles it."},
+     {q:"Three of these are correct. Which one is <strong>NOT</strong>?",
+      opts:[{t:"quieter"},{t:"more quiet"},{t:"simpler"},{t:"more simpler"}],a:3,
+      why:"Some two-syllable adjectives take either form: quieter and more quiet are both fine, and so are simpler and more simple. What is never fine is both markers at once."}]},
+
+"c9":{type:"mcq",level:2,title:"Finish the comparison",
+ qs:[{q:"The cost of an online course is lower than ____.",
+      opts:[{t:"a college course"},{t:"of a college course"},{t:"that of a college course"},{t:"than a college course"}],a:2,
+      why:"The two sides of than must be the same kind of thing. A cost can only be lower than another cost, so you need that of a college course — that stands for the cost."},
+     {q:"The sentence “Sara likes films more than her brother” has two meanings. Which sentence says clearly that Sara’s brother likes films <strong>less</strong> than she does?",
+      opts:[{t:"Sara likes films more than her brother does."},{t:"Sara likes films more than she likes her brother."},{t:"Sara likes films more than her brother."},{t:"Sara likes more films than her brother."}],a:0,
+      why:"Adding does tells the reader that the brother is also someone who likes films. Option 2 is clear but means the opposite thing, and options 3 and 4 still leave the reader guessing."},
+     {q:"Which sentence tells the reader exactly what is being compared?",
+      opts:[{t:"Cooking at home is much cheaper."},{t:"Cooking at home is much cheaper than eating out."},{t:"Cooking at home is much cheaper than a restaurant."},{t:"Cooking at home is much cheaper than to eat out."}],a:1,
+      why:"Cheaper than what? Option 1 never says. Option 3 compares an activity with a building, and option 4 changes form halfway through; only option 2 puts the same kind of thing on both sides of than."},
+     {q:"Which sentence is correct?",
+      opts:[{t:"The subway is faster than any form of transport in the city."},{t:"The subway is faster than any other form of transport in the city."},{t:"The subway is faster than any others form of transport in the city."},{t:"The subway is faster than other."}],a:1,
+      why:"The subway is itself a form of transport, so it cannot be faster than any form of transport — it would have to be faster than itself. Any other keeps the subway out of the group it is compared with."}]},
+
+"c10":{type:"mcq",level:2,title:"On the other hand — or on the contrary?",
+ qs:[{q:"Cooking at home is cheaper and usually healthier. ____, eating out saves an hour of work on a busy evening.",
+      opts:[{t:"On the other hand"},{t:"On the contrary"},{t:"Whereas"}],a:0,
+      why:"Both sentences are true, and the second one adds a point for the other side. That is exactly the job of on the other hand. Whereas is a conjunction, so with a comma after it the sentence would be a fragment."},
+     {q:"It is often said that films have killed the novel. ____, sales of printed novels have risen for three years in a row.",
+      opts:[{t:"On the other hand"},{t:"On the contrary"},{t:"Whereas"}],a:1,
+      why:"The first sentence reports a claim the writer thinks is false; the second one says the opposite is true. Use on the contrary only when you are contradicting something like this."},
+     {q:"Driving to work gives you privacy and a seat. ____, the train lets you read or sleep on the way.",
+      opts:[{t:"On the contrary"},{t:"Whereas"},{t:"On the other hand"}],a:2,
+      why:"Two true points, one for each subject — that is on the other hand. On the contrary would tell the reader that privacy and a seat were a false claim."},
+     {q:"Working from home does not mean doing less. ____, most people at home work longer hours than they did in the office.",
+      opts:[{t:"Whereas"},{t:"On the contrary"},{t:"On the other hand"}],a:1,
+      why:"The first sentence denies an idea; the second shows the opposite is true. That is the one place where on the contrary is right. In a comparison essay this is rare — on the other hand is almost always the word you want."}]},
+
+/* ================= STAGE 3 ================= */
+"c11":{type:"order-sentences",level:2,title:"Rebuild a comparative paragraph",topic:"Taking the bus (A) vs. driving (B) — criterion: cost",
+ inst:"Criterion first, then subject A, then subject B, then the “so what?”.",
+ items:[{t:"The clearest difference between the two is the monthly cost.",tag:"Criterion"},
+        {t:"A commuter who takes the bus pays for one monthly pass and nothing else.",tag:"Subject A"},
+        {t:"A driver, by contrast, pays for gas, insurance, parking and repairs.",tag:"Subject B"},
+        {t:"That difference means that for a student on a tight budget, the bus is not just cheaper but the only realistic choice.",tag:"So what?"}],
+ why:"The first sentence names the criterion, not a subject. Then A, then B with by contrast pointing back at A, and finally that difference — which can only be said after both sides are on the table.",
+ tip:"Look for the words that point backward: by contrast needs something before it, and that difference needs two things before it."},
+
+"c12":{type:"label",level:2,title:"Whose sentence is it?",
+ inst:"Subject A is working from home; subject B is the office. Label each sentence by the job it does in the paragraph.",
+ topic:"Working from home (A) vs. the office (B)",
+ roles:["Topic — names the criterion","Subject A","Subject B","Interpretation"],
+ items:[{t:"The second criterion is how easily colleagues can work together.",role:"Topic — names the criterion",why:"it names the thing both subjects will be judged on and says nothing about either subject yet."},
+        {t:"Someone working at home has to book a video call even to ask a quick question.",role:"Subject A",why:"it reports one fact about working from home and nothing about the office."},
+        {t:"In an office, that same question is answered by turning around in a chair.",role:"Subject B",why:"it reports the matching fact about the office; that same question points back to subject A."},
+        {t:"This is why teams that solve problems together still lose something when everyone stays home.",role:"Interpretation",why:"it does not add a new fact — it tells the reader what the two facts mean."},
+        {t:"A home worker can start the day without a single minute of commuting.",role:"Subject A",why:"it is a fact about working from home only."},
+        {t:"In other words, the office wins on teamwork, but only for jobs where teamwork is daily.",role:"Interpretation",why:"in other words signals that the writer is drawing a conclusion, and the sentence weighs the two subjects instead of describing one."}]},
+
+"c13":{type:"gap",level:2,title:"Insert the right connector",topic:"Wind power vs. solar power — criterion: reliability",
+ inst:"The bank has two more words than you need. Watch the punctuation around each gap.",
+ text:"The second criterion is reliability. Solar panels produce nothing after sunset, {0} wind turbines can keep running through the night. {1}, a turbine stops completely on a calm day, and calm days are common in summer. {2} its weaknesses, wind power remains the more reliable of the two, because a calm day is rarer than a night.",
+ bank:["whereas","However","Despite","but","therefore"],
+ answers:[["whereas","but"],["However"],["Despite"]],
+ why:"Gap 1 sits after a comma, so it wants a conjunction — whereas or but. Gap 2 opens a new sentence and is followed by a comma, so it wants an adverb: However. Gap 3 is followed by a noun phrase, its weaknesses, so it wants a preposition: Despite. Therefore fits nowhere — the calm day is not a result of the night, and after a comma it would make a splice.",
+ tip:"Comma before the gap → conjunction. Capital letter and comma after → adverb. A noun straight after → preposition."},
+
+"c14":{type:"writer",level:3,title:"Write your own comparative paragraph",
+ inst:"Name your two subjects, pick ONE criterion, and build the four-box paragraph: criterion · subject A · subject B · so what? Boxes 2 and 3 can be one sentence joined by whereas.",
+ topics:["Cats vs. dogs as a first pet — pick one criterion (cost, time, space …)",
+         "A holiday by the sea vs. a holiday in the mountains — pick one criterion",
+         "Studying early in the morning vs. late at night — pick one criterion",
+         "Paying with cash vs. paying by card — pick one criterion",
+         "Cooking at home vs. eating out — pick one criterion",
+         "Working from home vs. working in an office — pick one criterion",
+         "Wind power vs. solar power — pick one criterion",
+         "Shopping in a store vs. shopping online — pick one criterion"],
+ total:"55–80",
+ boxes:[{label:"Subject A",min:1,max:6,rows:1,nocount:true,hint:"One or two words — the name you will use in the paragraph.",ph:"the bus"},
+        {label:"Subject B",min:1,max:6,rows:1,nocount:true,hint:"One or two words.",ph:"the car"},
+        {label:"1 · Criterion",min:6,max:20,rows:2,hint:"Name the thing you judge BOTH subjects on. Do not name a subject yet.",ph:"The clearest difference between the two is …"},
+        {label:"2 · Subject A",min:10,max:28,rows:2,hint:"One specific fact about subject A on this criterion.",ph:"A commuter who takes the bus …"},
+        {label:"3 · Subject B",min:10,max:28,rows:2,hint:"The matching fact about subject B. Use a connector: whereas, by contrast, however …",ph:"A driver, by contrast, …"},
+        {label:"4 · So what?",min:10,max:28,rows:2,hint:"Do not add a new fact. Say what the two facts mean, and for whom.",ph:"That difference means that for …"}],
+ checks:function(t,n){
+   var r=[];
+   var stem=function(w){w=w.toLowerCase().replace(/[^a-z]/g,"");
+     if(w.length>5&&/ing$/.test(w)){w=w.slice(0,-3);if(/(bb|dd|gg|mm|nn|pp|rr|tt)$/.test(w))w=w.slice(0,-1);}
+     if(/ies$/.test(w)&&w.length>4)w=w.slice(0,-3)+"i";
+     else if(/(ss|us|is)$/.test(w)){}
+     else if(/(sh|ch|x|s)es$/.test(w))w=w.slice(0,-2);
+     else if(/s$/.test(w)&&w.length>3)w=w.slice(0,-1);
+     if(/y$/.test(w)&&w.length>3)w=w.slice(0,-1)+"i";
+     if(/e$/.test(w)&&w.length>3)w=w.slice(0,-1);
+     return w;};
+   var toks=function(s){return s.toLowerCase().replace(/-/g,"").replace(/[^a-z\s]/g," ").split(/\s+/).filter(function(x){return x.length>1;}).map(stem);};
+   var stop={};"a an the in at on of with from to by for and or vs versus taking using going being having doing getting working living learning studying paying out one two thing things way ways my your".split(" ").forEach(function(w){stop[stem(w)]=1;});
+   var sig=function(s){return toks(s).filter(function(x){return !stop[x];});};
+   var A=sig(t[0]),B=sig(t[1]);
+   var dA=A.filter(function(x){return B.indexOf(x)<0;}),dB=B.filter(function(x){return A.indexOf(x)<0;});
+   if(!dA.length)dA=A; if(!dB.length)dB=B;
+   var count=function(s,set){var w=toks(s);return set.reduce(function(m,x){var c=w.filter(function(y){return y===x;}).length;return c>m?c:m;},0);};
+   var filled=t.every(function(s){return s.trim().length>0;});
+   r.push(filled?["p","All four boxes and both subject names are filled."]:["f","Fill every box — the paragraph needs the names, the criterion, both subjects and the so what."]);
+   r.push(n>=55&&n<=80?["p","Length is right: "+n+" words."]:(n<55?["f","Too short: "+n+" words. A four-box paragraph needs 55–80."]:["f","Too long: "+n+" words. Trim to 55–80 — one fact per subject is enough."]));
+   var namesOK=A.length>0&&B.length>0;
+   if(!namesOK){r.push(["f","Name both subjects in the two small boxes first — the checks below use those names."]);}
+   var topic=t[2];
+   var namesA=namesOK&&count(topic,dA)>0, namesB=namesOK&&count(topic,dB)>0;
+   var crit=/\b(criterion|difference|differ|similarity|cost|price|money|speed|time|hours?|flexibility|interaction|convenience|comfort|safety|health|quality|choice|reliability|noise|space|freedom|support|taste|effort|first|second|third|most important|clearest|biggest|another)\b/i.test(topic);
+   if(namesOK&&(namesA||namesB))r.push(["w","Box 1 names a subject. The topic sentence should name only the criterion — “The clearest difference between the two is cost.” Keep the subjects for boxes 2 and 3."]);
+   else r.push(crit?["p","Box 1 names the criterion, not a subject."]:["w","Does box 1 name the thing you judge both subjects on (cost, time, space …)? The reader should know the criterion before meeting either subject."]);
+   if(namesOK){
+     r.push(count(t[3],dA)>0?["p","Box 2 talks about "+t[0].trim()+"."]:["w","Box 2 does not use the name "+t[0].trim()+". Name subject A here — it is the reader’s first meeting with it."]);
+     r.push(count(t[4],dB)>0?["p","Box 3 talks about "+t[1].trim()+"."]:["w","Box 3 does not use the name "+t[1].trim()+". Name subject B here so the reader sees the two side by side."]);
+   }
+   var body=t.slice(3).join(" ");
+   var conn=/\b(whereas|while|although|even though|but|yet|however|in contrast|by contrast|on the other hand|unlike|compared (?:with|to)|similarly|likewise|than|both|neither|as \w+ as|instead)\b/i.test(body);
+   r.push(conn?["p","A comparison connector links the two subjects."]:["w","No connector found. Join or contrast the two sides with whereas, by contrast, however, or than."]);
+   var splice=/,\s*(however|therefore|nevertheless|moreover|furthermore|consequently|in contrast|by contrast|on the other hand|on the contrary|as a result|similarly|likewise)\s+(?!to\b|with\b|of\b|much\b|many\b|hard\b|long\b|far\b|often\b|well\b|little\b|good\b)[a-z]/i.exec(body);
+   r.push(splice?["w","Possible comma splice: “…"+splice[0]+"…”. An adverb like "+splice[1]+" cannot join two clauses with a comma — use a period or a semicolon before it."]:["p","No comma splice found."]);
+   var last=t[5];
+   var interp=/\b(this|that|these|so|means|matters|why|therefore|for (?:a|an|any|anyone|most|the|people|students|families|someone)\b|in other words|which is why|shows|suggests|as a result|in the end|worth|better|worse|wins?|choice)\b/i.test(last);
+   var digit=/\d/.test(last);
+   if(digit)r.push(["w","Box 4 contains a number. Numbers are evidence and belong in boxes 2 and 3 — box 4 should say what they mean."]);
+   else r.push(interp?["p","Box 4 interprets: it says what the facts mean."]:["w","Box 4 looks like another fact. Start it with This means… or That difference matters because… and say who should care."]);
+   return r;
+ }},
+
+/* ================= STAGE 4 ================= */
+"c15":{type:"mcq",level:3,title:"Which thesis is strongest?",
+ qs:[{q:"<strong>Living in a city vs. living in a small town.</strong><br>Which thesis is strongest?",
+      opts:[{t:"This essay will compare living in a city with living in a small town."},{t:"Cities and small towns have many similarities and differences."},{t:"Cities are more expensive, while small towns are quieter."},{t:"Although a small town is cheaper and calmer, a city is the better place for a young graduate, because of the jobs and the people it offers."}],a:3,
+      why:"Option 4 concedes a point, makes a judgment, limits it to one kind of reader, and gives the grounds. Option 1 only announces, option 2 promises a list, and option 3 reports two facts without taking a side."},
+     {q:"<strong>Wind power vs. solar power.</strong><br>Which thesis is strongest?",
+      opts:[{t:"Although solar power is easier to install on a single home, wind power is the better choice for a national grid, because it works at night and in winter."},{t:"Wind and solar power are both renewable and both have advantages and disadvantages."},{t:"I am going to discuss wind power and solar power."},{t:"Wind power works at night, whereas solar power does not."}],a:0,
+      why:"Option 1 has all four parts: concession, judgment, limit (a national grid), grounds. Option 4 is a true fact, but a fact is evidence, not a thesis; options 2 and 3 take no side at all."},
+     {q:"<strong>Reading a novel vs. watching the film.</strong><br>Which thesis is strongest?",
+      opts:[{t:"Films are simply better than novels."},{t:"Although a film can show in two hours what a novel takes a week to tell, the novel is the richer experience for a reader who wants to know the characters, because it can show what they think."},{t:"Novels and films tell the same story in different ways."},{t:"In this essay I will explain the differences between novels and films."}],a:1,
+      why:"Option 1 makes a judgment but concedes nothing, limits nothing and gives no grounds — a reader has no reason to believe it. Option 2 does all four jobs. Options 3 and 4 never take a side."}]},
+
+"c16":{type:"order-words",level:3,title:"Build a comparative thesis",topic:"Restaurant meals vs. cooking at home",
+ inst:"Concession, then judgment, then limit, then grounds.",
+ tokens:["Although","restaurant meals","are quicker",",","cooking at home","is the better choice","for a student on a budget",",","because","it costs","a third of the price","."],
+ alts:[["Although","restaurant meals","are quicker",",","cooking at home","is the better choice",",","because","it costs","a third of the price","for a student on a budget","."],
+       ["Although","restaurant meals","are quicker","for a student on a budget",",","cooking at home","is the better choice",",","because","it costs","a third of the price","."],
+       ["Although","restaurant meals","are quicker",",","cooking at home","for a student on a budget","is the better choice",",","because","it costs","a third of the price","."]],
+ why:"Although gives away the other side’s point first; the main clause then delivers the judgment, the limit says who it is for, and because supplies the grounds.",
+ tip:"Restaurant meals is plural, so it goes with are; cooking at home is singular, so it goes with is. The two commas close the although clause and open the because clause."},
+
+"c17":{type:"order-sentences",level:3,title:"Assemble a thesis from its parts",topic:"Working from home vs. the office",
+ inst:"Four pieces, one sentence. Put them in the order the guide taught: concession · judgment · limit · grounds.",
+ items:[{t:"Although working from home saves the commute and gives more quiet,",tag:"Concession"},
+        {t:"the office is still the better place",tag:"Judgment"},
+        {t:"— at least for someone in the first year of a job —",tag:"Limit"},
+        {t:"because learning a job means watching other people do it.",tag:"Grounds"}],
+ why:"The concession opens with a capital letter and closes with a comma; the judgment carries the main verb; the limit sits between dashes right after the judgment it limits; the grounds end the sentence with the period.",
+ tip:"Only one piece starts with a capital letter and only one ends with a period. The dashes have to be next to the thing they limit."},
+
+/* ================= STAGE 5 ================= */
+"c18":{type:"sort",level:3,title:"Block or point-by-point?",
+ inst:"Each card describes part of an essay plan. Which layout is it?",
+ cols:["POINT-BY-POINT — one criterion per paragraph","BLOCK — all of A, then all of B"],
+ items:[{t:"¶2 the cost of both · ¶3 the flexibility of both · ¶4 the interaction in both",col:0},
+        {t:"¶2 everything about the bus · ¶3 everything about the car · ¶4 weighing the two",col:1},
+        {t:"Every body paragraph opens with a criterion and puts both subjects inside it.",col:0},
+        {t:"The reader meets subject B only after reading everything about subject A.",col:1},
+        {t:"A bridge sentence is needed where the essay turns from the first subject to the second.",col:1},
+        {t:"Paragraph 4 is about one criterion only — the strongest — and both subjects appear in it.",col:0}],
+ tip:"Ask: does each paragraph hold one criterion with both subjects, or one subject with all the criteria?",
+ why:"Point-by-point keeps the comparison visible in every paragraph. Block describes each subject in turn and needs a bridge sentence and a fourth paragraph to do the comparing."},
+
+"c19":{type:"order-sentences",level:3,title:"Three criteria in order — strongest last",topic:"Shopping in a store vs. shopping online",
+ inst:"Put the three topic sentences in the order the guide taught, then add the sentence that follows them.",
+ items:[{t:"The first and least important difference is opening hours: a website never closes, whereas a store does.",tag:"Criterion 1 — weakest"},
+        {t:"A second difference is price, where online sellers usually win by a few percent.",tag:"Criterion 2"},
+        {t:"The most important criterion, however, is whether the customer can try the product before paying, and here the store wins clearly.",tag:"Criterion 3 — strongest"},
+        {t:"That last difference is the one that decides the essay’s judgment.",tag:"Weighing"}],
+ why:"Weakest first, strongest last: the reader finishes on the point that decides the argument. The signposts first, second and most important fix the order, and that last difference can only come after the third.",
+ tip:"The words first, second and most important tell you where each sentence goes."},
+
+"c20":{type:"mcq",level:3,title:"Which structure fits the task?",
+ qs:[{q:"You have three criteria and a reader who will read quickly. Which layout?",
+      opts:[{t:"Point-by-point, strongest criterion last"},{t:"Point-by-point, strongest criterion first"},{t:"Block, with the bridge sentence “Now I will write about…”"},{t:"Block, with no fourth paragraph"}],a:0,
+      why:"Point-by-point is easier to read because the comparison is visible in every paragraph, and the strongest criterion comes last so the reader finishes on it. A block essay without a weighing paragraph is two descriptions, not a comparison."},
+     {q:"A student has written two full paragraphs — one about the bus, one about the car — and now needs a fourth paragraph. Which structure is she using, and what must the fourth paragraph do?",
+      opts:[{t:"Point-by-point — the fourth paragraph adds a third criterion"},{t:"Block — the fourth paragraph describes a third subject"},{t:"Block — the fourth paragraph weighs the two subjects against each other"},{t:"Point-by-point — the fourth paragraph repeats the thesis"}],a:2,
+      why:"One paragraph per subject is the block layout. Its fourth paragraph is where the comparing finally happens — without it the reader has two descriptions and no argument."},
+     {q:"Which sentence explains why point-by-point is the default choice?",
+      opts:[{t:"It is easier to write because you describe one subject at a time."},{t:"The reader sees both subjects judged on the same criterion in the same paragraph, so the comparison is never out of sight."},{t:"It needs no topic sentences."},{t:"It is always shorter."}],a:1,
+      why:"Point-by-point is easier to read; block is easier to write. Option 1 describes the advantage of block, and options 3 and 4 are simply untrue."}]},
+
+"c21":{type:"mcq",level:3,title:"Find the missing bridge sentence",
+ qs:[{q:"<strong>Block essay.</strong> Paragraph 2 has described cooking at home: cheap, healthy, and slow. Paragraph 3 must turn to eating out.<br>Which sentence opens paragraph 3 best?",
+      opts:[{t:"Now I will write about eating out."},{t:"Eating out reverses almost every one of these features: it is fast, it is expensive, and the salt is out of your hands."},{t:"Eating out is also popular with students."},{t:"There are many similarities and differences between cooking and eating out."}],a:1,
+      why:"A bridge sentence names the second subject and ties it to the criteria the reader has just seen. Option 1 talks about the essay instead of the subject, option 3 ignores the criteria, and option 4 promises a list."},
+     {q:"<strong>Block essay.</strong> Paragraph 2 has described taking the bus: cheap, no parking, but a timetable and a lot of waiting. Paragraph 3 must turn to driving.<br>Which sentence opens paragraph 3 best?",
+      opts:[{t:"Driving is the second subject of this essay."},{t:"Cars are very useful in the modern world."},{t:"Secondly, driving."},{t:"A car turns each of these points around: no timetable and no waiting, but a monthly bill three times higher."}],a:3,
+      why:"Option 4 picks up each of these points from the bus paragraph and shows how the car reverses them. Option 1 announces, option 2 is a general remark with no link to the criteria, and option 3 is a fragment."}]},
+
+/* ================= STAGE 6 ================= */
+"c22":{type:"order-sentences",level:4,title:"Rebuild a whole comparative essay",topic:"Reading the novel vs. watching the film",
+ inst:"Five paragraphs, shortened. Introduction, three criteria with the strongest last, conclusion.",
+ items:[{t:"Almost every popular novel now becomes a film, and readers argue about which version is better. Both tell the same story, and both can move an audience. Although a film delivers that story in two hours, the novel is the richer experience for anyone who wants to know the characters, because it can show what they think.",tag:"Introduction"},
+        {t:"The first difference is time. A film asks for two hours; a novel asks for a week of evenings. For a busy reader that is a real cost, and it is the strongest argument for the screen.",tag:"Criterion 1"},
+        {t:"A second difference is what the audience sees. The film shows a real street and a real face, whereas the novel hands the reader a few words and lets them build the rest. That work is tiring, but the world the reader builds is their own.",tag:"Criterion 2"},
+        {t:"The most important difference, however, is thought. A camera can only show a character’s face; a novel can show what is behind it. This is the one thing a film cannot copy, and it is why the novel wins.",tag:"Criterion 3 — strongest"},
+        {t:"So the two-hour film is not a cheaper novel; it is a different thing. For a reader who wants to know the people in the story, the book remains the better choice, and the film is best watched afterward.",tag:"Conclusion"}],
+ why:"Context, common ground and thesis open the essay; first, second and most important carry the three criteria in rising order; So and the judgment in new words close it — without a single new example.",
+ tip:"The introduction ends with the thesis. The criteria are numbered. The conclusion starts by drawing everything together with So."},
+
+"c23":{type:"sort",level:4,title:"Both and neither — keep it or rewrite it?",
+ inst:"Both … and, neither … nor. Both … not is grammatical but unclear — does it mean neither, or only one of them? The guide’s rule: rewrite it with neither.",
+ cols:["CORRECT — keep it","WRONG OR UNCLEAR — rewrite it"],
+ items:[{t:"Both the bus and the car cost money every month.",col:0},
+        {t:"Neither the bus nor the car is free.",col:0},
+        {t:"They both were expensive.",col:0},
+        {t:"Both of the classes meet twice a week.",col:0},
+        {t:"Both the bus and the car are not free.",col:1},
+        {t:"Neither the bus or the car is free.",col:1},
+        {t:"Neither of them are not free.",col:1},
+        {t:"The both classes meet twice a week.",col:1}],
+ tip:"Both goes with and; neither goes with nor. Both can sit before or after the verb — they both were and they were both are equally correct.",
+ why:"Neither … or, a double negative (neither … not), and an article in front of both are all wrong. Both … are not is grammatical but leaves the reader unsure whether it means neither or just one, so the guide says rewrite it as neither … nor."},
+
+"c24":{type:"writer",level:4,title:"The full comparative essay",
+ inst:"Five paragraphs, 250–350 words. Introduction with a concession thesis; three criteria, strongest last, both subjects in every one; a conclusion that says the judgment again in new words and adds nothing new.",
+ topics:["Paper books vs. e-books",
+         "Living with your parents vs. living alone",
+         "Team sports vs. training alone",
+         "Learning a language in a class vs. learning it from an app",
+         "Online classes vs. in-person classes",
+         "Living in a city vs. living in a small town",
+         "Taking the bus vs. driving",
+         "Cooking at home vs. eating out"],
+ total:"250–350",
+ boxes:[{label:"Subject A",min:1,max:6,rows:1,nocount:true,hint:"The name you will use for subject A throughout.",ph:"paper books"},
+        {label:"Subject B",min:1,max:6,rows:1,nocount:true,hint:"The name you will use for subject B throughout.",ph:"e-books"},
+        {label:"¶1 · Introduction",min:50,max:75,rows:4,hint:"Context · common ground · thesis (concession, judgment, limit, grounds).",ph:"Almost everyone who reads now has a choice between …"},
+        {label:"¶2 · Criterion 1",min:55,max:85,rows:5,hint:"Weakest criterion. Name it, then A, then B, then so what.",ph:"The first difference is …"},
+        {label:"¶3 · Criterion 2",min:55,max:85,rows:5,hint:"Same shape as ¶2. Both subjects inside.",ph:"A second difference is …"},
+        {label:"¶4 · Criterion 3",min:55,max:85,rows:5,hint:"Strongest criterion — the one that decides the judgment.",ph:"The most important difference, however, is …"},
+        {label:"¶5 · Conclusion",min:40,max:60,rows:4,hint:"Judgment again in new words · recommend for ONE kind of reader · nothing new.",ph:"So …"}],
+ checks:function(t,n){
+   var r=[];
+   var stem=function(w){w=w.toLowerCase().replace(/[^a-z]/g,"");
+     if(w.length>5&&/ing$/.test(w)){w=w.slice(0,-3);if(/(bb|dd|gg|mm|nn|pp|rr|tt)$/.test(w))w=w.slice(0,-1);}
+     if(/ies$/.test(w)&&w.length>4)w=w.slice(0,-3)+"i";
+     else if(/(ss|us|is)$/.test(w)){}
+     else if(/(sh|ch|x|s)es$/.test(w))w=w.slice(0,-2);
+     else if(/s$/.test(w)&&w.length>3)w=w.slice(0,-1);
+     if(/y$/.test(w)&&w.length>3)w=w.slice(0,-1)+"i";
+     if(/e$/.test(w)&&w.length>3)w=w.slice(0,-1);
+     return w;};
+   var toks=function(s){return s.toLowerCase().replace(/-/g,"").replace(/[^a-z\s]/g," ").split(/\s+/).filter(function(x){return x.length>1;}).map(stem);};
+   var stop={};"a an the in at on of with from to by for and or vs versus taking using going being having doing getting working living learning studying paying out one two thing things way ways my your it".split(" ").forEach(function(w){stop[stem(w)]=1;});
+   var sig=function(s){return toks(s).filter(function(x){return !stop[x];});};
+   var wc=function(s){var m=s.trim().match(/\S+/g);return m?m.length:0;};
+   var A=sig(t[0]),B=sig(t[1]);
+   var dA=A.filter(function(x){return B.indexOf(x)<0;}),dB=B.filter(function(x){return A.indexOf(x)<0;});
+   if(!dA.length)dA=A; if(!dB.length)dB=B;
+   var count=function(s,set){var w=toks(s);return set.reduce(function(m,x){var c=w.filter(function(y){return y===x;}).length;return c>m?c:m;},0);};
+   var nameA=t[0].trim()||"subject A", nameB=t[1].trim()||"subject B";
+   var intro=t[2], body=[t[3],t[4],t[5]], concl=t[6], essay=t.slice(2).join("\n");
+   var filled=t.every(function(s){return s.trim().length>0;});
+   r.push(filled?["p","All five paragraphs and both subject names are filled."]:["f","Every box must be filled: two names, five paragraphs."]);
+   r.push(n>=250&&n<=350?["p","Total length is right: "+n+" words."]:(n<250?["f","Too short: "+n+" words. The essay needs 250–350."]:["f","Too long: "+n+" words. Cut to 250–350 — one fact per subject per criterion is enough."]));
+   var lens=[[intro,50,75,"¶1"],[body[0],55,85,"¶2"],[body[1],55,85,"¶3"],[body[2],55,85,"¶4"],[concl,40,60,"¶5"]];
+   var off=lens.filter(function(x){var c=wc(x[0]);return c<x[1]||c>x[2];}).map(function(x){return x[3]+" ("+wc(x[0])+", wants "+x[1]+"–"+x[2]+")";});
+   r.push(off.length?["w","Paragraph length outside the guide: "+off.join(", ")+"."]:["p","Every paragraph is within its word range."]);
+   var conc=/\b(although|even though|whereas|while|despite|in spite of|admittedly|it is true that|but|yet)\b/i.test(intro);
+   r.push(conc?["p","The introduction concedes something to the other side."]:["f","No concession in the introduction. The thesis should give the losing side its due first: Although A is …, B is …"]);
+   var judg=/\b(better|best|worse|worst|should|wins?|outweighs?|preferable|superior|stronger|weaker|more (?:effective|useful|valuable|rewarding|sensible|practical)|the (?:right|wrong|smarter|wiser|safer|sensible|realistic) choice|\w+er than|more \w+ than|less \w+ than)\b/i.test(intro);
+   r.push(judg?["p","The thesis takes a side."]:["w","No judgment found in the introduction. The thesis must say which subject is better — and for whom."]);
+   if(/\b(similarities and differences|differences and similarities|advantages and disadvantages)\b/i.test(essay))r.push(["w","“Similarities and differences” promises a list, not an argument. Say what you conclude from them instead."]);
+   else r.push(["p","No list-promise like “similarities and differences”."]);
+   var namesOK=A.length>0&&B.length>0;
+   if(!namesOK)r.push(["f","Name both subjects in the two small boxes — the checks below use those names."]);
+   else{
+     var missing=[],none=0;
+     body.forEach(function(p,i){var a=count(p,dA)>0,b=count(p,dB)>0;var tag="¶"+(i+2);
+       if(!a&&!b){none++;r.push(["w",tag+" names neither subject. A comparative paragraph must put "+nameA+" and "+nameB+" side by side — use the names you gave above."]);}
+       else if(!a)missing.push(tag+" never names "+nameA);
+       else if(!b)missing.push(tag+" never names "+nameB);});
+     if(missing.length)r.push(["w",missing.join("; ")+". Fine in a block layout, but in point-by-point every paragraph should hold both subjects."]);
+     else if(!none)r.push(["p","Every body paragraph names both subjects."]);
+     var cA=count(essay,dA),cB=count(essay,dB);
+     if(cA+cB===0)r.push(["w","Neither subject is named anywhere in the essay. Use the names you gave above, so the reader always knows which side you mean."]);
+     else if(cA===0)r.push(["w",nameA+" is never named in the essay — use the name you gave above."]);
+     else if(cB===0)r.push(["w",nameB+" is never named in the essay — use the name you gave above."]);
+     else{var share=Math.min(cA,cB)/(cA+cB);
+       r.push(share>=0.35?["p","Balance looks fair: "+nameA+" named "+cA+" times, "+nameB+" "+cB+"."]:["w","Unbalanced: "+nameA+" named "+cA+" times against "+cB+" for "+nameB+". Outside roughly 45:55 is worth a second look — give the quieter subject the same space."]);}
+   }
+   var sigs=[/\bwhereas\b/i,/\bwhile\b/i,/\b(although|even though)\b/i,/\bhowever\b/i,/\b(in|by) contrast\b/i,/\bon the other hand\b/i,/\b(similarly|likewise)\b/i,/\bunlike\b/i,/\bcompared (?:with|to)\b/i,/\b(despite|in spite of)\b/i,/\bboth\b/i,/\bneither\b/i,/\bthan\b/i,/\bas \w+ as\b/i,/\bbut\b/i,/\byet\b/i,/\binstead\b/i,/\bdiffer(?:s|ent|ence|ences)?\b/i];
+   var found=sigs.filter(function(x){return x.test(essay);}).length;
+   r.push(found>=4?["p",found+" different comparison signals used."]:["w","Only "+found+" different comparison signal(s). Use at least four: whereas, however, on the other hand, unlike, both, than, as … as …"]);
+   var splice=/,\s*(however|therefore|nevertheless|moreover|furthermore|consequently|in contrast|by contrast|on the other hand|on the contrary|as a result|similarly|likewise)\s+(?!to\b|with\b|of\b|much\b|many\b|hard\b|long\b|far\b|often\b|well\b|little\b|good\b)[a-z]/i.exec(essay);
+   r.push(splice?["w","Possible comma splice: “…"+splice[0]+"…”. An adverb like "+splice[1]+" cannot join two clauses with a comma — put a period or a semicolon before it."]:["p","No comma splice found."]);
+   if(/\bon the contrary\b/i.test(essay))r.push(["w","On the contrary contradicts a false claim. For a second true point about the other subject, you almost always want on the other hand."]);
+   if(/\d/.test(concl))r.push(["w","The conclusion contains a number. Numbers are evidence, and evidence belongs in the body — the conclusion adds nothing new."]);
+   else if(/\b(for example|for instance)\b/i.test(concl))r.push(["w","The conclusion seems to introduce an example. Say the judgment again in new words and recommend — add nothing new."]);
+   else r.push(["p","The conclusion adds no new evidence."]);
+   var grams=function(s){var w=s.toLowerCase().replace(/[^a-z\s]/g," ").split(/\s+/).filter(Boolean);var g=[];for(var i=0;i+5<=w.length;i++)g.push(w.slice(i,i+5).join(" "));return g;};
+   var gi=grams(intro),gc=grams(concl),dup=null;
+   for(var i=0;i<gc.length&&!dup;i++)if(gi.indexOf(gc[i])>=0)dup=gc[i];
+   r.push(dup?["w","The conclusion repeats five words from the introduction: “"+dup+"”. Say the judgment again in new words — swap the words, turn the verb into a noun, or flip it around."]:["p","The conclusion restates the judgment in new words."]);
+   return r;
+ }}
+
+};
+</script>
+
+<style>
+/* ============ PRACTICE ENGINE ============ */
+.drill{border:1px solid var(--line); border-radius:10px; margin:1.1em 0; overflow:hidden; background:#fff}
+.drill-top{display:flex; align-items:center; gap:9px; padding:9px 14px; background:var(--wash,#f4f5f8); border-bottom:1px solid var(--line); flex-wrap:wrap}
+.drill-n{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.72rem; font-weight:700; letter-spacing:.1em; color:var(--muted,#5f6a7d)}
+.drill-name{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.92rem; font-weight:700; flex:1 1 220px; margin:0}
+.lvl{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.63rem; font-weight:700; letter-spacing:.08em;
+  text-transform:uppercase; padding:3px 8px; border-radius:99px; white-space:nowrap}
+.lvl1{background:#e8f4ea; color:#2f6b3d; border:1px solid #bcdcc3}
+.lvl2{background:#e7f0fa; color:#2b5180; border:1px solid #b8cee6}
+.lvl3{background:#f6ecdc; color:#8a5a15; border:1px solid #e3caa0}
+.lvl4{background:#f2e9f8; color:#5b3a86; border:1px solid #d3c0e6}
+.drill-body{padding:13px 15px}
+.drill-inst{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.86rem; color:var(--ink-soft,#4b5670); margin:0 0 .8em}
+.drill-topic{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.74rem; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--muted,#5f6a7d); margin:0 0 .7em}
+.drill-topic b{color:var(--ink-soft,#4b5670)}
+
+.bank,.line{display:flex; flex-wrap:wrap; gap:6px; min-height:44px; padding:8px; border-radius:8px}
+.bank{background:#f4f4f2; border:1px dashed #cfcfc9}
+.line{background:#fff; border:2px solid var(--line); margin-top:9px}
+.line.empty::before,.bank.empty::before{content:attr(data-ph); font-family:"Helvetica Neue",Arial,sans-serif;
+  font-size:.8rem; color:#6b7280; align-self:center; padding-left:4px}
+.tile{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.9rem; padding:10px 12px; border-radius:6px;
+  border:1px solid #c8c8cd; background:#fff; cursor:pointer; user-select:none; line-height:1.25;
+  overflow-wrap:anywhere; transition:transform .08s, background .12s}
+.tile:hover{background:#eef3f8; border-color:#8fb3d0}
+.col:focus-visible,.card:focus-visible,.gap:focus-visible,.tile:focus-visible,.opt:focus-visible,
+.role:focus-visible,.btn:focus-visible,.arrow:focus-visible{outline:3px solid #1b5fa8; outline-offset:2px}
+.tile:active{transform:translateY(1px)}
+.tile.punc{padding:10px 8px; background:#f0efe9; font-weight:700}
+.tile.good{background:#e6f4ea; border-color:#5aa06f; color:#22603a}
+.tile.good::after{content:" \2713"; font-weight:700}
+.tile.bad{background:#fbe9e7; border-color:#d4796f; color:#8e2f28; text-decoration:line-through}
+.tile.bad::after{content:" \2717"; font-weight:700; text-decoration:none; display:inline-block}
+
+.cards{display:flex; flex-direction:column; gap:7px}
+.card{display:flex; gap:9px; align-items:flex-start; border:1px solid #d3d3d8; border-radius:8px;
+  padding:8px 10px; background:#fff; cursor:pointer; font-size:.93rem}
+.card:hover{background:#f4f8fb; border-color:#8fb3d0}
+.card .cn{font-family:"Helvetica Neue",Arial,sans-serif; font-weight:700; font-size:.78rem; color:#fff;
+  background:var(--muted,#5f6a7d); border-radius:50%; min-width:21px; height:21px; line-height:21px; text-align:center; flex:0 0 auto}
+.card.placed .cn{background:var(--brand)}
+.card.good{background:#eef8f1; border-color:#5aa06f}
+.card.good .cn::after{content:"\2713"}
+.card.bad{background:#fdefee; border-color:#d4796f}
+.card.bad .cn::after{content:"\2717"}
+.card .arrows{margin-left:auto; display:flex; gap:3px; flex:0 0 auto}
+.arrow{border:1px solid #b6b6bd; background:#fff; border-radius:5px; width:34px; height:34px; cursor:pointer;
+  font-size:.8rem; line-height:1; color:#41485c}
+.arrow:hover{background:#eee}
+
+.roles{display:flex; flex-wrap:wrap; gap:5px; margin-top:6px}
+.role{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.75rem; padding:9px 12px; border-radius:5px;
+  border:1px solid #c8c8cd; background:#fff; cursor:pointer}
+.role:hover{background:#eef3f8}
+.role.sel{background:var(--ink); color:#fff; border-color:var(--ink)}
+.item{border:1px solid #e0e0e4; border-radius:8px; padding:9px 11px; margin-bottom:8px; background:#fff}
+.item.good{background:#f2faf4; border-color:#8ec49f}
+.item.bad{background:#fdf2f1; border-color:#e0a49d}
+.item.good>.txt::before{content:"\2713 "; color:#2f7d4f; font-weight:800}
+.item.bad>.txt::before{content:"\2717 "; color:#b3392f; font-weight:800}
+.item .txt{font-size:.94rem}
+
+.cols{display:grid; gap:10px; margin-top:10px}
+.col{border:2px dashed #cfcfd4; border-radius:9px; padding:8px; min-height:76px}
+.col h5{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.76rem; letter-spacing:.06em; text-transform:uppercase;
+  margin:0 0 7px; color:var(--ink-soft,#4b5670); text-align:center}
+.col.act{border-color:var(--brand); background:#f7fafd}
+.col .tile{display:block; width:100%; text-align:left; margin-bottom:5px}
+
+.qa{margin-bottom:14px}
+.qa .qtext{font-size:.96rem; margin:0 0 .5em; font-weight:600}
+.opt{display:block; width:100%; text-align:left; font-family:inherit; font-size:.93rem; padding:11px 13px;
+  border:1px solid #d3d3d8; border-radius:7px; background:#fff; cursor:pointer; margin-bottom:6px; line-height:1.4}
+.opt:hover{background:#f4f8fb; border-color:#8fb3d0}
+.opt.sel{border-color:var(--ink); box-shadow:inset 0 0 0 1px var(--ink)}
+.opt.good{background:#eef8f1; border-color:#5aa06f}
+.opt.good::after{content:" \2713"; font-weight:800; color:#1f5c37}
+.opt.bad{background:#fdefee; border-color:#d4796f}
+.opt.bad::after{content:" \2717"; font-weight:800; color:#8e2f28}
+.why{font-size:.83rem; color:var(--ink-soft,#4b5670); margin:.35em 0 0 4px; padding-left:10px; border-left:2px solid var(--line)}
+
+.gaptext{font-size:1rem; line-height:2.2}
+.gap{display:inline-block; min-width:92px; border-bottom:2px solid var(--brand); text-align:center;
+  cursor:pointer; padding:7px 9px; font-family:"Helvetica Neue",Arial,sans-serif; font-size:.88rem; color:var(--brand)}
+.gap.act{background:#fff6dd; border-bottom-color:#c08b1f}
+.gap.good{background:#e6f4ea; border-bottom-color:#2f7d4f; color:#22603a}
+.gap.good::after{content:"\2713"; font-size:.8em; margin-left:3px}
+.gap.bad{background:#fbe9e7; border-bottom-color:#b3392f; color:#8e2f28}
+.gap.bad::after{content:"\2717"; font-size:.8em; margin-left:3px}
+.gap.empty::before{content:"______"; color:#8a8a93}
+
+.btns{display:flex; flex-wrap:wrap; gap:7px; margin-top:12px}
+.btn{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.86rem; font-weight:600; padding:11px 18px;
+  border-radius:7px; border:1px solid var(--ink); background:var(--ink); color:#fff; cursor:pointer}
+.btn:hover{opacity:.87}
+.btn.sec{background:#fff; color:var(--ink-soft,#4b5670); border-color:#c8c8cd}
+.btn.sec:hover{background:#f2f2f0}
+.fb{margin-top:11px; padding:10px 13px; border-radius:8px; font-size:.9rem; display:none}
+.fb.on{display:block}
+.fb.win{background:#eef8f1; border:1px solid #8ec49f; color:#1f5c37}
+.fb.part{background:#fdf6e6; border:1px solid #e0c483; color:#7a5510}
+.fb.lose{background:#fdefee; border:1px solid #e0a49d; color:#8e2f28}
+.fb b{display:block; margin-bottom:.2em}
+
+/* writer */
+.writer label{display:block; font-family:"Helvetica Neue",Arial,sans-serif; font-size:.8rem; font-weight:700;
+  margin:12px 0 3px; color:var(--ink-soft,#4b5670)}
+.writer .hint{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.78rem; color:var(--muted,#5f6a7d); margin:0 0 5px}
+.writer textarea{width:100%; border:1px solid #cfcfd4; border-radius:8px; padding:9px 11px; font-family:inherit;
+  font-size:.95rem; line-height:1.55; resize:vertical; background:#fffdf8}
+.writer textarea:focus{outline:2px solid #b9cfe4; border-color:#8fb3d0}
+.wc{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.75rem; color:var(--muted,#5f6a7d); text-align:right; margin-top:2px}
+.wc.ok{color:#2f7d4f; font-weight:700}
+.wc.over{color:#b3392f; font-weight:700}
+.picker{display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 4px}
+.chk{list-style:none; padding:0; margin:.6em 0 0}
+.chk li{font-family:"Helvetica Neue",Arial,sans-serif; font-size:.86rem; padding:5px 0 5px 26px; position:relative; border-bottom:1px dotted var(--line)}
+.chk li::before{position:absolute; left:2px; font-weight:700}
+.chk li.p::before{content:"\2713"; color:#2f7d4f}
+.chk li.w::before{content:"!"; color:#c08b1f}
+.chk li.f::before{content:"\2717"; color:#b3392f}
+.out{white-space:pre-wrap; background:#fbfaf6; border:1px solid var(--line); border-radius:8px; padding:14px 16px;
+  margin-top:11px; font-size:.97rem; line-height:1.6; display:none}
+.out.on{display:block}
+.printonly{display:none}
+
+@media (max-width:760px){ .cols{grid-template-columns:1fr !important} }
+@media print{
+  .btns,.fb,.arrows{display:none !important}
+  .drill{page-break-inside:avoid; break-inside:avoid}
+  .line{min-height:58px}
+  .col{min-height:58px}
+  .cards:empty{min-height:64px; border:1px dashed #b9bcc6; border-radius:8px}
+  .card .cn{background:#fff !important; color:#000 !important; border:1px solid #888}
+  .tile{background:#fff !important}
+  .out{display:none !important}
+  .writer textarea{min-height:70px; background:#fff}
+  .roles .role{border-style:solid}
+  .noprint{display:none !important}
+  .printonly{display:block !important}
+}
+</style>
+
+<script>
+(function(){
+"use strict";
+var DONE={}, TOTAL=0;
+var WINS=["<b>Correct.</b>","<b>Yes — that is it.</b>","<b>Right.</b>","<b>Nice one.</b>",
+          "<b>Correct — well spotted.</b>","<b>That is the one.</b>"];
+var WI=0;
+function winTag(){ var t=WINS[WI%WINS.length]; WI++; return t; }
+
+function el(t,c,x){var e=document.createElement(t); if(c)e.className=c; if(x!=null)e.textContent=x; return e;}
+function shuffle(a){a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t;} return a;}
+function reshuffle(a){ if(a.length<2) return a.slice();
+  var s=shuffle(a),n=0; while(n<12 && s.join("|")===a.join("|")){s=shuffle(a);n++;} return s; }
+function joinTok(t){ var s="";
+  for(var i=0;i<t.length;i++){ var w=t[i];
+    if(i>0 && !/^[.,;:!?’”)]/.test(w) && !/[“(‘]$/.test(t[i-1])) s+=" ";
+    s+=w; }
+  return s; }
+function mark(d,st,html){
+  var f=d.querySelector(".fb");
+  f.className="fb on "+st; f.innerHTML=html;
+  if(st==="lose"){ d._tries=(d._tries||0)+1;
+    try{document.dispatchEvent(new CustomEvent("drill:miss",{detail:{}}));}catch(err){} }
+}
+function tries(d){ return d._tries||0; }
+function keyable(n,fn){ n.tabIndex=0; n.setAttribute("role","button");
+  n.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" "||e.key==="Spacebar"){e.preventDefault(); fn(e);} }); }
+function scoreIt(id,ok){ if(ok && !DONE[id]){DONE[id]=1; upd();} }
+function upd(){ try{document.dispatchEvent(new CustomEvent("drill:update",{detail:{map:DONE,total:TOTAL}}));}catch(err){} }
+function btnRow(d,defs){
+  var b=el("div","btns");
+  defs.forEach(function(x){ var k=el("button","btn"+(x.s?" sec":""),x.t); k.type="button"; k.onclick=x.f; b.appendChild(k); });
+  d.appendChild(b);
+  var f=el("div","fb"); f.setAttribute("role","status"); f.setAttribute("aria-live","polite"); d.appendChild(f);
+}
+
+/* ---------- order-words ---------- */
+function tOrderWords(d,ex){
+  var toks = ex.tokens || ex.answer.split(/\s+/);
+  d.appendChild(el("p","drill-inst noprint","Tap the words in the bank, one by one, to build the sentence. Tap a word you have placed to send it back."));
+  d.appendChild(el("p","drill-inst printonly","Number the words below in the right order, then write the sentence on the line."));
+  var bank=el("div","bank empty"); bank.dataset.ph="word bank";
+  var line=el("div","line empty"); line.dataset.ph="your sentence appears here";
+  function sync(){bank.classList.toggle("empty",!bank.children.length); line.classList.toggle("empty",!line.children.length);}
+  function mk(w,inBank){
+    var t=el("button","tile"+(/^[.,;:!?“”’]+$/.test(w)?" punc":""),w); t.type="button";
+    t.onclick=function(){ (inBank? line:bank).appendChild(t); inBank=!inBank;
+      t.className="tile"+(/^[.,;:!?“”’]+$/.test(w)?" punc":""); sync(); };
+    return t;
+  }
+  reshuffle(toks).forEach(function(w){bank.appendChild(mk(w,true));});
+  d.appendChild(bank); d.appendChild(line); sync();
+  btnRow(d,[
+    {t:"Check",f:function(){
+      var got=[].map.call(line.children,function(c){return c.textContent;});
+      var want=toks, ok = joinTok(got)===joinTok(want);
+      if(!ok && ex.alts){ for(var ai=0;ai<ex.alts.length;ai++){ if(joinTok(got)===joinTok(ex.alts[ai])){ok=true; want=ex.alts[ai]; break;} } }
+      [].forEach.call(line.children,function(c,i){c.className="tile"+(/^[.,;:!?“”’]+$/.test(c.textContent)?" punc":"")+(got[i]===want[i]?" good":" bad");});
+      if(ok){scoreIt(ex.id,true); mark(d,"win",winTag()+(ex.why?" "+ex.why:""));}
+      else mark(d,"lose","<b>Not yet.</b> Words marked ✓ are in the right place. "+(ex.tip||"Start with who or what the sentence is about.")+(tries(d)>=1&&ex.why?"<br>"+ex.why:""));
+    }},
+    {t:"Show answer",s:1,f:function(){mark(d,"part","<b>Answer:</b> "+joinTok(toks)+(ex.why?"<br>"+ex.why:""));}},
+    {t:"Reset",s:1,f:function(){bank.innerHTML="";line.innerHTML="";reshuffle(toks).forEach(function(w){bank.appendChild(mk(w,true));});sync();d.querySelector(".fb").className="fb";}}
+  ]);
+}
+
+/* ---------- order-sentences ---------- */
+function tOrderSentences(d,ex){
+  var pool=el("div","cards"), ans=el("div","cards"); ans.style.marginTop="10px";
+  d.appendChild(el("p","drill-inst noprint","Tap a sentence to move it into “Your order”. Use ▲ ▼ to change the order. Tap it again to send it back."));
+  d.appendChild(el("p","drill-inst printonly","Write a number (1, 2, 3 …) in front of each sentence to show the right order."));
+  var wrapA=el("div"); wrapA.appendChild(el("div","drill-topic")); wrapA.firstChild.innerHTML="<b>Scrambled</b>";
+  var wrapB=el("div"); wrapB.style.marginTop="10px"; wrapB.appendChild(el("div","drill-topic")); wrapB.firstChild.innerHTML="<b>Your order</b>";
+  wrapA.appendChild(pool); wrapB.appendChild(ans);
+  d.appendChild(wrapA); d.appendChild(wrapB);
+  function renum(){[].forEach.call(ans.children,function(c,i){c.querySelector(".cn").textContent=i+1;});}
+  function mk(it){
+    var c=el("div","card");
+    var n=el("span","cn","•"); c.appendChild(n);
+    c.appendChild(el("span",null,it.t));
+    var ar=el("span","arrows");
+    var up=el("button","arrow","▲"),dn=el("button","arrow","▼");
+    up.type=dn.type="button";
+    up.onclick=function(e){e.stopPropagation(); var p=c.previousElementSibling; if(p&&c.parentNode===ans)ans.insertBefore(c,p); renum();};
+    dn.onclick=function(e){e.stopPropagation(); var s=c.nextElementSibling; if(s&&c.parentNode===ans)ans.insertBefore(s,c); renum();};
+    ar.appendChild(up); ar.appendChild(dn); c.appendChild(ar);
+    c._it=it;
+    keyable(c,function(){c.onclick();});
+    c.onclick=function(){
+      if(c.parentNode===pool){ans.appendChild(c); c.classList.add("placed");}
+      else {pool.appendChild(c); c.classList.remove("placed"); n.textContent="•";}
+      renum();
+    };
+    return c;
+  }
+  function build(){pool.innerHTML="";ans.innerHTML="";reshuffle(ex.items.map(function(x){return x;})).forEach(function(it){pool.appendChild(mk(it));});}
+  build();
+  btnRow(d,[
+    {t:"Check",f:function(){
+      var got=[].map.call(ans.children,function(c){return c._it;});
+      if(got.length!==ex.items.length){mark(d,"part","<b>Not finished.</b> Place all "+ex.items.length+" sentences first.");return;}
+      var ok=true;
+      [].forEach.call(ans.children,function(c,i){
+        var right=got[i]===ex.items[i];
+        c.className="card placed "+(right?"good":"bad"); if(!right)ok=false;
+      });
+      if(ok){scoreIt(ex.id,true);
+        var roles=ex.items.map(function(x,i){return (i+1)+". "+x.tag;}).join(" · ");
+        mark(d,"win",winTag()+" "+roles+(ex.why?"<br>"+ex.why:""));
+      } else mark(d,"lose","<b>Not yet.</b> Sentences marked ✓ are in the right position. "+(ex.tip||"Read them as one paragraph: which one has to come first for the rest to make sense?")+(tries(d)>=1&&ex.why?"<br>"+ex.why:""));
+    }},
+    {t:"Show answer",s:1,f:function(){
+      mark(d,"part","<b>Correct order:</b><br>"+ex.items.map(function(x,i){return (i+1)+". <em>"+x.tag+"</em> — "+x.t;}).join("<br>"));
+    }},
+    {t:"Reset",s:1,f:function(){build();d.querySelector(".fb").className="fb";}}
+  ]);
+}
+
+/* ---------- label ---------- */
+function tLabel(d,ex){
+  var host=el("div"); d.appendChild(host);
+  function build(){
+    host.innerHTML="";
+    ex.items.forEach(function(it){
+      var b=el("div","item");
+      var t=el("div","txt"); t.innerHTML=it.t; b.appendChild(t);
+      var r=el("div","roles");
+      ex.roles.forEach(function(role){
+        var k=el("button","role",role); k.type="button";
+        k.onclick=function(){ [].forEach.call(r.children,function(x){x.classList.remove("sel");});
+          k.classList.add("sel"); b._pick=role; };
+        r.appendChild(k);
+      });
+      b.appendChild(r); b._it=it; host.appendChild(b);
+    });
+  }
+  build();
+  btnRow(d,[
+    {t:"Check",f:function(){
+      var all=true,done=true;
+      [].forEach.call(host.children,function(b){
+        if(!b._pick){done=false;return;}
+        var right=b._pick===b._it.role;
+        b.className="item "+(right?"good":"bad"); if(!right)all=false;
+        var old=b.querySelector(".why"); if(old)old.remove();
+        if(!right||ex.always){var w=el("div","why"); w.innerHTML="<strong>"+b._it.role+"</strong>"+(b._it.why?" — "+b._it.why:""); b.appendChild(w);}
+      });
+      if(!done){mark(d,"part","<b>Not finished.</b> Choose a label for every item.");return;}
+      if(all){scoreIt(ex.id,true); mark(d,"win",winTag()+(ex.why?" "+ex.why:""));}
+      else mark(d,"lose","<b>Some are wrong.</b> Items marked ✗ have the right label written underneath.");
+    }},
+    {t:"Show answers",s:1,f:function(){
+      [].forEach.call(host.children,function(b){
+        var old=b.querySelector(".why"); if(old)old.remove();
+        var w=el("div","why"); w.innerHTML="<strong>"+b._it.role+"</strong>"+(b._it.why?" — "+b._it.why:""); b.appendChild(w);
+      });
+      mark(d,"part","<b>Answers shown below each item.</b>");
+    }},
+    {t:"Reset",s:1,f:function(){build();d.querySelector(".fb").className="fb";}}
+  ]);
+}
+
+/* ---------- sort ---------- */
+function tSort(d,ex){
+  var bank=el("div","bank empty"); bank.dataset.ph="all sorted";
+  var cols=el("div","cols"); cols.style.gridTemplateColumns="repeat("+ex.cols.length+",1fr)";
+  var sel=null, boxes=[];
+  function pick(t){ if(sel)sel.style.outline=""; sel=t;
+    t.style.outline="2px solid "+getComputedStyle(document.documentElement).getPropertyValue("--brand"); }
+  ex.cols.forEach(function(name){
+    var c=el("div","col"); c.appendChild(el("h5",null,name));
+    c.setAttribute("aria-label","Box: "+name);
+    c.onclick=function(){ if(sel){c.appendChild(sel); sel.className="tile"; sel.style.outline=""; sel=null; sync();} };
+    keyable(c,function(){c.onclick();});
+    boxes.push(c); cols.appendChild(c);
+  });
+  function mk(it){
+    var t=el("button","tile",it.t); t.type="button"; t._it=it;
+    t.onclick=function(e){ e.stopPropagation();
+      if(t.parentNode!==bank){bank.appendChild(t); t.className="tile"; t.style.outline=""; if(sel===t)sel=null; sync(); return;}
+      pick(t);
+    };
+    return t;
+  }
+  function sync(){bank.classList.toggle("empty",!bank.children.length);}
+  function build(){bank.innerHTML=""; boxes.forEach(function(c){[].slice.call(c.querySelectorAll(".tile")).forEach(function(x){x.remove();});});
+    reshuffle(ex.items).forEach(function(it){bank.appendChild(mk(it));}); sync(); sel=null;}
+  d.appendChild(el("p","drill-inst noprint","Tap an item, then tap the box it belongs in. Tap a placed item to send it back. The boxes are just below the list."));
+  d.appendChild(el("p","drill-inst printonly","Write each item in the box below where it belongs."));
+  d.appendChild(bank); d.appendChild(cols);
+  build();
+  btnRow(d,[
+    {t:"Check",f:function(){
+      if(bank.children.length){mark(d,"part","<b>Not finished.</b> "+bank.children.length+" item(s) still unsorted.");return;}
+      var all=true;
+      boxes.forEach(function(c,i){
+        [].slice.call(c.querySelectorAll(".tile")).forEach(function(t){
+          var right=t._it.col===i; t.className="tile "+(right?"good":"bad"); if(!right)all=false;
+        });
+      });
+      if(all){scoreIt(ex.id,true); mark(d,"win",winTag()+" All sorted correctly."+(ex.why?" "+ex.why:""));}
+      else mark(d,"lose","<b>Some are in the wrong box.</b> "+(ex.tip||"Tap an item marked ✗ to send it back, then try the other box.")+(tries(d)>=1&&ex.why?"<br>"+ex.why:""));
+    }},
+    {t:"Show answer",s:1,f:function(){
+      mark(d,"part","<b>Answer:</b><br>"+ex.cols.map(function(n,i){
+        return "<strong>"+n+":</strong> "+ex.items.filter(function(x){return x.col===i;}).map(function(x){return x.t;}).join(" · ");
+      }).join("<br>"));
+    }},
+    {t:"Reset",s:1,f:function(){build();d.querySelector(".fb").className="fb";}}
+  ]);
+}
+
+/* ---------- mcq ---------- */
+function tMcq(d,ex){
+  var host=el("div"); d.appendChild(host);
+  function build(){
+    host.innerHTML="";
+    ex.qs.forEach(function(q,qi){
+      var w=el("div","qa");
+      var p=el("p","qtext"); p.innerHTML=(ex.qs.length>1?(qi+1)+". ":"")+q.q; w.appendChild(p);
+      q.opts.forEach(function(o,oi){
+        var b=el("button","opt"); b.type="button"; b.innerHTML=o.t;
+        b.onclick=function(){[].forEach.call(w.querySelectorAll(".opt"),function(x){x.classList.remove("sel");}); b.classList.add("sel"); w._pick=oi;};
+        w.appendChild(b);
+      });
+      w._q=q; host.appendChild(w);
+    });
+  }
+  build();
+  function reveal(force){
+    var all=true,done=true, soft=(!force && tries(d)<1);
+    [].forEach.call(host.children,function(w){ if(w._pick==null && !force){done=false;} });
+    if(!done){mark(d,"part","<b>Not finished.</b> Answer every question first."); return;}
+    [].forEach.call(host.children,function(w){
+      var right = w._pick===w._q.a;
+      if(!right)all=false;
+      [].forEach.call(w.querySelectorAll(".opt"),function(b,i){
+        b.classList.remove("sel","good","bad");
+        if(soft){ if(i===w._pick) b.classList.add(right?"good":"bad"); return; }
+        if(i===w._q.a)b.classList.add("good");
+        else if(i===w._pick)b.classList.add("bad");
+      });
+      var old=w.querySelector(".why"); if(old&&(soft&&!right))old.remove();
+      if(!(soft&&!right) && !w.querySelector(".why")){var y=el("div","why"); y.innerHTML=w._q.why; w.appendChild(y);}
+    });
+    if(force){mark(d,"part","<b>The right answer is now marked ✓.</b>"); return;}
+    if(all){scoreIt(ex.id,true); mark(d,"win",winTag());}
+    else if(soft) mark(d,"lose","<b>Not quite.</b> Your answer is marked ✗. Read the question once more and try a different option — the reason appears after your next try.");
+    else mark(d,"lose","<b>Not all correct.</b> The right answer is marked ✓; the reason is under each question.");
+  }
+  btnRow(d,[{t:"Check",f:function(){reveal(false);}},{t:"Show answers",s:1,f:function(){reveal(true);}},
+    {t:"Reset",s:1,f:function(){build();d.querySelector(".fb").className="fb";}}]);
+}
+
+/* ---------- gap ---------- */
+function tGap(d,ex){
+  var bank=el("div","bank"), body=el("p","gaptext"), gaps=[], active=null;
+  function build(){
+    bank.innerHTML=""; body.innerHTML=""; gaps=[]; active=null;
+    var parts=ex.text.split(/(\{\d+\})/);
+    parts.forEach(function(p){
+      var m=p.match(/^\{(\d+)\}$/);
+      if(m){
+        var g=el("span","gap empty"); g._i=+m[1]; g._v=null;
+        keyable(g,function(){g.onclick();});
+        g.onclick=function(){
+          if(g._v){ var w=g._v; g._v=null; g.textContent=""; g.className="gap empty"; addTile(w); return; }
+          gaps.forEach(function(x){x.classList.remove("act");}); g.classList.add("act"); active=g;
+        };
+        gaps.push(g); body.appendChild(g);
+      } else body.appendChild(document.createTextNode(p));
+    });
+    reshuffle(ex.bank).forEach(addTile);
+  }
+  function addTile(w){
+    var t=el("button","tile",w); t.type="button";
+    t.onclick=function(){
+      var g=active||gaps.filter(function(x){return !x._v;})[0];
+      if(!g)return;
+      g._v=w; g.textContent=w; g.className="gap"; t.remove();
+      gaps.forEach(function(x){x.classList.remove("act");}); active=null;
+    };
+    bank.appendChild(t);
+  }
+  d.appendChild(el("p","drill-inst noprint","Tap a word from the bank, then tap the gap it belongs in — or tap the gap first. Tap a filled gap to empty it."));
+  d.appendChild(el("p","drill-inst printonly","Write one word from the bank in each gap. Two words are not used."));
+  d.appendChild(bank); d.appendChild(body);
+  build();
+  btnRow(d,[
+    {t:"Check",f:function(){
+      var all=true,done=true;
+      gaps.forEach(function(g){
+        if(!g._v){done=false;return;}
+        var ok=ex.answers[g._i].indexOf(g._v)>-1;
+        g.className="gap "+(ok?"good":"bad"); if(!ok)all=false;
+      });
+      if(!done){mark(d,"part","<b>Not finished.</b> Fill every gap.");return;}
+      if(all){scoreIt(ex.id,true); mark(d,"win",winTag()+(ex.why?" "+ex.why:""));}
+      else mark(d,"lose","<b>Some are wrong.</b> "+(ex.tip||"Tap a gap marked ✗ to empty it, then try another word.")+(tries(d)>=1&&ex.why?"<br>"+ex.why:""));
+    }},
+    {t:"Show answer",s:1,f:function(){mark(d,"part","<b>Answer:</b> "+ex.answers.map(function(a,i){return (i+1)+" = "+a[0];}).join(" · ")+(ex.why?"<br>"+ex.why:""));}},
+    {t:"Reset",s:1,f:function(){build();d.querySelector(".fb").className="fb";}}
+  ]);
+}
+
+/* ---------- writer ---------- */
+function tWriter(d,ex){
+  var w=el("div","writer");
+  var chosen=ex.topics[0], tt;
+  var pk=el("div","picker");
+  ex.topics.forEach(function(t){
+    var b=el("button","role",t); b.type="button";
+    if(t===chosen)b.classList.add("sel");
+    b.onclick=function(){[].forEach.call(pk.children,function(x){x.classList.remove("sel");}); b.classList.add("sel"); chosen=t; tt.textContent=t;};
+    pk.appendChild(b);
+  });
+  w.appendChild(el("label",null,"Choose your task")); w.appendChild(pk);
+  var tt2=el("p","drill-topic"); tt2.appendChild(document.createTextNode("Writing about: "));
+  var strong=el("b",null,chosen); tt2.appendChild(strong); w.appendChild(tt2); tt=strong;
+
+  var areas=[];
+  ex.boxes.forEach(function(b){
+    w.appendChild(el("label",null,b.label));
+    if(b.hint)w.appendChild(el("p","hint",b.hint));
+    var ta=el("textarea"); ta.rows=b.rows||3; ta.placeholder=b.ph||"";
+    var c=el("div","wc",b.nocount?"":"0 words · target "+b.min+"–"+b.max);
+    ta.oninput=function(){
+      var n=ta.value.trim()?ta.value.trim().split(/\s+/).length:0;
+      if(!b.nocount){ c.textContent=n+" words · target "+b.min+"–"+b.max;
+        c.className="wc"+(n===0?"":(n>=b.min&&n<=b.max?" ok":" over")); }
+      total();
+    };
+    w.appendChild(ta); w.appendChild(c); areas.push({ta:ta,def:b});
+  });
+  var tot=el("p","drill-topic"); tot.innerHTML="Total: <b>0</b> words (target "+ex.total+")"; w.appendChild(tot);
+  function total(){
+    var n=areas.reduce(function(a,x){return a+(x.def.nocount?0:(x.ta.value.trim()?x.ta.value.trim().split(/\s+/).length:0));},0);
+    tot.innerHTML="Total: <b>"+n+"</b> words (target "+ex.total+")";
+    return n;
+  }
+  var list=el("ul","chk"), out=el("div","out");
+  d.appendChild(w); d.appendChild(list); d.appendChild(out);
+  function run(){
+    var txt=areas.map(function(x){return x.ta.value.trim();});
+    var n=total();
+    var res=ex.checks(txt,n,areas);
+    list.innerHTML="";
+    res.forEach(function(r){list.appendChild(el("li",r[0],r[1]));});
+    // allow HTML in check messages
+    [].forEach.call(list.children,function(li,i){ li.innerHTML=res[i][1]; });
+    var fails=res.filter(function(r){return r[0]==="f";}).length;
+    var warns=res.filter(function(r){return r[0]==="w";}).length;
+    if(!fails&&!warns){scoreIt(ex.id,true); mark(d,"win","<b>The structural checks found nothing to flag.</b> They cannot judge your ideas — read it aloud once, then give it to your teacher.");}
+    else if(!fails){scoreIt(ex.id,true); mark(d,"part","<b>Structure holds. "+warns+" thing(s) worth a second look</b> — you can move on, but read them first.");}
+    else mark(d,"lose","<b>"+fails+" structural check(s) failed.</b> Fix those first — they are the ones a teacher notices immediately.");
+  }
+  btnRow(d,[
+    {t:"Check my writing",f:run},
+    {t:"Put it together",s:1,f:function(){
+      var t=areas.map(function(x){return x.ta.value.trim();}).filter(Boolean).join("\n\n");
+      out.textContent=t||"Nothing written yet."; out.className="out on";
+    }},
+    {t:"Clear",s:1,f:function(){areas.forEach(function(x){x.ta.value="";x.ta.oninput();}); list.innerHTML=""; out.className="out"; d.querySelector(".fb").className="fb";}}
+  ]);
+}
+
+var TYPES={"order-words":tOrderWords,"order-sentences":tOrderSentences,"label":tLabel,
+  "sort":tSort,"mcq":tMcq,"gap":tGap,"writer":tWriter};
+
+function boot(){
+  var all=[].slice.call(document.querySelectorAll("[data-ex]"));
+  all.forEach(function(n){ if(!DRILLS[n.dataset.ex]) n.remove(); });
+  var nodes=all.filter(function(n){return !!DRILLS[n.dataset.ex];});
+  TOTAL=nodes.length;
+  nodes.forEach(function(node,i){
+    var ex=DRILLS[node.dataset.ex];
+    ex.id=node.dataset.ex;
+    node.className="drill";
+    var top=el("div","drill-top");
+    top.appendChild(el("span","drill-n","DRILL "+(i+1)));
+    top.appendChild(el("h2","drill-name",ex.title));
+    top.appendChild(el("span","lvl lvl"+ex.level, ["Starter","Building","Independent","Master"][ex.level-1]));
+    node.appendChild(top);
+    var body=el("div","drill-body");
+    if(ex.topic){var t=el("p","drill-topic"); t.innerHTML="Topic: <b>"+ex.topic+"</b>"; body.appendChild(t);}
+    if(ex.inst)body.appendChild(el("p","drill-inst",ex.inst));
+    node.appendChild(body);
+    TYPES[ex.type](body,ex);
+  });
+  upd();
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot); else boot();
+})();
+</script>
+
+<script>
+function figRnd(seed){ var s=seed; return function(){ s=(s*1103515245+12345)&0x7fffffff; return s/0x7fffffff; }; }
+function figStipple(n,x,y,w,h,fill,op,seed,r0,r1,ry){
+  var R=figRnd(seed), o="";
+  for(var i=0;i<n;i++){ var cx=(x+R()*w).toFixed(1), cy=(y+R()*h).toFixed(1), r=(r0+R()*(r1-r0)).toFixed(2);
+    o+='<ellipse cx="'+cx+'" cy="'+cy+'" rx="'+r+'" ry="'+(r*(ry||1)).toFixed(2)+'" fill="'+fill+'" opacity="'+(op*(.5+R()*.5)).toFixed(2)+'"/>'; }
+  return o;
+}
+function figApply(root,s,instant){
+  if(!root) return;
+  var nodes=root.querySelectorAll(".fel");
+  for(var i=0;i<nodes.length;i++){
+    var e=nodes[i], inAt=+e.getAttribute("data-in")||0, tf="none", k;
+    for(k=6;k>=1;k--){ if(s>=k && e.getAttribute("data-t"+k)){ tf=e.getAttribute("data-t"+k); break; } }
+    for(k=6;k>=1;k--){ if(s<k && e.getAttribute("data-u"+k)){ tf=e.getAttribute("data-u"+k); break; } }
+    var out=e.getAttribute("data-out")?+e.getAttribute("data-out"):99;
+    e.style.transitionDelay = instant?"0ms":((s===inAt?(e.getAttribute("data-d")||0):0)+"ms");
+    if(s>=out){ e.style.opacity=0; e.style.transform=tf; }
+    else if(s>=inAt){ e.style.opacity=e.getAttribute("data-op")||1; e.style.transform=tf; }
+    else { e.style.opacity=0; e.style.transform=e.getAttribute("data-from")||"none"; }
+  }
+}
+
+function figBeat(stage){
+  if(/^Stage 1/.test(stage)) return 1;
+  if(/^Stage 2/.test(stage)) return 2;
+  if(/^Stage 3/.test(stage)) return 3;
+  if(/^Stage 4/.test(stage)) return 4;
+  if(/^Stage 5/.test(stage)) return 5;
+  if(/^Stage 6/.test(stage)) return 6;
+  if(/^Final/.test(stage))   return 6;
+  if(/^Finished/.test(stage))return 6;
+  return 0;
+}
+function figCell(x,y,w,val,col,seed){
+  var marks="", R=figRnd(seed), i;
+  for(i=0;i<3;i++){ var ly=y+8+i*7, lw=(w-24)*(0.5+R()*0.42);
+    marks+='<line x1="'+(x+10)+'" y1="'+ly+'" x2="'+(x+10+lw).toFixed(0)+'" y2="'+ly+'" stroke="#8b8272" stroke-width="1.4" opacity=".55"/>'; }
+  return '<g>'+marks+'<rect x="'+(x+10)+'" y="'+(y+30)+'" width="'+val+'" height="7" rx="3.5" fill="'+col+'"/>'+
+    '<rect x="'+(x+10)+'" y="'+(y+30)+'" width="'+val+'" height="2.6" rx="1.3" fill="#fff" opacity=".3"/></g>';
+}
+function figRow(y,h,label,va,vb,seed){
+  return '<g>'+
+   '<line x1="88" y1="'+y+'" x2="556" y2="'+y+'" stroke="#b9c6d8" stroke-width="1.2"/>'+
+   '<line x1="88" y1="'+(y+h)+'" x2="556" y2="'+(y+h)+'" stroke="#b9c6d8" stroke-width="1.2"/>'+
+   '<text x="100" y="'+(y+24)+'" font-family="Georgia,serif" font-size="15" font-style="italic" fill="#5d5244">'+label+'</text>'+
+   '<line x1="100" y1="'+(y+30)+'" x2="'+(100+label.length*7)+'" y2="'+(y+30)+'" stroke="#5d5244" stroke-width="1" opacity=".35"/>'+
+   figCell(268,y,140,va,"#2a6f9e",seed)+figCell(410,y,140,vb,"#c2701f",seed+11)+
+   '<g><path d="M556,'+(y+h/2-9)+' l0,18 l10,-9 z" fill="#b3392f"/>'+
+    '<rect x="566" y="'+(y+h/2-3)+'" width="26" height="6" rx="3" fill="#b3392f"/>'+
+    '<rect x="566" y="'+(y+h/2+6)+'" width="17" height="4" rx="2" fill="#b3392f" opacity=".45"/></g></g>';
+}
+function figBig(){
+  return '<svg viewBox="0 0 660 500" role="img" aria-label="The comparative essay, drawn as a planning card">'+
+  '<defs>'+
+   '<linearGradient id="fgDesk" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#8a7a63"/><stop offset="1" stop-color="#6a5c48"/></linearGradient>'+
+   '<linearGradient id="fgBoard" x1="0" y1="0" x2=".2" y2="1"><stop offset="0" stop-color="#c99f63"/><stop offset="1" stop-color="#a97f45"/></linearGradient>'+
+   '<linearGradient id="fgPaper" x1="0" y1="0" x2=".15" y2="1"><stop offset="0" stop-color="#fdfaf2"/><stop offset="1" stop-color="#f2ecdc"/></linearGradient>'+
+   '<linearGradient id="fgClip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6eaef"/><stop offset=".5" stop-color="#aeb6c1"/><stop offset="1" stop-color="#7c848f"/></linearGradient>'+
+   '<radialGradient id="fgStamp" cx=".35" cy=".3"><stop offset="0" stop-color="#c94a3f"/><stop offset="1" stop-color="#8e2b23"/></radialGradient>'+
+  '</defs>'+
+  '<g class="fel" data-in="1"><rect width="660" height="500" fill="url(#fgDesk)"/>'+
+   figStipple(120,0,0,660,500,"#000",.07,5,1,3,.5)+
+   '<rect x="34" y="18" width="592" height="470" rx="12" fill="url(#fgBoard)"/>'+
+   '<rect x="34" y="18" width="592" height="470" rx="12" fill="none" stroke="#7c5a2c" stroke-width="2"/>'+
+   '<rect x="52" y="36" width="556" height="436" rx="4" fill="#000" opacity=".18"/>'+
+   '<rect x="48" y="30" width="556" height="436" rx="4" fill="url(#fgPaper)"/>'+
+   figStipple(90,48,30,556,436,"#b8ab90",.28,9,.7,1.6)+
+   '<line x1="88" y1="30" x2="88" y2="466" stroke="#d98f86" stroke-width="1.6"/>'+
+   '<path d="M604,30 l0,26 l-26,-26 z" fill="#e2dbc8"/></g>'+
+
+  '<g class="fel" data-in="1" data-from="translateY(-20px)" data-d="120">'+
+   '<rect x="200" y="52" width="252" height="26" rx="6" fill="#eef1f6" stroke="#a9b3c4" stroke-width="1.4"/>'+
+   '<text x="326" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="14" font-style="italic" fill="#4a5468">same category</text></g>'+
+  '<g class="fel" data-in="1" data-from="translateY(24px)">'+
+   '<rect x="268" y="150" width="140" height="30" rx="6" fill="#2a6f9e"/>'+
+   '<rect x="268" y="150" width="140" height="11" rx="5" fill="#fff" opacity=".22"/>'+
+   '<text x="338" y="171" text-anchor="middle" font-family="Helvetica" font-size="16" font-weight="700" fill="#fff">A</text></g>'+
+  '<g class="fel" data-in="1" data-from="translateY(24px)" data-d="120">'+
+   '<rect x="410" y="150" width="140" height="30" rx="6" fill="#c2701f"/>'+
+   '<rect x="410" y="150" width="140" height="11" rx="5" fill="#fff" opacity=".22"/>'+
+   '<text x="480" y="171" text-anchor="middle" font-family="Helvetica" font-size="16" font-weight="700" fill="#fff">B</text></g>'+
+
+  '<g class="fel" data-in="2" data-from="scaleX(.2)" style="transform-origin:322px 190px">'+
+   '<line x1="88" y1="190" x2="556" y2="190" stroke="#5d5244" stroke-width="2.4"/></g>'+
+
+  '<g class="fel" data-in="3" data-from="translateX(-26px)">'+figRow(190,62,"cost",104,52,3)+'</g>'+
+  '<g class="fel" data-in="5" data-d="130" data-from="translateX(-26px)">'+figRow(252,62,"flexibility",96,58,21)+'</g>'+
+  '<g class="fel" data-in="5" data-d="350" data-from="translateX(-26px)">'+figRow(314,74,"interaction",46,116,37)+'</g>'+
+
+  '<g class="fel" data-in="4" data-from="translateY(-22px)">'+
+   '<rect x="88" y="96" width="468" height="42" rx="7" fill="#eef1f6" stroke="#a9b3c4" stroke-width="1.4"/>'+
+   '<rect x="98" y="106" width="130" height="22" rx="5" fill="#8e9ab0"/>'+
+   '<rect x="234" y="106" width="126" height="22" rx="5" fill="#5b6a86"/>'+
+   '<rect x="366" y="106" width="62" height="22" rx="5" fill="#b3392f"/>'+
+   '<rect x="434" y="106" width="112" height="22" rx="5" fill="#8e9ab0"/>'+
+   '<text x="163" y="121" text-anchor="middle" font-family="Helvetica" font-size="10" font-weight="700" fill="#fff" letter-spacing=".08em">CONCESSION</text>'+
+   '<text x="297" y="121" text-anchor="middle" font-family="Helvetica" font-size="10" font-weight="700" fill="#fff" letter-spacing=".08em">JUDGMENT</text>'+
+   '<text x="397" y="121" text-anchor="middle" font-family="Helvetica" font-size="10" font-weight="700" fill="#fff" letter-spacing=".08em">LIMIT</text>'+
+   '<text x="490" y="121" text-anchor="middle" font-family="Helvetica" font-size="10" font-weight="700" fill="#fff" letter-spacing=".08em">GROUNDS</text></g>'+
+
+  '<g class="fel" data-in="6" data-d="60">'+
+   '<line x1="88" y1="404" x2="556" y2="404" stroke="#b9c6d8" stroke-width="1.2"/>'+
+   '<line x1="100" y1="420" x2="330" y2="420" stroke="#8b8272" stroke-width="1.6" opacity=".5"/>'+
+   '<line x1="100" y1="434" x2="270" y2="434" stroke="#8b8272" stroke-width="1.6" opacity=".4"/></g>'+
+  '<g class="fel" data-in="6" data-d="300" data-from="scale(1.5) rotate(-14deg)" style="transform-origin:424px 424px">'+
+   '<g transform="rotate(-6 424 424)" opacity=".92">'+
+    '<rect x="312" y="394" width="224" height="62" rx="7" fill="none" stroke="url(#fgStamp)" stroke-width="5"/>'+
+    '<rect x="324" y="409" width="200" height="13" rx="6.5" fill="url(#fgStamp)"/>'+
+    '<rect x="324" y="429" width="136" height="9" rx="4.5" fill="url(#fgStamp)" opacity=".8"/>'+
+    figStipple(110,312,394,224,62,"#fdfaf2",.5,55,.6,2.2)+'</g></g>'+
+  '<g class="fel" data-in="6" data-d="180">'+
+   '<rect x="248" y="6" width="164" height="40" rx="7" fill="url(#fgClip)"/>'+
+   '<rect x="264" y="14" width="132" height="9" rx="4.5" fill="#fff" opacity=".45"/>'+
+   '<rect x="286" y="0" width="88" height="16" rx="6" fill="#8b939f"/>'+
+   '<ellipse cx="330" cy="52" rx="60" ry="8" fill="#000" opacity=".18"/></g>'+
+  '<g class="fel" data-in="6" data-d="380"><g transform="rotate(-22 618 300)">'+
+   '<rect x="608" y="150" width="20" height="200" rx="4" fill="#e8b44a"/>'+
+   '<rect x="608" y="150" width="7" height="200" fill="#fff" opacity=".28"/>'+
+   '<path d="M608,350 l10,26 l10,-26 z" fill="#e8d9b4"/><path d="M613,363 l5,13 l5,-13 z" fill="#2f2a24"/>'+
+   '<rect x="608" y="134" width="20" height="16" rx="3" fill="#c4536a"/></g></g>'+
+  '</svg>';
+}
+function figMini(s){
+  var o='<rect x="3" y="3" width="50" height="28" rx="3" fill="#fdfaf2" stroke="#c9bfa8" stroke-width="1.4"/>'+
+        '<line x1="11" y1="3" x2="11" y2="31" stroke="#d98f86" stroke-width="1"/>';
+  if(s>=1){ o+='<rect x="24" y="7" width="12" height="5" rx="1.5" fill="#2a6f9e"/><rect x="38" y="7" width="12" height="5" rx="1.5" fill="#c2701f"/>'; }
+  if(s>=2){ o+='<line x1="13" y1="14" x2="50" y2="14" stroke="#5d5244" stroke-width="1.3"/>'; }
+  if(s>=3){ o+='<rect x="24" y="16" width="10" height="2.4" rx="1.2" fill="#2a6f9e"/><rect x="38" y="16" width="6" height="2.4" rx="1.2" fill="#c2701f"/><rect x="14" y="16" width="7" height="2.4" rx="1.2" fill="#b0a48c"/>'; }
+  if(s>=4){ o+='<rect x="13" y="5" width="9" height="3" rx="1.5" fill="#8e9ab0"/><rect x="13" y="5" width="3" height="3" rx="1.5" fill="#b3392f"/>'; }
+  if(s>=5){ o+='<rect x="24" y="20" width="9" height="2.4" rx="1.2" fill="#2a6f9e"/><rect x="38" y="20" width="6" height="2.4" rx="1.2" fill="#c2701f"/><rect x="14" y="20" width="7" height="2.4" rx="1.2" fill="#b0a48c"/>'+
+             '<rect x="24" y="24" width="5" height="2.4" rx="1.2" fill="#2a6f9e"/><rect x="38" y="24" width="11" height="2.4" rx="1.2" fill="#c2701f"/><rect x="14" y="24" width="7" height="2.4" rx="1.2" fill="#b0a48c"/>'; }
+  if(s>=6){ o+='<rect x="26" y="27" width="24" height="4" rx="2" fill="#b3392f" opacity=".9" transform="rotate(-5 38 29)"/>'; }
+  return '<svg viewBox="0 0 56 34" width="52" height="32" aria-hidden="true">'+o+'</svg>';
+}
+var FIG_ALT=["An empty planning card.","The card: the shared category, and two columns of equal width for the two subjects.",
+"One rule drawn right across both columns.","The first row filled: one criterion, a mark for each subject, and a red note on the end.",
+"The thesis strip: concession, judgment, limit, grounds.",
+"All three rows filled. The deepest row is last and its orange mark is the longest.",
+"The finished plan: three criteria, both subjects on each, and the verdict stamped across the bottom."];
+</script>
+<script>
+(function(){
+"use strict";
+var steps=[].slice.call(document.querySelectorAll(".step"));
+var N=steps.length, cur=0, DONE={}, SKIP={}, QK={}, MISS={}, started=false;
+var bar=document.querySelector(".tprog i"), num=document.querySelector(".tnum"), chip=document.querySelector(".chip");
+var back=document.querySelector(".nbtn.back"), next=document.querySelector(".nbtn.next"),
+    msg=document.querySelector(".navmsg"), skip=document.querySelector(".skip"),
+    miniHost=document.querySelector(".figmini");
+var RM=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* one shared instance of the big figure, moved into whichever step shows it */
+var FIGHOST=document.createElement("div"); FIGHOST.className="fighost";
+FIGHOST.innerHTML=figBig();
+var figPlayed={}, figTimer=null;
+
+function ready(i){
+  var s=steps[i], ex=s.dataset.req;
+  if(!ex) return true;
+  return !!(DONE[ex]||SKIP[ex]||QK[ex]);
+}
+function narrow(){ return window.innerWidth<560; }
+function shortStage(t){
+  var m=/^(Stage\s*\d+)/i.exec(t||""); if(m) return m[1];
+  return (t||"").length>13 ? (t||"").slice(0,12)+"\u2026" : (t||"");
+}
+[].slice.call(document.querySelectorAll(".qk")).forEach(function(q){
+  var id=q.dataset.qk, ans=+q.dataset.a, fb=q.querySelector(".qk-fb"), n=0;
+  var opts=[].slice.call(q.querySelectorAll(".qk-o"));
+  opts.forEach(function(b,i){
+    b.onclick=function(){
+      if(QK[id]) return;
+      if(i===ans){
+        b.classList.add("good"); QK[id]=1;
+        opts.forEach(function(x){x.disabled=true;});
+        fb.className="qk-fb on y";
+        fb.innerHTML="<b>"+["Yes.","Right.","Correct.","That is it.","Exactly."][n%5]+"</b>"+q.dataset.why;
+        paint();
+      } else {
+        n++; b.classList.add("bad"); b.disabled=true;
+        if(n>=2){
+          opts[ans].classList.add("good"); QK[id]=1;
+          opts.forEach(function(x){x.disabled=true;});
+          fb.className="qk-fb on n"; fb.innerHTML="<b>The answer is marked \u2713.</b>"+q.dataset.why;
+          paint();
+        } else { fb.className="qk-fb on n"; fb.innerHTML="<b>Not that one.</b>Read the screen once more, then try the other answer."; }
+      }
+    };
+  });
+});
+function placeFigure(s){
+  var box=s.querySelector(".figbox");
+  if(!box){ if(FIGHOST.parentNode) FIGHOST.parentNode.removeChild(FIGHOST); return; }
+  if(FIGHOST.parentNode!==box) box.appendChild(FIGHOST);
+  var beat=figBeat(s.dataset.stage||"");
+  var svg=FIGHOST.querySelector("svg");
+  if(svg && typeof FIG_ALT!=="undefined" && FIG_ALT[beat]) svg.setAttribute("aria-label",FIG_ALT[beat]);
+  if(figTimer){clearTimeout(figTimer); figTimer=null;}
+  if(RM || figPlayed[beat]){ figApply(FIGHOST,beat,true); figPlayed[beat]=1; return; }
+  figApply(FIGHOST,Math.max(0,beat-1),true);
+  figTimer=setTimeout(function(){ figApply(FIGHOST,beat,false); figPlayed[beat]=1; },260);
+}
+function paint(){
+  var s=steps[cur], nw=narrow();
+  chip.textContent = nw? shortStage(s.dataset.stage) : (s.dataset.stage||"");
+  num.textContent = nw? (cur+1)+"/"+N : "Step "+(cur+1)+" of "+N;
+  num.setAttribute("aria-label","Step "+(cur+1)+" of "+N);
+  bar.style.width=((cur)/(N-1)*100)+"%";
+  if(miniHost) miniHost.innerHTML=figMini(figBeat(s.dataset.stage||""));
+  back.disabled = cur===0;
+  var ok=ready(cur), last=cur===N-1, req=s.dataset.req;
+  next.disabled = !ok && !last;
+  next.classList.toggle("go", ok);
+  next.textContent = last? "Start again \u21ba" : (s.dataset.type==="teach"? "Got it \u2192" : "Next \u2192");
+  if(skip){
+    var showSkip = req && !DONE[req] && !SKIP[req] && !QK[req] && MISS[req];
+    skip.style.display = showSkip? "" : "none";
+    skip.onclick=function(){ SKIP[req]=1; paint(); };
+  }
+  msg.innerHTML = (!last && req && !ok)? "Answer this to keep going" : "";
+}
+function show(i){
+  cur=Math.max(0,Math.min(N-1,i));
+  steps.forEach(function(s,j){ s.classList.toggle("on", j===cur); });
+  placeFigure(steps[cur]);
+  paint();
+  window.scrollTo({top:0,behavior:"instant" in window?"instant":"auto"});
+}
+document.addEventListener("drill:update",function(e){ DONE=e.detail.map||{}; started=true; paint(); });
+document.addEventListener("drill:miss",function(){ var r=steps[cur].dataset.req; if(r){MISS[r]=1; paint();} });
+back.onclick=function(){ show(cur-1); };
+next.onclick=function(){ if(cur===N-1){ show(0); } else { show(cur+1); } };
+window.addEventListener("resize",function(){ paint(); });
+document.addEventListener("keydown",function(e){
+  var t=e.target;
+  if(t.tagName==="TEXTAREA"||t.tagName==="INPUT") return;
+  if(t.closest&&(t.closest(".drill")||t.closest(".qk"))) return;
+  if(e.key==="ArrowRight"&&!next.disabled) show(cur+1);
+  if(e.key==="ArrowLeft"&&!back.disabled) show(cur-1);
+});
+window.addEventListener("beforeunload",function(e){
+  if(!started && cur<3) return;
+  if(cur>=N-1) return;
+  e.preventDefault(); e.returnValue="";
+});
+show(0);
+})();
+</script>
+</body></html>
