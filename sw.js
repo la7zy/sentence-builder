@@ -1,12 +1,11 @@
-/* Sentence Builder - offline copy.
-   After the first visit the whole app is kept on the phone. The page is
-   served from that copy instantly (so it opens with no internet at all),
-   and a fresh copy is fetched in the background whenever there IS
+/* Offline copy for the whole site (Sentence Builder + the essay guides).
+   Every page is served from the saved copy instantly (so it opens with no
+   internet at all) and refreshed in the background whenever there IS
    internet, so students get your updates on their next open.
-   Change CACHE (for example to v2.5) whenever you upload a new version. */
-var CACHE = 'sentence-builder-v2.5';
-var PAGE = './index.html';
-var ASSETS = [PAGE, './comparative-essay.html', './sandwich-essay.html', './manifest.webmanifest', './icon-180.png', './icon-192.png', './icon-512.png'];
+   Change CACHE (for example to v2.7) whenever you upload a new version. */
+var CACHE = 'sentence-builder-v2.6';
+var PAGES = ['./index.html', './comparative-essay.html', './sandwich-essay.html'];
+var ASSETS = PAGES.concat(['./manifest.webmanifest', './icon-180.png', './icon-192.png', './icon-512.png']);
 
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(ASSETS); }).then(function () { return self.skipWaiting(); }));
@@ -27,15 +26,16 @@ self.addEventListener('fetch', function (e) {
   if (req.method !== 'GET') return;
   var url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
-  var isPage = req.mode === 'navigate' || url.pathname.endsWith('/index.html') || url.pathname.endsWith('/');
+  var isPage = req.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname.endsWith('/');
   if (isPage) {
-    /* serve the saved copy at once; refresh it in the background when online */
+    /* each page is cached under its own path (the folder itself means index.html) */
+    var key = url.pathname.endsWith('/') ? url.pathname + 'index.html' : url.pathname;
     var refresh = fetch(req).then(function (res) {
-      if (res && res.ok) { var copy = res.clone(); caches.open(CACHE).then(function (c) { c.put(PAGE, copy); }); }
+      if (res && res.ok) { var copy = res.clone(); caches.open(CACHE).then(function (c) { c.put(key, copy); }); }
       return res;
     }).catch(function () { return null; });
     e.waitUntil(refresh);
-    e.respondWith(caches.match(PAGE).then(function (cached) {
+    e.respondWith(caches.match(key).then(function (cached) {
       return cached || refresh.then(function (r) { return r || offlineFallback(); });
     }));
   } else {
