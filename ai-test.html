@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback engine test</title>
+<style>
+  :root{--ink:#1f2937;--mut:#6b7280;--line:#e5e7eb;--brand:#2a5b8f;--ok:#15803d;--bad:#b91c1c;--warn:#b45309;--card:#fff;--bg:#f3f4f6;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.5;}
+  main{max-width:720px;margin:0 auto;padding:16px;}
+  h1{font-size:1.35rem;margin:8px 0 4px;} h2{font-size:1.1rem;margin:0 0 8px;}
+  .note{color:var(--mut);font-size:.92rem;margin:0 0 14px;}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:0 0 14px;}
+  textarea{width:100%;box-sizing:border-box;min-height:140px;font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px;resize:vertical;}
+  button{font:inherit;font-weight:700;padding:11px 16px;border-radius:12px;border:0;background:var(--brand);color:#fff;cursor:pointer;margin:6px 6px 6px 0;}
+  button.soft{background:#e5edf6;color:var(--brand);} button:disabled{opacity:.5;cursor:default;}
+  select{font:inherit;padding:8px 10px;border-radius:10px;border:1px solid var(--line);max-width:100%;}
+  .kv{display:grid;grid-template-columns:max-content 1fr;gap:4px 12px;font-size:.95rem;}
+  .kv b{color:var(--mut);font-weight:600;}
+  .ok{color:var(--ok);font-weight:700;} .bad{color:var(--bad);font-weight:700;} .warn{color:var(--warn);font-weight:700;}
+  .status{font-size:.92rem;color:var(--mut);min-height:1.4em;white-space:pre-wrap;}
+  .lint{border-left:4px solid var(--warn);background:#fffbeb;padding:8px 10px;border-radius:8px;margin:8px 0;font-size:.95rem;}
+  .lint code{background:#fde68a;padding:0 4px;border-radius:4px;}
+  .out{white-space:pre-wrap;background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:10px;min-height:2em;font-size:.95rem;}
+  .bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin:6px 0;} .bar i{display:block;height:100%;width:0;background:var(--brand);transition:width .3s;}
+</style>
+</head>
+<body>
+<main>
+<h1>Feedback engine test</h1>
+<p class="note">Teacher's test page, not a lesson. Both engines run on this phone: no account, no key, nothing sent anywhere. Try each button and press "Copy report" at the end.</p>
+
+<section>
+ <h2>1. This device</h2>
+ <div class="kv" id="dev"></div>
+</section>
+
+<section>
+ <h2>2. Student text</h2>
+ <textarea id="txt">She go to school every day. The childs is playing in park. I have visit London last year, it was more better than I expect. Their are many reason why students dont like homework, for example it take alot of time.</textarea>
+</section>
+
+<section>
+ <h2>3. Grammar checker (rules, offline)</h2>
+ <p class="note">Loads a 15 MB checker once, then works with no internet. Should answer in under two seconds.</p>
+ <button id="btnRules">Check grammar</button>
+ <div class="status" id="rulesStatus"></div>
+ <div id="rulesOut"></div>
+</section>
+
+<section>
+ <h2>4. AI feedback (small model, on this phone)</h2>
+ <p class="note">One-time download, then cached. Use Wi-Fi. If this phone cannot run it, the page will say so and the grammar checker above still works.</p>
+ <label>Model:
+  <select id="model">
+   <option value="Llama-3.2-1B-Instruct-q4f16_1-MLC">Llama 3.2 1B (about 0.7 GB download, needs about 0.9 GB memory)</option>
+   <option value="Qwen2.5-0.5B-Instruct-q4f16_1-MLC">Qwen 2.5 0.5B (about 0.4 GB download, needs about 0.9 GB memory)</option>
+   <option value="Qwen2.5-1.5B-Instruct-q4f16_1-MLC">Qwen 2.5 1.5B (about 1.0 GB download, needs about 1.6 GB memory, better English)</option>
+   <option value="SmolLM2-360M-Instruct-q4f16_1-MLC">SmolLM2 360M (about 0.25 GB download, weakest, quickest test)</option>
+  </select>
+ </label>
+ <div>
+  <button id="btnLoad">Load the AI model</button>
+  <button id="btnAI" disabled>Get AI feedback</button>
+ </div>
+ <div class="bar"><i id="barFill"></i></div>
+ <div class="status" id="aiStatus"></div>
+ <div class="out" id="aiOut"></div>
+</section>
+
+<section>
+ <h2>5. Report</h2>
+ <button class="soft" id="btnCopy">Copy report</button>
+ <div class="status" id="copyStatus"></div>
+ <pre class="out" id="report" style="font-size:.85rem"></pre>
+</section>
+</main>
+
+<script type="module">
+const $ = id => document.getElementById(id);
+const R = { device: {}, rules: {}, ai: {} };
+
+/* ---------- 1. device report ---------- */
+async function deviceReport() {
+  const d = R.device;
+  d.browser = navigator.userAgent;
+  d.memoryGB = navigator.deviceMemory ? navigator.deviceMemory + ' GB (browser estimate, capped at 8)' : 'not reported';
+  d.cores = navigator.hardwareConcurrency || 'not reported';
+  d.webgpu = 'no';
+  if ('gpu' in navigator) {
+    try {
+      const adapter = await navigator.gpu.requestAdapter();
+      if (adapter) {
+        d.webgpu = 'yes';
+        d.f16 = adapter.features.has('shader-f16') ? 'yes' : 'no (needs the bigger f32 models)';
+        d.maxBufferMB = Math.round(adapter.limits.maxBufferSize / 1048576) + ' MB';
+        try { const info = adapter.info || (adapter.requestAdapterInfo ? await adapter.requestAdapterInfo() : null); if (info) d.gpu = [info.vendor, info.architecture, info.device].filter(Boolean).join(' / ') || 'unknown'; } catch (e) {}
+      } else { d.webgpu = 'no adapter'; }
+    } catch (e) { d.webgpu = 'error: ' + e.message; }
+  }
+  const rows = [
+    ['Browser', d.browser], ['Memory', d.memoryGB], ['CPU cores', d.cores],
+    ['WebGPU (needed for the AI model)', d.webgpu === 'yes' ? '<span class="ok">yes</span>' : '<span class="bad">' + d.webgpu + '</span>'],
+    ['16-bit shaders', d.f16 || '-'], ['GPU', d.gpu || '-'], ['Max buffer', d.maxBufferMB || '-'],
+  ];
+  $('dev').innerHTML = rows.map(([k, v]) => `<b>${k}</b><span>${v}</span>`).join('');
+  if (d.webgpu !== 'yes') { $('btnLoad').disabled = true; $('aiStatus').textContent = 'This browser has no WebGPU, so the on-device AI model cannot run here. The grammar checker still works.'; }
+  report();
+}
+
+/* ---------- 3. rules engine (Harper) ---------- */
+let linter = null;
+$('btnRules').onclick = async () => {
+  const st = $('rulesStatus'), out = $('rulesOut'); out.innerHTML = ''; $('btnRules').disabled = true;
+  try {
+    const t0 = performance.now();
+    if (!linter) {
+      st.textContent = 'Loading the checker (15 MB, first time only)...';
+      const harper = await import('https://cdn.jsdelivr.net/npm/harper.js@2.7.0/dist/index.js');
+      const { slimBinary } = await import('https://cdn.jsdelivr.net/npm/harper.js@2.7.0/dist/slimBinary.js');
+      linter = new harper.LocalLinter({ binary: slimBinary });
+      await linter.setup();
+      R.rules.loadSec = ((performance.now() - t0) / 1000).toFixed(1);
+    }
+    const text = $('txt').value;
+    const t1 = performance.now();
+    const lints = await linter.lint(text, { language: 'plaintext' });
+    R.rules.checkSec = ((performance.now() - t1) / 1000).toFixed(2);
+    R.rules.count = lints.length;
+    st.innerHTML = `<span class="ok">Done.</span> Load ${R.rules.loadSec || 'cached'} s, check ${R.rules.checkSec} s, ${lints.length} issue(s) found.`;
+    out.innerHTML = lints.map(l => {
+      const s = l.span(); const bad = text.slice(s.start, s.end);
+      const sug = l.suggestions().map(x => x.get_replacement_text()).filter(Boolean).slice(0, 3);
+      return `<div class="lint"><code>${escapeHtml(bad)}</code> &mdash; ${escapeHtml(l.message())} <i>(${escapeHtml(l.lint_kind())})</i>${sug.length ? '<br>Suggest: <b>' + sug.map(escapeHtml).join('</b> / <b>') + '</b>' : ''}</div>`;
+    }).join('') || '<div class="note">No issues found.</div>';
+  } catch (e) { st.innerHTML = '<span class="bad">Failed:</span> ' + escapeHtml(e.message || String(e)); R.rules.error = e.message || String(e); }
+  $('btnRules').disabled = false; report();
+};
+
+/* ---------- 4. on-device AI (WebLLM) ---------- */
+let engine = null, loadedModel = '';
+$('btnLoad').onclick = async () => {
+  const model = $('model').value;
+  if (!confirm('Download the AI model now? This is a one-time download of up to 1 GB. Wi-Fi is recommended. The model stays on this phone afterwards.')) return;
+  $('btnLoad').disabled = true; $('btnAI').disabled = true; $('aiOut').textContent = ''; $('barFill').style.width = '0';
+  const st = $('aiStatus');
+  try {
+    const t0 = performance.now();
+    st.textContent = 'Loading the AI library...';
+    const webllm = await import('https://esm.run/@mlc-ai/web-llm@0.2.84');
+    engine = await webllm.CreateMLCEngine(model, { initProgressCallback: p => {
+      st.textContent = p.text; if (typeof p.progress === 'number') $('barFill').style.width = Math.round(p.progress * 100) + '%';
+    } });
+    loadedModel = model; R.ai.model = model; R.ai.loadSec = ((performance.now() - t0) / 1000).toFixed(1);
+    $('barFill').style.width = '100%';
+    st.innerHTML = `<span class="ok">Model ready</span> in ${R.ai.loadSec} s. Now press "Get AI feedback".`;
+    $('btnAI').disabled = false;
+  } catch (e) { st.innerHTML = '<span class="bad">Could not load the model:</span> ' + escapeHtml(e.message || String(e)); R.ai.error = e.message || String(e); $('btnLoad').disabled = false; }
+  report();
+};
+
+$('btnAI').onclick = async () => {
+  if (!engine) return;
+  const st = $('aiStatus'), out = $('aiOut'); out.textContent = ''; $('btnAI').disabled = true;
+  const text = $('txt').value.trim();
+  const messages = [
+    { role: 'system', content: 'You are a friendly English teacher helping B1-level ESL students. Be short, specific and encouraging. Never invent mistakes that are not in the text.' },
+    { role: 'user', content: 'Here is a student paragraph:\n\n"""' + text + '"""\n\nList up to 5 mistakes. For each one write: the wrong words in quotes, a one-sentence explanation, and the corrected words. Then write one sentence about what the student did well, and one sentence about the structure of the paragraph.' },
+  ];
+  try {
+    const t0 = performance.now(); let first = 0, chars = 0;
+    st.textContent = 'Thinking...';
+    const stream = await engine.chat.completions.create({ messages, temperature: 0.3, max_tokens: 350, stream: true });
+    for await (const chunk of stream) {
+      const piece = chunk.choices?.[0]?.delta?.content || '';
+      if (piece && !first) first = performance.now();
+      chars += piece.length; out.textContent += piece;
+    }
+    const total = (performance.now() - t0) / 1000;
+    R.ai.firstWordSec = first ? ((first - t0) / 1000).toFixed(1) : '-'; R.ai.totalSec = total.toFixed(1);
+    R.ai.wordsPerSec = (out.textContent.split(/\s+/).length / total).toFixed(1);
+    let stats = ''; try { stats = await engine.runtimeStatsText(); } catch (e) {}
+    R.ai.stats = stats;
+    st.innerHTML = `<span class="ok">Done</span> in ${R.ai.totalSec} s (first words after ${R.ai.firstWordSec} s). ${escapeHtml(stats)}`;
+  } catch (e) { st.innerHTML = '<span class="bad">Feedback failed:</span> ' + escapeHtml(e.message || String(e)); R.ai.error = e.message || String(e); }
+  $('btnAI').disabled = false; report();
+};
+
+/* ---------- 5. report ---------- */
+function report() {
+  const d = R.device, r = R.rules, a = R.ai;
+  $('report').textContent = [
+    'FEEDBACK ENGINE TEST', 'Browser: ' + (d.browser || ''), 'Memory: ' + d.memoryGB + ' | cores: ' + d.cores,
+    'WebGPU: ' + d.webgpu + (d.f16 ? ' | f16: ' + d.f16 : '') + (d.gpu ? ' | GPU: ' + d.gpu : ''),
+    'Rules engine: ' + (r.error ? 'FAILED ' + r.error : r.count === undefined ? 'not tried' : `OK, load ${r.loadSec || 'cached'} s, check ${r.checkSec} s, ${r.count} issues`),
+    'AI model: ' + (a.error ? 'FAILED ' + a.error : a.model ? `${a.model}, load ${a.loadSec} s` + (a.totalSec ? `, feedback ${a.totalSec} s, first words ${a.firstWordSec} s, ${a.wordsPerSec} words/s` : ', feedback not tried') : 'not tried'),
+  ].join('\n');
+}
+$('btnCopy').onclick = async () => {
+  try { await navigator.clipboard.writeText($('report').textContent); $('copyStatus').textContent = 'Copied. Paste it into WhatsApp.'; }
+  catch (e) { $('copyStatus').textContent = 'Could not copy automatically; long-press the report text to copy it.'; }
+};
+function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+deviceReport();
+</script>
+</body>
+</html>
