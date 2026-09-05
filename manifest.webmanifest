@@ -1,0 +1,15 @@
+{
+  "name": "Sentence Builder",
+  "short_name": "Sentences",
+  "description": "English sentence skills program: 7 units, 37 lessons, final test and certificate.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fdf4e3",
+  "theme_color": "#ff7a5c",
+  "lang": "en",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
