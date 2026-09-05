@@ -7,10 +7,10 @@ Built from the four strand plans in this folder (grammar sections 1-7, grammar s
 | Strand | Units (tests) | Lessons | Exercises in lessons | Bank items (planned) | Certificates |
 |---|---|---|---|---|---|
 | Grammar (12 sections × 5 bands) | 60 | 304 | 4,741 | 6,652 | 60 |
-| Writing (sentence, paragraph, essay, research) | 18 | 133 new (+37 existing Sentence Builder) | 1,810 | 1,940 target (1,600 minimum) | 18 (+5 free-writing badges) |
+| Writing (sentence, paragraph, essay, research) | 17 | 133 new (+37 existing Sentence Builder) | 1,810 | 1,940 target (1,600 minimum) | 17 (+5 free-writing badges) |
 | Listening & Speaking | 5 | 80 | 1,534 | 500 | 5 (+5 speaking badges) |
 | Proofreading checkpoints | 15 | — | 2-3 passages each | 127 topics → 300+ passages | pass/continue |
-| **Total** | **83 tests + 15 checkpoints** | **517 new lessons** (+37) | **8,085** | **9,092** | **83** |
+| **Total** | **82 tests + 15 checkpoints** | **517 new lessons** (+37) | **8,085** | **9,092** | **82** |
 
 Existing material placed inside the ladder: Sentence Builder (37 lessons), Sandwich Essay guide, Comparative Essay guide.
 
