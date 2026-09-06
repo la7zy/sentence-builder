@@ -24,14 +24,14 @@ knowledge (history, inventions, discoveries, famous places and people).
 The mapping to California ELD, Texas ELPS, Virginia SOL and WIDA is internal calibration
 only (docs/standards-mapping.md). Students see band names, never grades.
 
-## 3. The four strands
+## 3. The strands (scope decision 2026-09-05: grammar-based for now)
 
-| Strand | What it teaches | Certified by |
-|---|---|---|
-| Grammar | 13 sections, each revisited across bands (spiral) | section test per band |
-| Listening & Speaking | sounds, stress, rhythm, listening skills; speaking practice | listening test per band; speaking = practice badge (+ optional teacher grade) |
-| Writing | sentence → paragraph → essay types → research paper | level test per band (auto part + writing part) |
-| Proofreading checkpoints | cumulative mastery checks between grammar units | checkpoint pass |
+| Strand | What it teaches | Certified by | Status |
+|---|---|---|---|
+| Grammar | 12 sections, each revisited across bands (spiral); Section 4 is the Verbs and Tenses strand (units 4A-4O); the coverage map (`grammar-coverage-map.md`) guarantees every grammar and usage topic has a lesson | section or unit test per band | in scope |
+| Proofreading checkpoints | cumulative mastery checks between grammar units | checkpoint pass | in scope |
+| Writing | sentence → paragraph → essay types → research paper | level test per band (auto part + writing part) | later phase (plan complete) |
+| Listening & Speaking | sounds, stress, rhythm, listening skills; speaking practice | listening test per band; speaking = practice badge | deferred (plan kept) |
 
 ## 4. The lesson loop (identical everywhere)
 
@@ -131,9 +131,9 @@ student), export. Data lives on the relay with daily snapshots committed to the 
 
 ## 11. Build phases
 
-1. Engine + hub + relay + dashboard skeleton + Foundations sections 1-2 with verified banks.
+1. Engine + hub + relay + dashboard skeleton + Foundations sections 1-2 and tenses units 4A-4B with verified banks.
 2. Proofreading checkpoint engine + first passage bank.
-3. Remaining grammar sections, band by band, Foundations first.
-4. Listening & Speaking strand (audio generation pipeline, say-it).
-5. Writing strand: paragraph, essay types, research paper (MLA/APA/Chicago).
+3. Remaining grammar sections and tenses units, band by band, Foundations first, following the coverage map.
+4. Writing strand: paragraph, essay types, research paper (MLA/APA/Chicago) — later phase.
+5. Listening & Speaking strand (audio generation pipeline, say-it) — deferred.
 6. Continuous: bank growth, teacher-reported fixes, standards re-check.
