@@ -96,10 +96,20 @@ only (docs/standards-mapping.md). Students see band names, never grades.
 | CP3 | 9-12 (conjunctions, questions/reported speech, punctuation, cohesion) | 1-12 |
 
 Each checkpoint: 2-3 passages about well-known general-knowledge subjects; find every error
-and type the correction; pass = 80% of errors found *and* correctly fixed; a miss sends the
-student to the lesson for that rule, then to a **new** passage. Passage length and planted
-errors per passage rise with the band (specified in the listening-speaking-and-proofreading
+and type the correction; pass = 80% of errors found *and* correctly fixed. Passage length and
+planted errors per passage rise with the band (specified in the listening-speaking-and-proofreading
 plan).
+
+**No help rule (owner decision, 2026-09-07).** The passage is shown plain. Nothing is
+highlighted, the number of planted errors is not shown, and no answer options or hint cards
+are offered. The student reads, taps the words they believe are wrong, and types the fix
+themselves. Only after they finish is anything revealed.
+
+**Referral rule.** Every missed error, and every correct word the student marked as wrong,
+is mapped to the lesson that teaches that rule. The result screen lists those lessons with the
+exact phrase from the passage and sends the student back to them; the checkpoint reopens with
+a **new** passage once those lessons are completed again. A checkpoint is never passed by
+retrying the same passage.
 
 ## 8. Engines (all free, all on the phone)
 
